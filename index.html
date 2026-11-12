@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hZhhHfWeGvmLJGkADXe76K25tVfBhYCyDz7YMCCzqL4=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-y2ftwmeYGfF/NU40azmwlnSJ4l9Q6s337moeAKmIwDA=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="8975955c7c73">
+<meta name="cod-build" content="60d11fb9873f">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9341,15 +9341,18 @@ function nsDefeat(){if(NS.over)return;NS.over=true;NS.overAt=MATCH.time;NS.phase
 const _nsSE=new V3(),_nsSD=new V3();function nsSpectate(dt){NS.specT+=dt;if(NS.specT<2.5)return;const mates=MATCH.online?[...NET.remotes.values()].filter((e)=>!e.remoteBot&&e.alive&&e.model&&e.model.root.visible!==false):[];if(!mates.length){NS.spec=null;return;}
 if(!NS.spec||!mates.includes(NS.spec))NS.spec=mates[0];const m=NS.spec;entEye(m,_nsSE);const yaw=m.yaw;_nsSD.set(Math.sin(yaw),0.25,Math.cos(yaw)).normalize();const h=rayWorld(_nsSE.x,_nsSE.y,_nsSE.z,_nsSD.x,_nsSD.y,_nsSD.z,2.8),d=h?Math.max(0.3,h.t-0.25):2.8;camera.position.copy(_nsSE).addScaledVector(_nsSD,d);camera.lookAt(_nsSE.x-Math.sin(yaw)*4,_nsSE.y-0.3,_nsSE.z-Math.cos(yaw)*4);nsHudSpec(m.name);}
 if(window.MATCH_COUNTDOWN==null)window.MATCH_COUNTDOWN=4;function nsNetPub(){if(NET.role!=='host'||!NET.on)return;netBroadcast({t:'ns',w:NS.wave,ph:NS.phase,pt:Math.round(NS.phaseT*10)/10,k:NS.kills,a:NS.alive,o:NS.over?1:0,e:Math.round(NS.elapsed)},true);nsLookPub(false);}
-const NSLOOK={sent:0,last:''};function nsLookPub(force){if(NET.role!=='host'||!NET.on||typeof BOCFG==='undefined'||!BOCFG.v)return;const now=performance.now();if(!force&&now-NSLOOK.sent<2000)return;NSLOOK.sent=now;netBroadcast({t:'nslook',look:BOCFG.v.look,light:BOCFG.v.light},true);}
-function nsLookIn(m){if(typeof BOCFG==='undefined'||!m||!m.look||typeof m.look!=='object')return;const key=JSON.stringify(m.look)+'|'+JSON.stringify(m.light||{});if(key===NSLOOK.last)return;NSLOOK.last=key;const v=JSON.parse(JSON.stringify(BOCFG.v));v.look=m.look;if(m.light&&typeof m.light==='object')v.light=m.light;BOCFG.replace(v,true);}
-function nsLookRestore(){if(typeof BOCFG==='undefined'||!BOCFG.remote)return;BOCFG.remote=false;BOCFG.load();NSLOOK.last='';try{BOCFG.applyAll();}catch(e){}}
-if(typeof BOCFG!=='undefined'){const _lookSave=BOCFG.save,_lookSaveNow=BOCFG.saveNow;BOCFG.save=function(){const r=_lookSave.apply(this,arguments);if(NET.role==='host'&&NS.match)nsLookPub(true);return r;};BOCFG.saveNow=function(){const r=_lookSaveNow.apply(this,arguments);if(NET.role==='host'&&NS.match)nsLookPub(true);return r;};}
+const NSLOOK={sent:0,last:'',lit:false};function nsLookPack(){const c=BOCFG.v;return{t:'nslook',look:c.look,light:c.light,lightVer:c.lightVer,weapons:c.weapons,atts:c.atts};}
+function nsLookPub(force){if(NET.role!=='host'||typeof BOCFG==='undefined'||!BOCFG.v)return;if(!NET.on&&!NET.joined)return;const now=performance.now();if(!force&&now-NSLOOK.sent<2000)return;NSLOOK.sent=now;netBroadcast(nsLookPack(),false);}
+function nsLookReady(){return typeof CURMAP!=='undefined'&&CURMAP&&typeof boMapOn==='function'&&boMapOn(CURMAP.id);}
+function nsLookIn(m){if(typeof BOCFG==='undefined'||!m||!m.look||typeof m.look!=='object')return;const key=JSON.stringify(m.look)+'|'+JSON.stringify(m.light||{})+'|'+JSON.stringify(m.weapons||{})+'|'+JSON.stringify(m.atts||{});if(key===NSLOOK.last&&NSLOOK.lit)return;if(key!==NSLOOK.last){NSLOOK.last=key;const v=JSON.parse(JSON.stringify(BOCFG.v));v.look=m.look;if(m.light&&typeof m.light==='object')v.light=m.light;if(m.lightVer)v.lightVer=m.lightVer;if(m.weapons&&typeof m.weapons==='object')v.weapons=m.weapons;if(m.atts&&typeof m.atts==='object')v.atts=m.atts;BOCFG.replace(v,true);}else{try{BOCFG.applyAll();}catch(e){}}
+NSLOOK.lit=nsLookReady();}
+function nsLookRestore(){if(typeof BOCFG==='undefined'||!BOCFG.remote)return;BOCFG.remote=false;BOCFG.load();NSLOOK.last='';NSLOOK.lit=false;try{BOCFG.applyAll();}catch(e){}}
+if(typeof BOCFG!=='undefined'){const _lookSave=BOCFG.save,_lookSaveNow=BOCFG.saveNow;BOCFG.save=function(){const r=_lookSave.apply(this,arguments);if(NET.role==='host')nsLookPub(true);return r;};BOCFG.saveNow=function(){const r=_lookSaveNow.apply(this,arguments);if(NET.role==='host')nsLookPub(true);return r;};}
 {const base=toMenu;toMenu=function(screen){if(NET.role==='client')nsLookRestore();return base(screen);};}
 {const base=netReset;netReset=function(){const client=NET.role==='client';const r=base.apply(this,arguments);if(client)nsLookRestore();return r;};}
 function nsNetIn(m){if(!NS.match||NET.role!=='client')return;const ph=['pre','wave','break','over','doors','secured','hold'].includes(m.ph)?m.ph:NS.phase;NS.wave=clamp(m.w|0,0,999);NS.phase=ph;NS.phaseT=clamp(+m.pt||0,0,60);NS.kills=Math.max(0,m.k|0);NS.alive=Math.max(0,m.a|0);NS.elapsed=Math.max(0,+m.e||0);if(m.o&&!NS.over){NS.over=true;NS.overAt=MATCH.time;nsOverShow();}}
 function nsTeamsZero(){for(const pl of NET.players.values())pl.t=0;}
-{const base=netHostMsg;netHostMsg=function(c,m){const r=base(c,m);if(NS.on){nsTeamsZero();const pl=c&&NET.players.get(c.peer);if(pl&&pl.conn===c&&m&&typeof m==='object'&&NET.role==='host'){if(m.t==='nsrdy')nsRuSet(pl.id,!!m.r);else if(m.t==='hi'&&NSRU.on){netSendTo(pl,{t:'nslo',on:1});nsRuPub();}}}
+{const base=netHostMsg;netHostMsg=function(c,m){const r=base(c,m);if(NS.on){nsTeamsZero();const pl=c&&NET.players.get(c.peer);if(pl&&pl.conn===c&&m&&typeof m==='object'&&NET.role==='host'){if(m.t==='nsrdy')nsRuSet(pl.id,!!m.r);else if(m.t==='hi'){nsLookPub(true);if(NSRU.on){netSendTo(pl,{t:'nslo',on:1});nsRuPub();}}}}
 return r;};}
 {const base=netHostUp;netHostUp=function(id){const r=base(id);if(NS.on){nsTeamsZero();netLobbyChanged();}return r;};}
 {const base=netLaunch;netLaunch=function(){if(NS.on){nsTeamsZero();nsLookPub(true);}return base();};}
