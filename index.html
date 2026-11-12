@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-y2ftwmeYGfF/NU40azmwlnSJ4l9Q6s337moeAKmIwDA=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5dWSCEmuza7heb6mqYyrWInG/cl5QIqEwR6W5+lzM5c=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="60d11fb9873f">
+<meta name="cod-build" content="85210925a3ef">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9765,7 +9765,7 @@ if((NSDOOR.cd[key]||0)>now)return false
 NSDOOR.cd[key]=now+(wait||14)
 return true}
 function nsDoorCool(key){return(NSDOOR.cd[key]||0)>(MATCH.time||0)}
-function nsDoorGive(who,kind){if(who&&who.isPlayer===false&&MATCH.online&&NET.role==='host'){const pl=[...NET.players.values()].find(p=>p.id===who.id)
+function nsDoorGive(who,kind){if(who&&who.isPlayer===false&&MATCH.online&&NET.role==='host'){const pl=[...NET.players.values()].find(p=>p.id===who.peer||p.id===who.id)
 if(pl)netSendTo(pl,{t:'nsdoor',act:kind})
 return
 }
@@ -9944,8 +9944,8 @@ d.col.y1=shut?2.55:-7}
 if(NSDOOR.lit)nsGenHum()
 if(!(PL.ent&&PL.ent.pos))return
 const down=!!(KEYS&&KEYS.KeyE)
-if(down&&!NSDOOR.eWas)netSend({t:'nsuse'})
-else if(!down)NSDOOR.prompt=nsDoorPromptAt(PL.ent.pos.x,PL.ent.pos.z)
+if(down&&!NSDOOR.eWas)netSend({t:'nsuse',x:PL.ent.pos.x,z:PL.ent.pos.z})
+else if(!down&&NSDOOR.on)NSDOOR.prompt=nsDoorPromptAt(PL.ent.pos.x,PL.ent.pos.z)
 NSDOOR.eWas=down}
 function nsDoorTick(dt){if(!nsAuth()||NS.over||playHold()||MATCH.state!=='playing'||!(dt>0))return
 NS.elapsed+=dt
@@ -9987,7 +9987,7 @@ if(!nsAuth())return
 nsDoorTick(dt)}}
 {const base=nsTick
 nsTick=function(dt,bg){const r=base(dt,bg)
-if(NSDOOR.on&&!nsAuth()&&dt>0)nsDoorFollow(dt)
+if(!nsAuth()&&NS.match&&dt>0)nsDoorFollow(dt)
 return r}}
 {const base=nsHudTick
 nsHudTick=function(){if(!NSDOOR.on)return base()
@@ -10015,9 +10015,12 @@ netClientMsg=function(m){if(m&&m.t==='nsdoor'&&NET.role==='client'){nsDoorIn(m);
 return base(m)}}
 {const base=netHostMsg
 netHostMsg=function(c,m){const r=base(c,m)
-if(m&&m.t==='nsuse'&&NSDOOR.on&&nsAuth()){const pl=c&&NET.players.get(c.peer)
-const e=pl&&nszPlayers().find(p=>p.id===pl.id)
-if(e)nsDoorUse(e.pos.x,e.pos.z,e)}
+if(m&&m.t==='nsuse'&&NSDOOR.on&&nsAuth()){const e=NET.remotes.get(c&&c.peer)
+if(!e||!e.alive||!e.pos)return r
+let x=e.pos.x,z=e.pos.z
+if(typeof m.x==='number'&&typeof m.z==='number'&&isFinite(m.x)&&isFinite(m.z)){const dx=m.x-e.pos.x,dz=m.z-e.pos.z
+if(dx*dx+dz*dz<36){x=m.x;z=m.z}}
+nsDoorUse(x,z,e)}
 return r}}
 const NSA_GAIN={master:1,idle:0.58,chase:0.72,attack:0.95,hurt:0.78,death:1,drone:0.25,dissonant:0.5,heartStress:0.58,heartLow:0.68,tinnitus:0.55,breath:0.75,click:0.5,creak:0.55,};const NSA_MAX_VOICES=10;const NSA_MAX_DIST=40;const NSA_NEAR=15;const NSA_HEART_DIST=8;const NSA_HURT_CD=0.25;const NSA_IDLE_MIN=4,NSA_IDLE_MAX=12;const NSA_CHASE_MIN=2.2,NSA_CHASE_MAX=5.2;const NSA_BREATH_WAIT=3;const NSA_BREATH_CD=20;const NSA_DMG_HEART=4;const NSA_LOW_HP=35;const NSA_CRIT_HP=20;const NSA_BIG_HIT=25;const NSA_RING_IN=3;const NSA_RING_HOLD=3.5;const NSA_AMB_MIN=25,NSA_AMB_MAX=60;const NSA_AMB_QUIET_MIN=12,NSA_AMB_QUIET_MAX=28;const NSA_RATE_MIN=0.92,NSA_RATE_MAX=1.08;const NSA_PRI={death:4,attack:3,hurt:2,chase:1,idle:0};const NSA_ZKINDS=['idle','chase','attack','hurt','death'];const NSA_TFILES={drone:['drone_low_2'],droneAlt:['drone_low_3'],dissonant:['tone_dissonant_1','tone_dissonant_2'],heartS:['heartbeat_stress_1','heartbeat_stress_2'],heartL:['heartbeat_lowhealth_1','heartbeat_lowhealth_2'],tinnitus:['tinnitus_ring_1','tinnitus_ring_2'],breath:['breathing_recover_1','breathing_recover_2'],click:['click_1','click_2'],creak:['creak_distant_1','creak_distant_2'],};const NSA={on:false,pre:false,master:null,zOut:null,tOut:null,bufs:new Map(),lastTake:{},takes:{},voices:[],loops:{},z:new Map(),hp:100,combat:false,quietT:0,lastBreath:-1e9,nextAmb:0,ringUntil:0,overFade:false,};function nsaRand(a,b){return a+Math.random()*(b-a);}
 function nsaPickI(n,lastK){if(n<=1)return 0;let i=Math.floor(Math.random()*n);if(i===NSA.lastTake[lastK])i=(i+1)%n;NSA.lastTake[lastK]=i;return i;}
