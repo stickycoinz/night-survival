@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-5dWSCEmuza7heb6mqYyrWInG/cl5QIqEwR6W5+lzM5c=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-81oZDXgfiZOIFHLWtb+LzDU8BRKen72it5GOX8PBCVo=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="85210925a3ef">
+<meta name="cod-build" content="9acc5e695be2">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9586,7 +9586,7 @@ return base(e);};}
 const NSDOOR={on:false,power:false,lit:null,eWas:false,prompt:'',built:false,doors:[],sectors:[],stations:[],rr:0,hold:'',quiet:0,siege:0,cd:{},pubT:0}
 const NSDOOR_ROOMS=[{id:'security',name:'Security',node:'CP_security_breach_door_01',x:-21.6,z:-26.4},{id:'armory',name:'Armory',node:'CP_armory_breach_door_01',x:3.2,z:-26.4},{id:'maintenance',name:'Maintenance',node:'CP_maintenance_breach_door_01',x:-21.6,z:26.4},{id:'medical',name:'Medical',node:'CP_medical_breach_door_01',x:2.4,z:26.4},]
 const NSDOOR_POWER=[{id:'hub',name:'hub panel',x:14.14,z:-3.84},{id:'gen',name:'generator',x:-20.06,z:37.39},]
-const NSDOOR_STATIONS=[{id:'armory',name:'weapon rack',node:'CP_armory_weaponrack_01__INTERACT_WeaponRack_Lock'},{id:'armory',name:'weapon rack',node:'CP_armory_weaponrack_02__INTERACT_WeaponRack_Lock'},{id:'medical',name:'medical cart',node:'CP_medical_medicalcart_01__INTERACT_Cart_Supplies'},{id:'security',name:'cameras',node:'CP_security_securitydesk_01__INTERACT_DeskRadio'},{id:'control_hub',name:'hub console',node:'CP_control_hub_operatorconsole_01__INTERACT_OperatorTerminal'},]
+const NSDOOR_STATIONS=[{id:'armory',name:'ammo crate',node:'CP_armory_supplycrate_01',color:0xd7a441},{id:'medical',name:'med crate',node:'CP_medical_medicalcart_01',color:0xd24a4a},{id:'security',name:'cameras',node:'CP_security_securitydesk_01__INTERACT_DeskRadio',color:0},{id:'control_hub',name:'hub console',node:'CP_control_hub_operatorconsole_01__INTERACT_OperatorTerminal',color:0},]
 function nsDoorRoom(id){return NSB.data&&NSB.data.layout.rooms.find(r=>r.id===id)}
 function nsDoorSector(id){return NSDOOR.sectors.find(s=>s.id===id)}
 function nsDoorPoints(room){const out=[]
@@ -9643,10 +9643,22 @@ NSDOOR.sectors.push({id:R.id,name:R.name,room,reserve:60,spawned:0,open:false,po
 nsDoorShut(door)}
 const hub=nsDoorRoom('control_hub')
 if(hub)NSDOOR.sectors.push({id:'control_hub',name:'Control Hub',room:hub,reserve:0,spawned:0,open:true,points:[],timer:0,hold:'',overrun:false,warn:0})
+const old=[]
+NSB.root.traverse(o=>{if(o.name&&o.name.indexOf('nsdoor-crate-')===0)old.push(o)})
+for(const o of old)if(o.parent)o.parent.remove(o)
 for(const S of NSDOOR_STATIONS){const n=nsDoorNode(S.node)
 if(!n)continue
 n.getWorldPosition(wp)
-NSDOOR.stations.push({id:S.id,name:S.name,x:wp.x,z:wp.z})}
+let glow=null
+if(S.color){n.traverse(o=>{if(!o.isMesh||!o.material||!o.material.emissive)return
+if(!o.userData.nsCrate){o.material=o.material.clone();o.userData.nsCrate=true}
+o.material.emissive.setHex(S.color)
+o.material.emissiveIntensity=0.45})
+glow=new THREE.Mesh(new THREE.BoxGeometry(.18,.06,.18),new THREE.MeshStandardMaterial({color:S.color,emissive:S.color,emissiveIntensity:1.8,roughness:.35}))
+glow.position.set(wp.x,wp.y+1.05,wp.z)
+glow.name='nsdoor-crate-'+S.id
+NSB.root.add(glow)}
+NSDOOR.stations.push({id:S.id,name:S.name,x:wp.x,z:wp.z,glow,color:S.color})}
 nsDoorLeds(false)
 NSDOOR.built=NSDOOR.doors.length>0}
 function nsGenQuiet(){const s=NSDOOR.genSnd
@@ -9774,17 +9786,22 @@ if(kind==='heal'&&PL.ent)PL.ent.health=Math.min(100,(PL.ent.health||0)+45)}
 function nsDoorGiveAll(kind){nsDoorGive(PL.ent,kind)
 if(!(MATCH.online&&NET.role==='host'))return
 for(const pl of NET.players.values())if(!pl.h)netSendTo(pl,{t:'nsdoor',act:kind})}
+function nsDoorCrateLine(st){if(st.id!=='armory'&&st.id!=='medical')return''
+const s=nsDoorSector(st.id)
+const label=st.id==='armory'?'Ammo crate':'Med crate'
+if(!s||!s.open)return label+' is in '+(s?s.name:'that room')
+if(s.hold==='overrun'||s.hold==='contested'||s.hold==='warned')return label+' lost'
+if(!nsDoorUsable(st.id))return'Clear '+s.name+', then use the '+label.toLowerCase()
+if(nsDoorCool(st.id))return st.id==='armory'?'Ammo crate empty':'Med crate used'
+return'E  '+label}
+function nsDoorCrateGlow(){for(const st of NSDOOR.stations){if(!st.glow)continue
+const ok=nsDoorUsable(st.id)
+st.glow.material.emissiveIntensity=ok?2:.25}}
 function nsDoorStation(st,who){const ok=nsDoorUsable(st.id)
-if(st.id==='armory'){NSDOOR.prompt=!ok?'Armory lost':nsDoorCool('armory')?'Racks are empty':'E  Take ammo'
-if(!ok||!nsDoorReady('armory',14))return
-nsDoorGive(who,'ammo')
-nsDoorSay('ARMORY · ammo refilled','xp',2)
-return
-}
-if(st.id==='medical'){NSDOOR.prompt=!ok?'Medical lost':nsDoorCool('medical')?'Supplies used':'E  Use supplies'
-if(!ok||!nsDoorReady('medical',14))return
-nsDoorGive(who,'heal')
-nsDoorSay('MEDICAL · patched up','xp',2)
+if(st.id==='armory'||st.id==='medical'){NSDOOR.prompt=nsDoorCrateLine(st)
+if(!ok||!nsDoorReady(st.id,14))return
+nsDoorGive(who,st.id==='armory'?'ammo':'heal')
+nsDoorSay(st.id==='armory'?'AMMO CRATE · refilled':'MED CRATE · patched up','xp',2)
 return
 }
 if(st.id==='security'){NSDOOR.prompt=ok?'E  Check cameras':'Cameras down'
@@ -9800,10 +9817,10 @@ if(!nsDoorReady('control_hub',2))return
 nsDoorSay(NSDOOR.sectors.map(s=>s.name+' '+(s.hold||(s.open?'open':'shut'))).join(' · '),'info',3.5)}
 function nsDoorPromptAt(x,z){if(!NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,1.7)
 if(p)return'E  Start generator'}
-const st=nsDoorNear(x,z,NSDOOR.stations,1.7)
-if(st){const ok=nsDoorUsable(st.id)
-if(st.id==='armory')return!ok?'Armory lost':nsDoorCool('armory')?'Racks are empty':'E  Take ammo'
-if(st.id==='medical')return!ok?'Medical lost':nsDoorCool('medical')?'Supplies used':'E  Use supplies'
+const st=nsDoorNear(x,z,NSDOOR.stations,2.2)
+if(st){const crate=nsDoorCrateLine(st)
+if(crate)return crate
+const ok=nsDoorUsable(st.id)
 if(st.id==='security')return ok?'E  Check cameras':'Cameras down'
 return ok?'E  Sector board':'Control lost'}
 const powers=NSDOOR_POWER.map(p=>({x:p.x,z:p.z,kind:'power'}))
@@ -9818,7 +9835,7 @@ nsDoorPower()
 nsDoorSay('GENERATOR ON · door buttons are live','xp',3)
 return
 }}
-const st=nsDoorNear(x,z,NSDOOR.stations,1.7)
+const st=nsDoorNear(x,z,NSDOOR.stations,2.2)
 if(st){nsDoorStation(st,who||PL.ent);return}
 const doors=NSDOOR.doors.map(d=>({x:d.bx,z:d.bz,kind:'door',door:d,name:d.name}))
 const hit=nsDoorNear(x,z,doors,1.7)
@@ -9908,8 +9925,8 @@ if(now-NSDOOR.pubT<200)return
 NSDOOR.pubT=now
 netBroadcast({t:'nsdoor',p:NSDOOR.power?1:0,lit:NSDOOR.lit?1:0,h:NSDOOR.hold||'',sg:NSDOOR.siege|0,d:NSDOOR.doors.map(d=>[d.id,Math.round(d.swing*100),d.open?1:0,d.swinging?1:0]),s:NSDOOR.sectors.map(s=>[s.id,s.hold||'',s.reserve|0,s.open?1:0,s.overrun?1:0,nsDoorLive(s.id)]),note:NSDOOR.note||null,},true)}
 function nsDoorIn(m){if(!m||NET.role!=='client')return
-if(m.act==='ammo'){if(typeof nsRefillAmmo==='function')nsRefillAmmo();hudMsg('ARMORY · ammo refilled','xp',2);return}
-if(m.act==='heal'){if(PL.ent)PL.ent.health=Math.min(100,(PL.ent.health||0)+45);hudMsg('MEDICAL · patched up','xp',2);return}
+if(m.act==='ammo'){if(typeof nsRefillAmmo==='function')nsRefillAmmo();hudMsg('AMMO CRATE · refilled','xp',2);return}
+if(m.act==='heal'){if(PL.ent)PL.ent.health=Math.min(100,(PL.ent.health||0)+45);hudMsg('MED CRATE · patched up','xp',2);return}
 if(!NSDOOR.built)return
 NSDOOR.on=true
 NSDOOR.power=!!m.p
@@ -9942,6 +9959,7 @@ const shut=d.swing<0.98
 d.col.y0=shut?0:-8
 d.col.y1=shut?2.55:-7}
 if(NSDOOR.lit)nsGenHum()
+nsDoorCrateGlow()
 if(!(PL.ent&&PL.ent.pos))return
 const down=!!(KEYS&&KEYS.KeyE)
 if(down&&!NSDOOR.eWas)netSend({t:'nsuse',x:PL.ent.pos.x,z:PL.ent.pos.z})
@@ -9958,6 +9976,7 @@ else if(!down)NSDOOR.prompt=nsDoorPromptAt(me.pos.x,me.pos.z)
 NSDOOR.eWas=down
 nsDoorAnim(dt)
 nsGenHum()
+nsDoorCrateGlow()
 nsDoorSpawn(dt,players)
 let reserve=0,live=0
 for(const s of NSDOOR.sectors){if(!NSDOOR.hold&&(!s.open||s.id==='control_hub'))continue
