@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wSFOIunHqFpX7tcyqfixO9mgD+7mGjnEMoJPMzIwQus=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qyA7CEgKbN4wnojl8hO+Uan0dZahd1R8teZKTay/of4=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="f7331f11049d">
+<meta name="cod-build" content="a30423dd59bb">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9216,7 +9216,8 @@ function nslBeam(){const g=new THREE.ConeGeometry(1,1,20,1,true);g.translate(0,-
 function nslArm(){if(!NSL.flash){const fl=nslSpot(),sp=nslSpot();camera.add(fl,fl.target,sp,sp.target);fl.position.set(0.08,-0.05,0.02);fl.target.position.set(0,-0.15,-10);sp.position.set(0.08,-0.05,0.02);sp.target.position.set(0,-0.25,-10);fl.shadow.mapSize.set(1024,1024);fl.shadow.camera.near=0.2;fl.shadow.camera.far=NSL_DEF.range;fl.shadow.bias=-0.0006;fl.shadow.normalBias=0.02;NSL.flash=fl;NSL.spill=sp;}
 if(!camera.parent)scene.add(camera);const want=NS_CFG.teamLights;while(NSL.pool.length<want){const L=nslSpot();scene.add(L,L.target);NSL.pool.push(L);}
 while(NSL.pool.length>want){const L=NSL.pool.pop();scene.remove(L,L.target);}
-NSL.poolN=want;while(NSL.beams.length<3)NSL.beams.push(nslBeam());for(const L of[NSL.flash,NSL.spill,...NSL.pool]){L.visible=true;L.intensity=0;}
+NSL.poolN=want;while(NSL.beams.length<3)NSL.beams.push(nslBeam());if(!NSL.flood){const L=new THREE.PointLight(0xfff4e0,0,20,1.15);L.visible=true;L.position.set(0,2.7,0);scene.add(L);NSL.flood=L;}
+NSL.flood.visible=true;NSL.flood.intensity=0;for(const L of[NSL.flash,NSL.spill,...NSL.pool]){L.visible=true;L.intensity=0;}
 nslShadow();NSL.armed=true;if(typeof nsMuzArm==='function')nsMuzArm();}
 function nslShadow(){if(NSL.flash)NSL.flash.castShadow=!!NS_CFG.shadows&&!NO_SHADOWS;}
 function nslToggle(on){NSL.on=on===undefined?!NSL.on:!!on;sfxUi('click');nsHudLight();}
@@ -9310,7 +9311,7 @@ if(best)nsHearApplyEvent(b,best);return heard;}
 if(P)for(const p of P){const shot=p.lastShotT;if(!Number.isFinite(shot)||shot<=(b.zHeardT||-99))continue;const range=nszHearRange(p);const dist=hyp(p.pos.x-b.pos.x,p.pos.z-b.pos.z)+Math.abs(p.pos.y-b.pos.y)*4;if(dist>range)continue;const strength=1-dist/range;if(strength<=loudest)continue;loudest=strength;heard=true;b.zSearchX=p.pos.x;b.zSearchZ=p.pos.z;b.zHeardT=shot;b.zSearchUntil=MATCH.time+NSZ_SMART.searchSeconds+(b.zPersonality||0)*4;if(nsHearCanInvestigate(b)){b.zState='investigate';b.zSearchStage=0;b.path=null;b.repathT=0;b.zDormant=false;b.zAwake=true;b.zJoinHold=false;b.zWander=null;nszAlertRun(b);}}
 return heard;}
 function nszCanLeap(b){return!!(b.zLeaper&&b.alive&&b.zInjury==='healthy'&&!(b.zStag>0)&&(b.zLeapCd||0)<=0&&!b.zLeap);}
-function nszLeapStart(b,T){b.zLeap='tele';b.zLeapT=0;b.zLeapHit=false;b.zAtkN=(b.zAtkN+1)%1000;if(b.model)b.model.nsAtk=0;b.zAtkStyle='leap';b.path=null;if(T&&T.pos){b.zLeapTX=T.pos.x;b.zLeapTZ=T.pos.z;b.zLeapTY=T.pos.y;}}
+function nszLeapStart(b,T){b.zLeap='tele';b.zLeapT=0;b.zLeapHit=false;b.zDoorHit=false;b.zAtkN=(b.zAtkN+1)%1000;if(b.model)b.model.nsAtk=0;b.zAtkStyle='leap';b.path=null;if(T&&T.pos){b.zLeapTX=T.pos.x;b.zLeapTZ=T.pos.z;b.zLeapTY=T.pos.y;}}
 function nszLeapPlayerHit(dir,atk){const e=typeof PL!=='undefined'?PL.ent:null;if(!e||!e.alive)return;let dx=dir&&dir.x,dz=dir&&dir.z;if(!(Math.hypot(dx||0,dz||0)>0.05)&&atk&&atk.pos){dx=e.pos.x-atk.pos.x;dz=e.pos.z-atk.pos.z;}
 const h=Math.hypot(dx||0,dz||0);if(h>0.05){e.nsKbX=dx/h;e.nsKbZ=dz/h;e.nsKb=NSZ_LEAP.knock;}
 e.nsSlowT=NSZ_LEAP.slowT;e.nsSlowK=NSZ_LEAP.slowK;if(typeof PL!=='undefined'){PL.shake=Math.max(PL.shake||0,0.9);PL.vpP+=1.7;PL.vpY+=(Math.random()-0.5)*0.7;PL.vrollP+=(Math.random()-0.5)*0.55;PL.punchP=(PL.punchP||0)-0.09;}}
@@ -9318,7 +9319,7 @@ function nszLeapTick(b,dt,T){const L=NSZ_LEAP;if(b.zInjury!=='healthy'&&b.zLeap=
 b.zLeapT=(b.zLeapT||0)+dt;if(b.zLeap==='tele'){if(T&&T.pos){b.zLeapTX=T.pos.x;b.zLeapTZ=T.pos.z;b.zLeapTY=T.pos.y;}
 const dx=(b.zLeapTX||b.pos.x)-b.pos.x,dz=(b.zLeapTZ||b.pos.z)-b.pos.z,d=Math.max(1e-3,hyp(dx,dz));b._leapWishX=dx/d;b._leapWishZ=dz/d;b._leapSpeed=0.55;b._leapFace=Math.atan2(-dx,-dz);if(b.zLeapT>=L.tele){b.zLeap='air';b.zLeapT=0;b.zLeapSX=b.pos.x;b.zLeapSY=b.pos.y;b.zLeapSZ=b.pos.z;if(T&&T.pos){b.zLeapTX=T.pos.x+(T.vel?T.vel.x*0.18:0);b.zLeapTZ=T.pos.z+(T.vel?T.vel.z*0.18:0);b.zLeapTY=T.pos.y;}}
 return'move';}
-if(b.zLeap==='air'){const u=clamp(b.zLeapT/L.air,0,1);b.pos.x=b.zLeapSX+(b.zLeapTX-b.zLeapSX)*u;b.pos.z=b.zLeapSZ+(b.zLeapTZ-b.zLeapSZ)*u;b.pos.y=b.zLeapSY+((b.zLeapTY!=null?b.zLeapTY:b.zLeapSY)-b.zLeapSY)*u+L.height*4*u*(1-u);b.onGround=false;b.vy=0;if(typeof collideCircle==='function')collideCircle(b.pos,0.34,1.75);const fdx=(b.zLeapTX-b.pos.x),fdz=(b.zLeapTZ-b.pos.z);if(hyp(fdx,fdz)>0.05)b._leapFace=Math.atan2(-fdx,-fdz);if(u>=1){const ty=b.zLeapTY!=null?b.zLeapTY:b.zLeapSY;b.pos.y=ty;if(typeof collideCircle==='function')collideCircle(b.pos,0.34,1.75);b.onGround=true;const td=T&&T.alive?hyp(T.pos.x-b.pos.x,T.pos.z-b.pos.z):99;const hit=!!(T&&T.alive&&td<1.7&&Math.abs(T.pos.y-b.pos.y)<1.6);if(hit&&!b.zLeapHit){b.zLeapHit=true;let dx=T.pos.x-b.pos.x,dz=T.pos.z-b.pos.z,h=hyp(dx,dz);if(h<0.05){dx=-Math.sin(b.yaw);dz=-Math.cos(b.yaw);h=1;}
+if(b.zLeap==='air'){const u=clamp(b.zLeapT/L.air,0,1);b.pos.x=b.zLeapSX+(b.zLeapTX-b.zLeapSX)*u;b.pos.z=b.zLeapSZ+(b.zLeapTZ-b.zLeapSZ)*u;b.pos.y=b.zLeapSY+((b.zLeapTY!=null?b.zLeapTY:b.zLeapSY)-b.zLeapSY)*u+L.height*4*u*(1-u);b.onGround=false;b.vy=0;if(typeof nsDoorLeapHit==='function'&&nsDoorLeapHit(b))return'move';if(typeof collideCircle==='function')collideCircle(b.pos,0.34,1.75);const fdx=(b.zLeapTX-b.pos.x),fdz=(b.zLeapTZ-b.pos.z);if(hyp(fdx,fdz)>0.05)b._leapFace=Math.atan2(-fdx,-fdz);if(u>=1){const ty=b.zLeapTY!=null?b.zLeapTY:b.zLeapSY;b.pos.y=ty;if(typeof collideCircle==='function')collideCircle(b.pos,0.34,1.75);b.onGround=true;const td=T&&T.alive?hyp(T.pos.x-b.pos.x,T.pos.z-b.pos.z):99;const hit=!!(T&&T.alive&&td<1.7&&Math.abs(T.pos.y-b.pos.y)<1.6);if(hit&&!b.zLeapHit){b.zLeapHit=true;let dx=T.pos.x-b.pos.x,dz=T.pos.z-b.pos.z,h=hyp(dx,dz);if(h<0.05){dx=-Math.sin(b.yaw);dz=-Math.cos(b.yaw);h=1;}
 const dir=_nszT.set(dx/h,0,dz/h);applyDamage(T,b.zDmg*L.dmgMul,b,'ns-leap',false,dir,b.pos);}
 b.zLeapCd=L.cool;b.zState='chase';if(hit){b.zLeap='';b.zLeapT=0;}
 else{b.zLeap='stumble';b.zLeapT=0;b.zStag=Math.max(b.zStag||0,0.45);}}
@@ -9593,7 +9594,9 @@ body.ns #reloadHint{color:rgba(191,232,200,.88);text-shadow:none}
 .nsMk .fr i.bl{bottom:0;left:0;border-bottom-width:1px;border-left-width:1px}
 .nsMk .fr i.br{bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
 .nsMk .lab{position:absolute;left:0;right:0;top:11%;display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center;font-weight:400;letter-spacing:.14em;color:#e7fff1;line-height:1.2;font-size:11px;text-transform:uppercase;text-shadow:0 0 6px rgba(150,255,190,.8)}
-.nsMk.door .lab{top:28%;letter-spacing:.12em}
+.nsMk.door .fr i{display:none}
+.nsMk.door .fr{border:1px solid rgba(224,255,236,.96);box-shadow:0 0 12px rgba(150,255,190,.75)}
+.nsMk.door .lab{top:18%;letter-spacing:.12em}
 .nsMk .lab .d{letter-spacing:.08em}
 .nsMk .hp{position:absolute;left:10%;right:10%;bottom:8%;height:4px;background:rgba(214,255,228,.22);box-shadow:0 0 6px rgba(140,255,180,.35);display:none}
 .nsMk.door .hp{display:block}
@@ -9688,7 +9691,9 @@ if(m.bar)hudStyle(m.bar,'width',hp+'%')}else{hudText(m.k,title);hudText(m.d,dt);
 return true;}
 function nsMkUpdate(){if(!camera||!VIEW){nsMkHideAll();return;}
 camera.updateMatrixWorld();const W=VIEW.w,H=VIEW.h,cp=camera.position,now=performance.now();const focal=H/(2*Math.tan((camera.fov*Math.PI)/360));camera.getWorldDirection(NSV.fwd);let n=0;const me=PL.ent;if(me&&Array.isArray(entities)){for(const o of entities){if(o===me||!o.alive||o.off||o.zombie||o.remoteBot||o.netBot)continue;if(typeof allied==='function'&&!allied(o,me))continue;if(!o.isPlayer&&!o.isRemote)continue;if(typeof entHead==='function')entHead(o,NSV.h);else NSV.h.set(o.pos.x,o.pos.y+1.65,o.pos.z);const midY=(o.pos.y+NSV.h.y)*0.5;if(nsMkPlace(n,'team','TEAM',o,NSV.h.x,midY,NSV.h.z,1.15,2.35,cp,W,H,focal,now))n++;}}
-if(typeof NSDOOR!=='undefined'&&NSDOOR&&NSDOOR.on&&NSDOOR.doors){for(const d of NSDOOR.doors){const x=d.x,z=d.z,y=1.22;const ww=Math.max(1.4,(d.clearWidth||2.2)*0.82),wh=2.35;if(nsMkPlace(n,'door','DOOR',d,x,y,z,ww,wh,cp,W,H,focal,now))n++;}}
+if(typeof NSDOOR!=='undefined'&&NSDOOR&&NSDOOR.on&&NSDOOR.doors){const shut=[];for(const d of NSDOOR.doors){if(!d||d.open||(d.swing!=null&&d.swing>0.85))continue;const dx=d.x-cp.x,dz=d.z-cp.z;shut.push({d,d2:dx*dx+dz*dz});}
+shut.sort((a,b)=>a.d2-b.d2);const taken=[];for(const row of shut){const d=row.d;NSV.t.set(d.x,1.35,d.z);NSV.f.subVectors(NSV.t,cp);const dist=NSV.f.length();if(dist<0.55||dist>22||NSV.f.dot(NSV.fwd)<0.25)continue;NSV.p.copy(NSV.t).project(camera);if(NSV.p.z>=1)continue;const px=(NSV.p.x*0.5+0.5)*W,py=(-NSV.p.y*0.5+0.5)*H;const ww=Math.max(1.8,(d.clearWidth||2.2)*1.06),wh=2.8;const pw=Math.max(64,ww*focal/dist),ph=Math.max(88,wh*focal/dist);let covered=false;for(const r of taken){if(Math.abs(px-r.x)<(r.w+pw)*0.42&&Math.abs(py-r.y)<(r.h+ph)*0.42){covered=true;break;}}
+if(covered)continue;if(nsMkPlace(n,'door','DOOR',d,d.x,1.35,d.z,ww,wh,cp,W,H,focal,now)){taken.push({x:px,y:py,w:pw,h:ph});n++;}}}
 if(typeof nsMkBreach==='function')n=nsMkBreach(n,cp,W,H,focal,now);for(let i=n;i<NSV.mk.length;i++)hudStyle(NSV.mk[i].el,'opacity','0');}
 function nsVisTick(){if(!NSU.hud)return;nsGlassTick();const scoped=$('scope')&&$('scope').classList.contains('on');const playing=MATCH.state==='playing'||MATCH.state==='paused';if(!playing||scoped){nsMkHideAll();return;}
 nsMkUpdate();}
@@ -9826,10 +9831,32 @@ function nsDoorSpecList(){if(typeof nsIsTestmap==='function'&&nsIsTestmap())retu
 const L=NSB.data&&NSB.data.layout
 if(L&&Array.isArray(L.doors)&&L.doors.some(d=>d.role)){return L.doors.filter(d=>d.role==='sector'||d.role==='breach').map(d=>({id:d.role==='sector'?d.room:d.id,name:d.name,node:d.exportNode,x:d.center[0],z:d.center[1],facing:d.facing||'z',clearWidth:d.clearWidth||2.8,forceOpenOnSiege:!!d.forceOpenOnSiege,role:d.role,roomId:d.room,}))}
 return NSDOOR_ROOMS.map(r=>Object.assign({},r,{role:'sector',roomId:r.id,facing:'z',clearWidth:1.1,forceOpenOnSiege:false}))}
-function nsDoorColBox(R){const half=(R.clearWidth||1.1)*0.5,t=0.18
+function nsDoorFit(R){const alongZ=R.facing!=='x'
+const cx=R.x,cz=R.z
+const blocked=(x,z)=>{if(typeof queryBoxes!=='function')return false
+const arr=queryBoxes(x-0.05,z-0.05,x+0.05,z+0.05)
+for(let i=0;i<arr.length;i++){const c=arr[i]
+if(!c||c.nsDoor||c.ray)continue
+if(c.y1<1.05||c.y0>1.45)continue
+if(x<c.x0||x>c.x1||z<c.z0||z>c.z1)continue
+return true}
+return false}
+let left=0,right=0,hitL=false,hitR=false
+for(let d=0.08;d<=2.6;d+=0.08){const x=alongZ?cx-d:cx
+const z=alongZ?cz:cz-d
+if(blocked(x,z)){hitL=true;break}
+left=d}
+for(let d=0.08;d<=2.6;d+=0.08){const x=alongZ?cx+d:cx
+const z=alongZ?cz:cz+d
+if(blocked(x,z)){hitR=true;break}
+right=d}
+const span=left+right
+if(hitL&&hitR&&span>0.8)R.clearWidth=Math.max(R.clearWidth||0,span+0.2)
+else R.clearWidth=Math.max(R.clearWidth||0,2.2)}
+function nsDoorColBox(R){const half=(R.clearWidth||1.1)*0.5,t=0.28
 if(R.facing==='x')
-return{x0:R.x-t,x1:R.x+t,y0:0,y1:2.55,z0:R.z-half,z1:R.z+half,m:'metal',ray:false,nsDoor:R.id}
-return{x0:R.x-half,x1:R.x+half,y0:0,y1:2.55,z0:R.z-t,z1:R.z+t,m:'metal',ray:false,nsDoor:R.id}}
+return{x0:R.x-t,x1:R.x+t,y0:0,y1:2.72,z0:R.z-half,z1:R.z+half,m:'metal',ray:false,nsDoor:R.id}
+return{x0:R.x-half,x1:R.x+half,y0:0,y1:2.72,z0:R.z-t,z1:R.z+t,m:'metal',ray:false,nsDoor:R.id}}
 function nsDoorRefreshNav(){if(typeof buildNav!=='function')return
 buildNav()
 if(typeof nsFixNav==='function')nsFixNav()
@@ -9932,7 +9959,7 @@ d.broke=false
 d.pound=0
 d.lockAt=0
 d.col.y0=0
-d.col.y1=2.55
+d.col.y1=2.72
 if(d.leaves)nsDoorPose(d,0)
 else if(d.hinge&&d.closedQ)d.hinge.quaternion.copy(d.closedQ)}
 function nsDoorPose(d,k){if(d.leaves){for(const leaf of d.leaves){const a=leaf.userData.openP,b=leaf.userData.shutP
@@ -9943,12 +9970,12 @@ return
 if(d.hinge&&d.closedQ&&d.openQ)d.hinge.quaternion.copy(d.closedQ).slerp(d.openQ,k)}
 function nsDoorPrimitive(R){if(!MAPL.root)return[]
 const w=R.clearWidth||2.4
-const mesh=new THREE.Mesh(new THREE.BoxGeometry(R.facing==='x'?0.16:w,2.5,R.facing==='x'?w:0.16),new THREE.MeshStandardMaterial({color:0x5c6560,roughness:0.78,metalness:0.12}))
+const mesh=new THREE.Mesh(new THREE.BoxGeometry(R.facing==='x'?0.28:w,2.72,R.facing==='x'?w:0.28),new THREE.MeshStandardMaterial({color:0x5c6560,roughness:0.78,metalness:0.12}))
 mesh.name='night:door-primitive-'+R.id
 mesh.castShadow=false
 mesh.receiveShadow=false
 mesh.matrixAutoUpdate=true
-const shutP=new THREE.Vector3(R.x,1.25,R.z)
+const shutP=new THREE.Vector3(R.x,1.36,R.z)
 const openP=shutP.clone()
 if(R.facing==='x')openP.z+=w
 else openP.x+=w
@@ -10018,7 +10045,8 @@ NSDOOR_POWER[0].z=18.4
 NSDOOR_POWER[1].x=40.1
 NSDOOR_POWER[1].z=-41.98
 NSDOOR.genAt=new V3(40.1,1.1,-41.98)}
-for(const R of nsDoorSpecList()){const room=nsDoorRoom(R.roomId||R.id)
+for(const R of nsDoorSpecList()){if(typeof nsIsTestmap==='function'&&nsIsTestmap())nsDoorFit(R)
+const room=nsDoorRoom(R.roomId||R.id)
 let leaves=nsIsTestmap()?nsDoorPrimitive(R):[]
 let hinge=nsDoorNode(R.node+'__PIVOT_BlastDoor_Hinge')
 if(leaves.length){hinge=new THREE.Group()
@@ -10081,7 +10109,85 @@ p.z=wp.z
 nsDoorMark(n,0x3dff86,'POWER','power',p.id)}
 nsDoorLeds(false)
 NSDOOR.built=NSDOOR.doors.length>0}
-function nsGenQuiet(){const s=NSDOOR.genSnd
+function nsHoldAlarm(on){if(!on){const s=NSDOOR.alarm
+if(!s||typeof AU==='undefined'||!AU.ctx){NSDOOR.alarm=null;return}
+const t=AU.ctx.currentTime
+try{s.g.gain.setTargetAtTime(0.0001,t,0.15);s.o.stop(t+0.5);s.lfo.stop(t+0.5)}catch(e){}
+NSDOOR.alarm=null
+return
+}
+if(NSDOOR.alarm||typeof AU==='undefined'||!AU.ready||!AU.ctx||typeof auOut!=='function')return
+const sec=nsDoorSector(NSDOOR.breachId)
+const c=sec&&sec.room&&sec.room.center
+const pos=c?new V3(c[0],2.4,c[1]):new V3(0,2.4,0)
+const dest=auOut(pos,0.4,0.85,0.35,16)
+const ctx=AU.ctx
+const o=ctx.createOscillator(),lfo=ctx.createOscillator()
+const g=ctx.createGain(),lg=ctx.createGain()
+o.type='square'
+o.frequency.value=520
+lfo.type='sine'
+lfo.frequency.value=1.7
+lg.gain.value=90
+lfo.connect(lg)
+lg.connect(o.frequency)
+g.gain.value=0.0001
+g.gain.setTargetAtTime(0.16,ctx.currentTime,0.25)
+o.connect(g)
+g.connect(dest)
+o.start()
+lfo.start()
+NSDOOR.alarm={o,lfo,g}}
+function nsHoldFlood(){const L=(typeof NSL!=='undefined')?NSL.flood:null
+const on=!!(NSDOOR.on&&NSDOOR.hold==='defense'&&NSDOOR.breachId)
+if(!on){if(L)L.intensity=0
+nsHoldAlarm(false)
+return
+}
+const sec=nsDoorSector(NSDOOR.breachId)
+const c=sec&&sec.room&&sec.room.center
+if(L&&c){L.position.set(c[0],2.7,c[1])
+L.distance=22
+L.decay=1.1
+L.color.setHex(0xfff6e4)
+L.intensity=95}
+nsHoldAlarm(true)}
+function nsDoorLeapHit(b){if(!b||!NSDOOR.on||!NSDOOR.doors||b.zDoorHit)return false
+const x0=b.zLeapSX!=null?b.zLeapSX:b.pos.x
+const z0=b.zLeapSZ!=null?b.zLeapSZ:b.pos.z
+const x1=b.pos.x,z1=b.pos.z
+for(const d of NSDOOR.doors){const c=d.col
+if(!c||d.open||d.swing>0.2||c.y0<0)continue
+if(!nsSegHitsBox(x0,z0,x1,z1,c,0.36))continue
+const sideX=x0<d.x?-1:1
+const sideZ=z0<d.z?-1:1
+if(d.facing==='x')b.pos.x=d.x+sideX*0.62
+else b.pos.z=d.z+sideZ*0.62
+b.zDoorHit=true
+b.zLeap='stumble'
+b.zLeapT=0
+b.zStag=Math.max(b.zStag||0,0.7)
+d.pound=Math.min(1,(d.pound||0)+0.55)
+NSDOOR.pubT=0
+nsDoorSnd(d,1.15)
+if(d.pound>=1)nsDoorBreak(d)
+else nsDoorSay((d.name||'DOOR').toUpperCase()+' HIT · '+Math.round((1-d.pound)*100),'enemy',1.4)
+return true}
+return false}
+function nsSegHitsBox(x0,z0,x1,z1,c,pad){let t0=0,t1=1
+const dx=x1-x0,dz=z1-z0
+const clip=(p,q)=>{if(Math.abs(p)<1e-8)return q>=0
+const r=q/p
+if(p<0){if(r>t1)return false;if(r>t0)t0=r}
+else{if(r<t0)return false;if(r<t1)t1=r}
+return true}
+if(!clip(-dx,x0-(c.x0-pad)))return false
+if(!clip(dx,(c.x1+pad)-x0))return false
+if(!clip(-dz,z0-(c.z0-pad)))return false
+if(!clip(dz,(c.z1+pad)-z0))return false
+return true}
+function nsGenQuiet(){nsHoldAlarm(false)
+const s=NSDOOR.genSnd
 if(!s||typeof AU==='undefined'||!AU.ctx){NSDOOR.genSnd=null;return}
 const t=AU.ctx.currentTime
 try{s.g.gain.setTargetAtTime(0.0001,t,0.15);s.o1.stop(t+1);s.o2.stop(t+1);s.lfo.stop(t+1)}catch(e){}
@@ -10220,7 +10326,7 @@ d.swinging=false
 d.closing=false
 d.open=false
 d.col.y0=0
-d.col.y1=2.55
+d.col.y1=2.72
 nsDoorSnd(d,1)
 continue
 }
@@ -10356,7 +10462,7 @@ door.swinging=true
 door.open=false
 door.pound=0
 door.col.y0=0
-door.col.y1=2.55
+door.col.y1=2.72
 NSDOOR.pubT=0
 nsDoorSnd(door,.75)
 nsDoorSay((door.name||'DOOR').toUpperCase()+' LOCKED','xp',2)}
@@ -11018,8 +11124,9 @@ nsDoorPose(d,k)}
 if(d.swinging&&d.wheel&&Math.abs(d.swing-before)>.0001)d.wheel.rotateZ((d.closing?-1:1)*dt*7)
 const shut=d.closing||d.swing<0.98
 d.col.y0=shut?0:-8
-d.col.y1=shut?2.55:-7}
+d.col.y1=shut?2.72:-7}
 if(NSDOOR.lit)nsGenHum()
+nsHoldFlood()
 nsDoorCrateGlow()
 if(!(PL.ent&&PL.ent.pos))return
 const down=!!(KEYS&&KEYS.KeyE)
@@ -11039,6 +11146,7 @@ else if(!down)NSDOOR.prompt=nsDoorPromptAt(me.pos.x,me.pos.z)
 NSDOOR.eWas=down
 nsDoorAnim(dt)
 nsDoorPound(dt)
+nsHoldFlood()
 nsGenHum()
 nsDoorCrateGlow()
 if(NSDOOR.needPop)nsDoorPopulate()
