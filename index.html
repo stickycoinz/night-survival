@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-IaZOhjbxqq+MhXTkTlUejkiylLGGg8TEVqKfSKIEZ/k=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TJlvh1f31C5aMhz3jDOW4+peKJLRJpm8xQ29dcDhOk0=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="51fd023bb217">
+<meta name="cod-build" content="5a0befd1bbee">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9320,7 +9320,7 @@ const NS_BREAK=12,NS_PRE=6;Object.assign(NS,{match:false,myDown:false,overAt:0,s
 function nsPlayerCount(){let n=1;if(MATCH.online)for(const e of NET.remotes.values())if(!e.remoteBot)n++;return n;}
 function nsAuth(){return!MATCH.online||NET.role==='host';}
 function nsLiveZ(){let n=0;for(const b of NSZ.pool)if(b.alive)n++;return n;}
-{const base=startMatch;startMatch=function(opt={}){if(!NS.on)return base(opt);nszPoolEnsure();Object.assign(NS,{match:true,over:false,wave:0,phase:'pre',phaseT:NS_PRE,kills:0,toSpawn:0,spawnT:0,elapsed:0,alive:0,myDown:false,overAt:0,specT:0,spec:null,pubT:0,prevPhase:'pre'});NSL.on=true;base(opt);MATCH.limit=1e9;MATCH.timeLeft=1e6;nsOverHide();nsHudShow(true);nsHudLight();};}
+{const base=startMatch;startMatch=function(opt={}){if(!NS.on)return base(opt);nszPoolEnsure();if(typeof nsBoardReset==='function')nsBoardReset();Object.assign(NS,{match:true,over:false,wave:0,phase:'pre',phaseT:NS_PRE,kills:0,toSpawn:0,spawnT:0,elapsed:0,alive:0,myDown:false,overAt:0,specT:0,spec:null,pubT:0,prevPhase:'pre'});NSL.on=true;base(opt);MATCH.limit=1e9;MATCH.timeLeft=1e6;nsOverHide();nsHudShow(true);nsHudLight();};}
 {const base=modeRoster;modeRoster=function(){base();if(!NS.match)return;for(const e of entities)if(!e.isPlayer&&!e.isRemote){e.off=true;e.alive=false;e.respawnT=Infinity;e.target=null;if(e.model){e.model.rag=null;e.model.root.visible=false;}}};}
 const NS_LO_KEY='ns_loadout',NS_LO_DEF={p:'m4',pa:[],s:'m9',sa:[]};function nsGunOk(id){return typeof id==='string'&&(hasKey(WEAPONS,id)||!!(window.BOCFG&&BOCFG.CUSTOM&&hasKey(BOCFG.CUSTOM,id)));}
 function nsGunBase(id){return hasKey(WEAPONS,id)?WEAPONS[id]:window.BOCFG&&BOCFG.CUSTOM&&hasKey(BOCFG.CUSTOM,id)?BOCFG.CUSTOM[id]:null;}
@@ -9338,7 +9338,7 @@ return base(e);};}
 else{const B=MAP_DEFS.night.bounds;tx=(B.x0+B.x1)/2;tz=(B.z0+B.z1)/2;}
 return spawnFace(p,Math.atan2(-(tx-p.x),-(tz-p.z)));};}
 {const base=respawnPlayer;respawnPlayer=function(){if(NS.match)return;return base();};}
-{const base=killEnt;killEnt=function(v,a,weapon,head,dir,life){if(!NS.match)return base(v,a,weapon,head,dir,life);const z=nszIsZ(v);base(v,a,weapon,head,dir,life);if(z){v.respawnT=6;v.nsDeadAt=MATCH.time;v.zState='dead';if(!v.isRemote)NS.kills++;}
+{const base=killEnt;killEnt=function(v,a,weapon,head,dir,life){if(!NS.match)return base(v,a,weapon,head,dir,life);const z=nszIsZ(v);base(v,a,weapon,head,dir,life);if(z){v.respawnT=6;v.nsDeadAt=MATCH.time;v.zState='dead';if(!v.isRemote)NS.kills++;if(a&&a!==v&&!nszIsZ(a)&&typeof nsBoardKill==='function')nsBoardKill(a);}
 if(v.isPlayer){KC.pending=null;NS.myDown=true;NS.specT=0;hideDeathScreen();nsHudDown(true);}};}
 {const base=applyDamage;applyDamage=function(victim,dmg,attacker,weapon,head,dir,srcPos,life){const r=base(victim,dmg,attacker,weapon,head,dir,srcPos,life);if(NS.match&&victim&&victim.zombie&&!victim.isRemote&&victim.alive&&attacker&&attacker!==victim&&!nszIsZ(attacker)){victim.zAggro=attacker;if(victim.zState==='patrol')victim.zState='chase';const gun=attacker.arms&&armsW(attacker).def;const stag=gun&&gun.stag>0?gun.stag:0;if(victim.nsKnife)victim.nsKnife=0;else if(stag>0)victim.zStag=Math.max(victim.zStag||0,head?stag*1.2:stag);else if(dmg>=20||head)victim.zStag=Math.max(victim.zStag||0,head?0.45:0.3);}
 return r;};}
@@ -9354,10 +9354,10 @@ let left=0;for(const b of NSZ.pool)if(b.alive)left++;NS.alive=left+NS.toSpawn;if
 if(MATCH.online){const now=performance.now();if(now-NS.pubT>250){NS.pubT=now;nsNetPub();}}}
 function nsPhaseNote(from,to){if(to==='wave'){hudMsg(`WAVE ${NS.wave}`,'enemy',3);sfxUi('notify');}
 else if(to==='break'&&from==='wave'){hudMsg(`Wave ${NS.wave} cleared \u00b7 ammo refilled`,'xp',3.5);nsRefillAmmo();sfxUi('notify');}}
-function nsDefeat(){if(NS.over)return;NS.over=true;NS.overAt=MATCH.time;NS.phase='over';if(MATCH.online&&NET.role==='host')nsNetPub();nsOverShow();}
+function nsDefeat(){if(NS.over)return;NS.over=true;NS.overAt=MATCH.time;NS.phase='over';if(typeof nsBoardSnap==='function')nsBoardSnap();if(MATCH.online&&NET.role==='host')nsNetPub();nsOverShow();}
 const _nsSE=new V3(),_nsSD=new V3();function nsSpectate(dt){NS.specT+=dt;if(NS.specT<2.5)return;const mates=MATCH.online?[...NET.remotes.values()].filter((e)=>!e.remoteBot&&e.alive&&e.model&&e.model.root.visible!==false):[];if(!mates.length){NS.spec=null;return;}
 if(!NS.spec||!mates.includes(NS.spec))NS.spec=mates[0];const m=NS.spec;entEye(m,_nsSE);const yaw=m.yaw;_nsSD.set(Math.sin(yaw),0.25,Math.cos(yaw)).normalize();const h=rayWorld(_nsSE.x,_nsSE.y,_nsSE.z,_nsSD.x,_nsSD.y,_nsSD.z,2.8),d=h?Math.max(0.3,h.t-0.25):2.8;camera.position.copy(_nsSE).addScaledVector(_nsSD,d);camera.lookAt(_nsSE.x-Math.sin(yaw)*4,_nsSE.y-0.3,_nsSE.z-Math.cos(yaw)*4);nsHudSpec(m.name);}
-if(window.MATCH_COUNTDOWN==null)window.MATCH_COUNTDOWN=4;function nsNetPub(){if(NET.role!=='host'||!NET.on)return;netBroadcast({t:'ns',w:NS.wave,ph:NS.phase,pt:Math.round(NS.phaseT*10)/10,k:NS.kills,a:NS.alive,o:NS.over?1:0,e:Math.round(NS.elapsed)},true);nsLookPub(false);}
+if(window.MATCH_COUNTDOWN==null)window.MATCH_COUNTDOWN=4;function nsNetPub(){if(NET.role!=='host'||!NET.on)return;const msg={t:'ns',w:NS.wave,ph:NS.phase,pt:Math.round(NS.phaseT*10)/10,k:NS.kills,a:NS.alive,o:NS.over?1:0,e:Math.round(NS.elapsed)};if(NS.over&&typeof nsBoardPack==='function')msg.lb=nsBoardPack();netBroadcast(msg,true);nsLookPub(false);}
 const NSLOOK={sent:0,last:'',lit:false};function nsLookPack(){const c=BOCFG.v;return{t:'nslook',look:c.look,light:c.light,lightVer:c.lightVer,weapons:c.weapons,atts:c.atts};}
 function nsLookPub(force){if(NET.role!=='host'||typeof BOCFG==='undefined'||!BOCFG.v)return;if(!NET.on&&!NET.joined)return;const now=performance.now();if(!force&&now-NSLOOK.sent<2000)return;NSLOOK.sent=now;netBroadcast(nsLookPack(),false);}
 function nsLookReady(){return typeof CURMAP!=='undefined'&&CURMAP&&typeof boMapOn==='function'&&boMapOn(CURMAP.id);}
@@ -9367,7 +9367,8 @@ function nsLookRestore(){if(typeof BOCFG==='undefined'||!BOCFG.remote)return;BOC
 if(typeof BOCFG!=='undefined'){const _lookSave=BOCFG.save,_lookSaveNow=BOCFG.saveNow;BOCFG.save=function(){const r=_lookSave.apply(this,arguments);if(NET.role==='host')nsLookPub(true);return r;};BOCFG.saveNow=function(){const r=_lookSaveNow.apply(this,arguments);if(NET.role==='host')nsLookPub(true);return r;};}
 {const base=toMenu;toMenu=function(screen){if(NET.role==='client')nsLookRestore();return base(screen);};}
 {const base=netReset;netReset=function(){const client=NET.role==='client';const r=base.apply(this,arguments);if(client)nsLookRestore();return r;};}
-function nsNetIn(m){if(!NS.match||NET.role!=='client')return;const ph=['pre','wave','break','over','doors','secured','hold'].includes(m.ph)?m.ph:NS.phase;NS.wave=clamp(m.w|0,0,999);NS.phase=ph;NS.phaseT=clamp(+m.pt||0,0,60);NS.kills=Math.max(0,m.k|0);NS.alive=Math.max(0,m.a|0);NS.elapsed=Math.max(0,+m.e||0);if(m.o&&!NS.over){NS.over=true;NS.overAt=MATCH.time;nsOverShow();}}
+function nsNetIn(m){if(!NS.match||NET.role!=='client')return;const ph=['pre','wave','break','over','doors','secured','hold'].includes(m.ph)?m.ph:NS.phase;NS.wave=clamp(m.w|0,0,999);NS.phase=ph;NS.phaseT=clamp(+m.pt||0,0,60);NS.kills=Math.max(0,m.k|0);NS.alive=Math.max(0,m.a|0);NS.elapsed=Math.max(0,+m.e||0);if(m.lb&&typeof nsBoardIn==='function')nsBoardIn(m.lb);if(m.o&&!NS.over){NS.over=true;NS.overAt=MATCH.time;nsOverShow();}
+else if(m.o&&m.lb&&NSU.over&&NSU.over.classList.contains('on'))nsOverShow();}
 function nsTeamsZero(){for(const pl of NET.players.values())pl.t=0;}
 {const base=netHostMsg;netHostMsg=function(c,m){const r=base(c,m);if(NS.on){nsTeamsZero();const pl=c&&NET.players.get(c.peer);if(pl&&pl.conn===c&&m&&typeof m==='object'&&NET.role==='host'){if(m.t==='nsrdy')nsRuSet(pl.id,!!m.r);else if(m.t==='hi'){nsLookPub(true);if(NSRU.on){netSendTo(pl,{t:'nslo',on:1});nsRuPub();}}}}
 return r;};}
@@ -9399,7 +9400,7 @@ function nsRuCheck(){if(NET.role!=='host'||!NSRU.on||NET.phase!=='lobby')return;
 {const base=netHostDrop;netHostDrop=function(id,c,hard){const r=base(id,c,hard);if(NS.on&&NSRU.on&&NET.role==='host'){const pl=NET.players.get(id);if(!pl||pl.away)NSRU.ready.delete(id);nsRuPub();nsRuCheck();}
 return r;};}
 {const base=netReset;netReset=function(msg){NSRU.on=false;NSRU.me=false;NSRU.ready.clear();return base(msg);};}
-const NS_UI_KEEP=new Set(['options','legal']);const NSU={el:null,view:'main',hud:null,over:null,built:false};const NS_CSS=`
+const NS_UI_KEEP=new Set(['options','legal']);const NSU={el:null,view:'main',hud:null,over:null,built:false,tally:[],board:null};const NS_CSS=`
 #nsMenu{position:fixed;inset:0;z-index:60;display:none;background:radial-gradient(ellipse at 50% 30%,#141a20 0%,#07090c 60%,#030405 100%);color:#d9dee4;font-family:inherit;overflow:auto}
 body.ns-menu #nsMenu{display:flex;align-items:center;justify-content:center}
 body.ns-menu #ui{visibility:hidden}
@@ -9448,8 +9449,22 @@ body.ns-menu #ui{visibility:hidden}
 #nsOver button{flex:1;padding:12px;border:1px solid #39424c;background:#151b21;color:#e6ebef;font:inherit;font-size:15px;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
 #nsOver button.pri{background:#7d0f15;border-color:#b2121b}
 #nsOver .wait{font-size:13px;color:#9aa5af;margin-top:10px}
+#nsMenu .nslb,#nsOver .nslb{margin:12px 0;border:1px solid #222a31;background:#0c1014;text-align:left}
+#nsMenu .nslb .h,#nsOver .nslb .h{padding:7px 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9aa5af;border-bottom:1px solid #222a31}
+#nsMenu .nslb .t,#nsOver .nslb .t{padding:6px 10px;font-size:13px;color:#e6ebef;background:#140c0d;border-left:3px solid #b2121b}
+#nsMenu .nslb .r,#nsOver .nslb .r{display:flex;justify-content:space-between;padding:6px 10px;font-size:14px;color:#d9dee4}
+#nsMenu .nslb .r.top,#nsOver .nslb .r.top{color:#f2d48a}
+#nsMenu .nslb .e,#nsOver .nslb .e{padding:8px 10px;font-size:13px;color:#6f7a84}
 body.ns #hud .score,body.ns #hud .streaks,body.ns #hud .mm,body.ns #minimap,body.ns #zone,body.ns #nades,body.ns #xpbox,body.ns #arsUp,body.ns #rankUp,body.ns #domRow{display:none!important}
 `;function nsEsc(s){return String(s==null?'':s).replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function nsBoardReset(){NSU.tally=[];}
+function nsBoardKill(a){if(!a||(typeof nsAuth==='function'&&!nsAuth()))return;const mine=!!a.isPlayer;const id=mine?(NET.me||'me'):(a.peer||a.id||a.name||'p');const pl=!mine&&a.peer&&NET.players?NET.players.get(a.peer):null;const name=String(mine?(NET.nick||a.name||'You'):((pl&&pl.n)||a.name||'Player')).slice(0,16);let row=NSU.tally.find((r)=>r.id===id);if(!row){row={id,name,kills:0};NSU.tally.push(row);}
+else row.name=name;row.kills++;}
+function nsBoardSnap(){const rows=[];const seen=new Set();const put=(id,name,kills)=>{const key=String(id||name);if(seen.has(key))return;seen.add(key);rows.push({name:String(name||'Player').slice(0,16),kills:Math.max(0,kills|0)});};const used=new Set();if(MATCH.online&&NET.players&&NET.players.size){for(const p of NET.players.values()){const hit=NSU.tally.find((r)=>r.id===p.id||(p.id===NET.me&&r.id==='me'));if(hit)used.add(hit);put(p.id,p.n,hit?hit.kills:0);}}
+for(const r of NSU.tally)if(!used.has(r))put(r.id,r.name,r.kills);if(!rows.length&&((PL.ent&&PL.ent.kills)||NS.kills))put('me',NET.nick||'You',NS.kills||(PL.ent&&PL.ent.kills)||0);if(!rows.length)return;rows.sort((a,b)=>b.kills-a.kills||a.name.localeCompare(b.name));NSU.board=rows;}
+function nsBoardPack(){return(NSU.board||[]).slice(0,4).map((r)=>[r.name,r.kills|0]);}
+function nsBoardIn(rows){if(!Array.isArray(rows))return;NSU.board=rows.filter((r)=>Array.isArray(r)).slice(0,4).map((r)=>({name:String(r[0]||'Player').slice(0,16),kills:Math.max(0,r[1]|0)}));}
+function nsBoardHtml(){const rows=NSU.board;if(!rows||!rows.length)return'<div class="nslb"><div class="h">Leaderboard</div><div class="e">No match yet. Kills from the last game show up here.</div></div>';const lead=rows[0].kills>0?`<div class="t">${nsEsc(rows[0].name)} killed the most</div>`:'';const lines=rows.map((r,i)=>`<div class="r${i===0&&r.kills>0?' top':''}"><span>${i+1}  ${nsEsc(r.name)}</span><span>${r.kills}</span></div>`).join('');return`<div class="nslb"><div class="h">Last match</div>${lead}${lines}</div>`;}
 function nsUiBuild(){if(NSU.built)return;NSU.built=true;const st=document.createElement('style');st.textContent=NS_CSS;document.head.appendChild(st);document.body.classList.add('ns');const m=document.createElement('div');m.id='nsMenu';document.body.appendChild(m);NSU.el=m;m.addEventListener('click',nsMenuClick);m.addEventListener('input',nsMenuInput);m.addEventListener('keydown',(e)=>{if(e.key==='Enter'&&e.target&&e.target.id==='nsCode'){e.preventDefault();nsJoin();}e.stopPropagation();});const h=document.createElement('div');h.id='nsHud';h.innerHTML='<div class="tmp" id="nsTmp">TEMPORARY TEST MAP</div><div class="top"><div class="wave" id="nsWave"></div><div class="info" id="nsInfo"></div></div>'+`<div class="light" id="nsLight"><b>${NSL_KEY_LABEL}</b><span>Flashlight</span></div>`+'<div class="down" id="nsDown"><h2>YOU ARE DOWN</h2><p id="nsDownP"></p></div>';$('hud').appendChild(h);NSU.hud=h;const o=document.createElement('div');o.id='nsOver';document.body.appendChild(o);NSU.over=o;o.addEventListener('click',nsOverClick);}
 function nsMapLine(){const M=NS.map,have=NS_MAPFILES['night-arena.glb']&&NS_MAPFILES['night-arena.col.json'];if(M.src==='glb')return`<div class="map">Map: <b>Night Arena</b> (night-arena.glb + night-arena.col.json, ${M.boxes} collision boxes, ${M.ramps} stairs)</div>`;if(M.src==='test')return`<div class="map tmp">Map: <b>TEMPORARY TEST MAP</b> (corridor test boxes). The custom map did not load: ${nsEsc(M.why)}</div>`;return have?'<div class="map">Map: <b>Night Arena</b> (night-arena.glb, loaded when the match starts)</div>':'<div class="map tmp">Map: <b>TEMPORARY TEST MAP</b>: assets/maps/night-arena.glb and/or night-arena.col.json were missing at build time.</div>';}
 function nsNick(){const el=$('netName');return(el&&el.value)||NET.nick||'';}
@@ -9471,6 +9486,7 @@ const inLobby=NET.role!=='off';NSU.view=inLobby?'lobby':'main';let h='<div class
       <p class="hint">WASD move \u00b7 Shift sprint \u00b7 Ctrl / C crouch, slide \u00b7 Space jump \u00b7 R reload \u00b7 right mouse aim \u00b7 F knife \u00b7 <b>${NSL_KEY_LABEL} flashlight</b> \u00b7 1 / 2 weapons \u00b7 Esc pause \u00b7 F10 editor (lights, look, weapons)</p>`;}else{const host=NET.role==='host',code=NET.code||'-----';const pl=[...NET.players.values()].map((p)=>`<div class="pl"><span>${nsEsc(p.n)}${p.id===NET.me?' (you)':''}</span><span>${p.h||(host&&p.id===NET.me)?'host':''}${p.ig?' \u00b7 in game':''}</span></div>`).join('');h+=nsLoSummary()+`<p class="sub">Room code</p><div class="code">${nsEsc(code)}</div>
       <div class="status">${nsEsc(NET.status||'')}</div>
       <div>${pl||'<div class="pl"><span>Connecting\u2026</span></div>'}</div>
+      ${nsBoardHtml()}
       <p class="hint">${NET.players.size}/${NET_MAX} players. Friends join with the code (Join), from the same game build.</p>
       <div class="row">${host?`<button class="pri" data-a="launch" ${NET.joined&&NET.phase==='lobby'?'':'disabled'}>Start</button>`:`<button disabled>${NET.phase==='lobby'?'Waiting for the host':'Match in progress'}</button>`}
       ${!host&&NET.phase!=='lobby'&&NET.joined?'<button class="pri" data-a="rejoin">Join the match</button>':''}<button data-a="leave">Leave</button></div>`;}
@@ -9505,13 +9521,14 @@ else if(NS.phase==='over'){w='OVERRUN';info='';}
 else{w=`WAVE ${NS.wave}`;info=`${NS.alive} left`;}
 info=(info?info+' \u00b7 ':'')+`${t} \u00b7 kills ${MATCH.online?NS.kills+' (you '+my+')':NS.kills}`;const k=w+'|'+info;if(k===_nsHudK)return;_nsHudK=k;$('nsWave').textContent=w;$('nsInfo').textContent=info;}
 function nsOverShow(){nsUiBuild();const host=!MATCH.online||NET.role==='host';NSU.over.innerHTML=`<div class="box"><h2>OVERRUN</h2><div class="st"><div><b>${NS.wave}</b>wave</div><div><b>${fmtTime(NS.elapsed)}</b>survived</div><div><b>${NS.kills}</b>kills${MATCH.online?` (you ${PL.ent.kills|0})`:''}</div></div>
+    ${nsBoardHtml()}
     <div class="row">${host?'<button class="pri" data-a="restart">Restart</button>':''}<button data-a="menu">${MATCH.online&&!host?'Leave':'Main menu'}</button></div>
     ${host?'':'<div class="wait">Waiting for the host to restart\u2026</div>'}</div>`;NSU.over.classList.add('on');if(document.pointerLockElement)document.exitPointerLock();showLockPrompt(false);}
 function nsOverHide(){if(NSU.over)NSU.over.classList.remove('on');}
 function nsOverClick(e){const b=e.target.closest&&e.target.closest('button[data-a]');if(!b)return;sfxUi('click');if(b.dataset.a==='menu'){nsOverHide();if(MATCH.online&&NET.role==='client'){netQuit();}toMenu();}
 else if(b.dataset.a==='restart'){nsOverHide();if(MATCH.online&&NET.role==='host'){toMenu();setTimeout(()=>netLaunch(),250);}
 else{toMenu();setTimeout(()=>menuLaunch({online:false,map:'night',deploy:()=>startMatch()}),50);}}}
-{const base=toMenu;toMenu=function(screen){NS.match=false;nsOverHide();if(NSU.hud)nsHudShow(false);const r=base(screen);if(NS.on)nsMenuShow(true);return r;};}
+{const base=toMenu;toMenu=function(screen){if(NS.match&&!NS.over&&(typeof nsAuth!=='function'||nsAuth()))nsBoardSnap();NS.match=false;nsOverHide();if(NSU.hud)nsHudShow(false);const r=base(screen);if(NS.on)nsMenuShow(true);return r;};}
 {const base=requestLock;requestLock=function(manual){if(NS.match&&NS.over)return;return base(manual);};}
 newsPopup=function(){};ecoAsk=function(){};acctLoad=async function(){ACCT.state='off';ACCT.user=null;};mbgDraw=function(){return false;};{const base=mapBuild;mapBuild=async function(id){if(id==='night'){nszPoolEnsure();nslArm();}
 return base(id);};}
