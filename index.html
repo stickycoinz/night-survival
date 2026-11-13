@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0UPoDF4oLFX0yuuuzTfzUC4QR6Ali5k3kc9L3ZALwg0=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-9ecx0kztCyUdn3gipodDOhPO71/0pyoFTSSueD7g9sU=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="1bf6c936b2bb">
+<meta name="cod-build" content="e9660d29822c">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9271,7 +9271,8 @@ function nszSpawn(pos,w){const b=NSZ.pool.find((z)=>!z.alive&&z.respawnT===Infin
 function nszRelease(b){b.zState='dead';b.alive=false;b.respawnT=Infinity;b.target=null;b.path=null;b.model.rag=null;b.model.root.visible=false;b.off=true;}
 const NSZ_SEE=26,NSZ_FOV=Math.cos(75*Math.PI/180),NSZ_REACH=2.35,NSZ_HIT=2.2;function nszKnifeZ(e){return!!(typeof NS!=='undefined'&&NS.match&&e&&e.zombie);}
 const _nszE=new V3(),_nszT=new V3();function nszThink(b){const P=nszPlayers();let best=null,bd=1e9;if(b.zAggro&&b.zAggro.alive&&P.includes(b.zAggro))best=b.zAggro;else for(const p of P){const d=hyp(p.pos.x-b.pos.x,p.pos.z-b.pos.z)+Math.abs(p.pos.y-b.pos.y)*4;if(d<bd){bd=d;best=p;}}
-b.zTgt=best;b.target=best;if(!best){if(b.zState!=='patrol'){b.zState='patrol';b.path=null;}return;}
+b.zTgt=best;b.target=best;if(b.nsSurge&&typeof nsDoorMarch==='function'){const m=nsDoorMarch(P,b);if(m)b.zMarch=m;}
+if(!best){if(b.zState!=='patrol'){b.zState='patrol';b.path=null;}return;}
 const dx=best.pos.x-b.pos.x,dz=best.pos.z-b.pos.z,d=hyp(dx,dz),dy=best.pos.y-b.pos.y;b.zLos=d<NSZ_SEE&&Math.abs(dy)<2.6&&lineClear(_nszE.set(b.pos.x,b.pos.y+1.55,b.pos.z),_nszT.set(best.pos.x,best.pos.y+1.4,best.pos.z));if(b.zLos){b.zSeenT=MATCH.time;b.zLastX=best.pos.x;b.zLastZ=best.pos.z;}
 if(b.zState==='patrol'){let aware=!!b.zAggro||MATCH.time>b.zHuntAt;if(!aware&&b.zLos){const fx=-Math.sin(b.yaw),fz=-Math.cos(b.yaw);aware=d<3.5||(dx*fx+dz*fz)/Math.max(d,1e-3)>NSZ_FOV;}
 if(!aware&&best.sprinting&&d<10&&Math.abs(dy)<2)aware=true;if(!aware)for(let i=soundEvents.length-1;i>=0;i--){const s=soundEvents[i];if(MATCH.time-s.t>1.2)break;if(s.team===0&&hyp(s.pos.x-b.pos.x,s.pos.z-b.pos.z)<(s.loud?55:s.quiet?10:38)){aware=true;break;}}
@@ -9284,7 +9285,7 @@ b.repathT-=dt;b.zCd-=dt;let wishX=0,wishZ=0,speed=0,face=b.yaw;const T=b.zTgt&&b
 if(!b.zAtkHit&&b.zAtkT>=0.42){b.zAtkHit=true;if(d<NSZ_HIT&&Math.abs(T.pos.y-b.pos.y)<1.3&&b.zStag<=0&&lineClear(_nszE.set(b.pos.x,b.pos.y+1.3,b.pos.z),_nszT.set(T.pos.x,T.pos.y+1.2,T.pos.z)))
 applyDamage(T,b.zDmg,b,NET_WSPECIAL.zombie,false,_nszT.set(dx,0,dz).normalize(),b.pos);}}
 if(b.zAtkT>=1.0){b.zState='chase';b.zAtkT=-1;b.zCd=0.25;}}else if(b.zState==='chase'&&T){const dx=T.pos.x-b.pos.x,dz=T.pos.z-b.pos.z,d=hyp(dx,dz),dy=T.pos.y-b.pos.y;if(d<NSZ_REACH&&Math.abs(dy)<1.2&&b.zCd<=0&&b.zStag<=0){b.zState='attack';b.zAtkT=0;b.zAtkHit=false;b.zAtkN=(b.zAtkN+1)%1000;b.model.nsAtk=0;}else{if(b.zLos&&d<7&&Math.abs(dy)<0.6){wishX=dx/Math.max(d,1e-3);wishZ=dz/Math.max(d,1e-3);b.path=null;}
-else{if((!b.path||b.repathT<=0||(b.goal&&hyp(b.goal.x-T.pos.x,b.goal.z-T.pos.z)>2.5))&&NSZ.budget>0){NSZ.budget--;setPath(b,T.pos);b.repathT=rand(0.7,1.2);}
+else{const goal=(b.nsSurge&&b.zMarch&&!b.zLos&&d>8)?b.zMarch:T.pos;if((!b.path||b.repathT<=0||(b.goal&&hyp(b.goal.x-goal.x,b.goal.z-goal.z)>2.5))&&NSZ.budget>0){NSZ.budget--;setPath(b,goal);b.repathT=rand(0.7,1.2);}
 const pd=pathDir(b);if(pd){wishX=pd[0];wishZ=pd[1];}else if(d>0.01){wishX=dx/d;wishZ=dz/d;}}
 speed=b.zSpeed;if(wishX||wishZ)face=Math.atan2(-wishX,-wishZ);}}else{if(b.zState==='chase')b.zState='patrol';b.zWanderT-=dt;if((!b.zWander||b.zWanderT<=0||hyp(b.zWander.x-b.pos.x,b.zWander.z-b.pos.z)<1)&&NSZ.budget>0){b.zWanderT=rand(4,9);const p=randomNavPoint(b.pos.x-8,b.pos.x+8,b.pos.z-8,b.pos.z+8);if(p&&Math.abs(p.y-b.pos.y)<1){b.zWander=p;NSZ.budget--;setPath(b,p);}else b.zWander=null;}
 const pd=b.zWander?pathDir(b):null;if(pd){wishX=pd[0];wishZ=pd[1];speed=0.9;face=Math.atan2(-wishX,-wishZ);}}
@@ -9902,12 +9903,13 @@ s.taken=false
 s.warn=0
 s.points=nsDoorPoints(s.room)}
 NSDOOR.wave=null
-NSDOOR.arrivalPts=null}
+NSDOOR.arrivalPts=null
+NSDOOR.medPts=null}
 function nsDoorBegin(){if(!nsIsBunker()||!NSB.data){NSDOOR.on=false;return}
 const auth=typeof nsAuth!=='function'||nsAuth()
 if(auth){NSARM.on=false
 NSZ.stress=0
-NSZ.POOL=(typeof nsIsTestmap==='function'&&nsIsTestmap())?16:Math.max(NSZ.POOL||20,40)
+NSZ.POOL=(typeof nsIsTestmap==='function'&&nsIsTestmap())?24:Math.max(NSZ.POOL||20,40)
 nszPoolEnsure()}
 if(!NSDOOR.built||!NSDOOR.doors.length||!NSDOOR.doors[0].hinge||!NSDOOR.doors[0].hinge.parent)nsDoorBuild()
 NSDOOR.on=NSDOOR.doors.length>0
@@ -10120,6 +10122,7 @@ const[x0,z0,x1,z1]=s.room.bounds
 let n=0
 for(const z of NSZ.pool){if(!z.alive)continue
 if(z.pos.x<x0||z.pos.x>x1||z.pos.z<z0||z.pos.z>z1)continue
+if(z.nsSurge&&(s.id==='medbay'||s.id==='medical'||s.id==='arrival'||s.id==='control_hub'))continue
 n++
 }
 return n}
@@ -10127,6 +10130,56 @@ function nsDoorArrivalPts(){if(NSDOOR.arrivalPts&&NSDOOR.arrivalPts.length)retur
 const pts=nsDoorPoints(nsDoorRoom('arrival'))
 NSDOOR.arrivalPts=pts.length?pts:[new V3(-56.8,0,-1.6),new V3(-55.2,0,.8),new V3(-53.6,0,-1.6),new V3(-52,0,.8)]
 return NSDOOR.arrivalPts}
+function nsDoorMedPts(){if(NSDOOR.medPts&&NSDOOR.medPts.length)return NSDOOR.medPts
+const room=nsDoorRoom('medbay')||nsDoorRoom('medical')
+const pts=room?nsDoorPoints(room):[]
+NSDOOR.medPts=pts.length?pts:nsDoorArrivalPts()
+return NSDOOR.medPts}
+function nsDoorRearSpot(players,points,salt){if(!players.length||!points.length)return null
+const pl=players[Math.abs(salt||0)%players.length]
+const yaw=pl.yaw||0
+const fx=-Math.sin(yaw),fz=-Math.cos(yaw)
+const fans=[-1.15,-.55,0,.55,1.15]
+const ang=yaw+Math.PI+fans[Math.abs(salt||0)%fans.length]
+const dx=-Math.sin(ang),dz=-Math.cos(ang)
+let best=null,score=-1e9,loose=null,looseScore=-1e9
+for(const p of points){if(players.some(e=>e.pos.distanceToSquared(p)<9))continue
+if(NSZ.pool.some(z=>z.alive&&z.pos.distanceToSquared(p)<1.21))continue
+const vx=p.x-pl.pos.x,vz=p.z-pl.pos.z
+const d=Math.hypot(vx,vz)
+if(d<3.4)continue
+const ahead=(vx*fx+vz*fz)/d
+const aim=(vx*dx+vz*dz)/d
+const s=aim*3-ahead-Math.abs(d-6.5)*.05
+if(ahead<.05&&s>score){score=s;best=p}
+if(s>looseScore){looseScore=s;loose=p}}
+return best||loose}
+function nsDoorInRoom(e,id){const room=nsDoorRoom(id)
+if(!room||!room.bounds||!e||!e.pos)return false
+const[x0,z0,x1,z1]=room.bounds
+return e.pos.x>=x0&&e.pos.x<=x1&&e.pos.z>=z0&&e.pos.z<=z1}
+function nsDoorRoomPlayers(players,room){if(!room||!room.bounds)return players
+const[x0,z0,x1,z1]=room.bounds
+const inside=players.filter(e=>e.alive&&e.pos.x>=x0&&e.pos.x<=x1&&e.pos.z>=z0&&e.pos.z<=z1)
+return inside.length?inside:players}
+function nsDoorPace(z,hot){if(hot||Math.random()<.9){z.zRun=true
+z.zSpeed=rand(hot?4.4:4.1,hot?5.3:4.9)}else{z.zRun=false
+z.zSpeed=rand(3.1,3.8)}}
+function nsDoorGap(){if(!(typeof nsIsTestmap==='function'&&nsIsTestmap()))return.45
+return NSDOOR.hold==='fight'?.42:.72}
+function nsDoorMarch(players,z){let pick=null,bd=1e9
+for(const pl of players){if(!pl.alive||!pl.pos)continue
+const home=nsDoorInRoom(pl,'medbay')||nsDoorInRoom(pl,'medical')||nsDoorInRoom(pl,'arrival')||nsDoorInRoom(pl,'control_hub')
+const d=hyp(pl.pos.x-z.pos.x,pl.pos.z-z.pos.z)+(home?80:0)
+if(d<bd){bd=d;pick=pl}}
+if(pick&&bd<80)return pick.pos
+const rooms=['armory','security','maintenance','lower']
+const id=rooms[(z.zLane||0)%rooms.length]
+const room=nsDoorRoom(id)
+if(!room||!room.center)return pick?pick.pos:null
+if(z.zMarchRoom!==id||!z.zMarchPt){z.zMarchRoom=id
+z.zMarchPt=new V3(room.center[0],0,room.center[1])}
+return z.zMarchPt}
 function nsDoorUse(x,z,who){if(!NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,NSDOOR_REACH.use)
 if(p){NSDOOR.power=true
 NSDOOR.pubT=0
@@ -10192,14 +10245,16 @@ s.open=true
 s.timer=1.4
 if(!s.points.length)s.points=nsDoorPoints(s.room)
 nsDoorSay((s.name||s.id).toUpperCase()+' · 60 INFECTED','enemy',2.5)}}
-function nsDoorAliveCap(){return(typeof nsIsTestmap==='function'&&nsIsTestmap())?Math.min(4,NSZ.pool.length):Math.min(40,NSZ.pool.length)}
+function nsDoorAliveCap(){if(typeof nsIsTestmap==='function'&&nsIsTestmap())
+return Math.min(NSDOOR.hold==='fight'?8:6,NSZ.pool.length)
+return Math.min(40,NSZ.pool.length)}
 function nsDoorSpawn(dt,players){nsDoorWakeRooms()
 const wave=NSDOOR.hold==='fight'?NSDOOR.wave:null
 if(wave&&wave.reserve>0){wave.timer-=dt
 if(wave.timer>0)return
 const cap=nsDoorAliveCap()
 if(NSZ.pool.filter(z=>z.alive).length>=cap)return
-const pts=nsDoorArrivalPts()
+const pts=(typeof nsIsTestmap==='function'&&nsIsTestmap())?nsDoorMedPts():nsDoorArrivalPts()
 let spot=null
 for(let k=0;k<pts.length;k++){const p=pts[(k+(wave.spawned||0)*3)%pts.length]
 if(players.some(e=>e.pos.distanceToSquared(p)<10))continue
@@ -10208,11 +10263,15 @@ spot=p
 break
 }
 const z=spot?nszSpawn(spot,5):null
-wave.timer=z?((typeof nsIsTestmap==='function'&&nsIsTestmap())?1.1:.45):.5
+wave.timer=z?nsDoorGap():.5
 if(!z)return
 z.nsDoor='arrival'
 z.zHuntAt=MATCH.time
-if(Math.random()<.75){z.zRun=true;z.zSpeed=rand(3.9,4.6)}
+if(typeof nsIsTestmap==='function'&&nsIsTestmap()){z.nsSurge=true
+z.zLane=(wave.spawned||0)%4
+const march=nsDoorMarch(players,z)
+if(march)z.zMarch=march
+nsDoorPace(z,true)}else if(Math.random()<.75){z.zRun=true;z.zSpeed=rand(3.9,4.6)}
 else{z.zRun=false;z.zSpeed=rand(2.8,3.4)}
 wave.reserve--
 wave.spawned=(wave.spawned||0)+1
@@ -10230,20 +10289,20 @@ const ready=open.filter(s=>s.timer<=0)
 if(!ready.length)return
 NSDOOR.rr=(NSDOOR.rr+1)%ready.length
 const s=ready[NSDOOR.rr]
-let spot=null
-for(let k=0;k<s.points.length;k++){const p=s.points[(k+s.spawned*5)%s.points.length]
+const who=nsDoorRoomPlayers(players,s.room)
+let spot=nsDoorRearSpot(who,s.points,s.spawned)
+if(!spot)for(let k=0;k<s.points.length;k++){const p=s.points[(k+s.spawned*5)%s.points.length]
 if(players.some(e=>e.pos.distanceToSquared(p)<10))continue
 if(NSZ.pool.some(z=>z.alive&&z.pos.distanceToSquared(p)<1.21))continue
 spot=p
 break
 }
 const z=spot?nszSpawn(spot,5):null
-s.timer=z?((typeof nsIsTestmap==='function'&&nsIsTestmap())?1.1:.45):.5
+s.timer=z?nsDoorGap():.5
 if(!z)return
 z.nsDoor=s.id
 z.zHuntAt=MATCH.time
-if(Math.random()<.75){z.zRun=true;z.zSpeed=rand(3.9,4.6)}
-else{z.zRun=false;z.zSpeed=rand(2.8,3.4)}
+nsDoorPace(z,false)
 s.reserve--
 s.spawned++
 }
@@ -10254,23 +10313,24 @@ function nsDoorShown(id){if(typeof nsAuth!=='function'||nsAuth())return nsDoorLi
 const s=nsDoorSector(id)
 return s?(s.liveN|0):0}
 function nsDoorTaken(s){return s.open&&s.reserve<=0&&nsDoorLive(s.id)===0}
-function nsDoorAttack(){const pts=nsDoorArrivalPts()
-if(!pts.length){NSDOOR.hold='quiet';NSDOOR.quiet=6;return}
-const cams=!!(nsDoorSector('security')&&nsDoorSector('security').hold==='secured')
-const size=Math.min(24,12+NSDOOR.siege*3)
+function nsDoorAttack(){const test=typeof nsIsTestmap==='function'&&nsIsTestmap()
+const pts=test?nsDoorMedPts():nsDoorArrivalPts()
+if(!pts.length){NSDOOR.hold='quiet';NSDOOR.quiet=4;return}
+const cams=!test&&!!(nsDoorSector('security')&&nsDoorSector('security').hold==='secured')
+const size=test?Math.min(48,30+NSDOOR.siege*8):Math.min(24,12+NSDOOR.siege*3)
 NSDOOR.wave={reserve:size,timer:cams?5:.35,spawned:0}
 NSDOOR.siege++
 NSDOOR.hold='fight'
 NS.phase='hold'
-nsDoorSay(cams?'CAMERAS · INFECTED AT THE START':'INFECTED COMING FROM THE START','enemy',3)
-if(typeof sfxAt==='function')sfxAt('s_metal',new V3(-56,1.2,0),.8,{ref:10,roll:.7})
+nsDoorSay(test?'MED BAY · INFECTED POURING OUT':(cams?'CAMERAS · INFECTED AT THE START':'INFECTED COMING FROM THE START'),'enemy',3.5)
+if(typeof sfxAt==='function')sfxAt('s_metal',test?new V3(-.12,1.2,9.77):new V3(-56,1.2,0),.9,{ref:14,roll:.7})
 if(typeof sfxUi==='function')sfxUi('notify')}
 function nsDoorSiegeLive(){let n=0
 for(const z of NSZ.pool)if(z.alive&&z.nsDoor==='arrival')n++
 return n}
 function nsDoorHold(dt){for(const s of NSDOOR.sectors){if(!s.room)continue
 const inside=nsDoorInside(s)
-if(s.hold!=='overrun'&&inside>=10){s.overrun=true
+if(s.hold!=='overrun'&&inside>=(NSDOOR.hold==='fight'?6:10)){s.overrun=true
 s.hold='overrun'
 nsDoorSay(s.name.toUpperCase()+' OVERRUN · clear it to retake','enemy',3.5)}else if(s.hold==='overrun'&&inside===0){s.overrun=false
 s.hold='secured'
@@ -10281,7 +10341,7 @@ nsDoorPower()
 const wave=NSDOOR.wave
 if((!wave||wave.reserve<=0)&&nsDoorSiegeLive()===0){NSDOOR.wave=null
 NSDOOR.hold='quiet'
-NSDOOR.quiet=Math.max(4,12-NSDOOR.siege*2)}}
+NSDOOR.quiet=Math.max(3,7-NSDOOR.siege)}}
 function nsDoorPub(){if(!MATCH.online||NET.role!=='host'||typeof netBroadcast!=='function')return
 const now=performance.now()
 if(now-NSDOOR.pubT<200)return
@@ -10360,7 +10420,7 @@ live=NSZ.pool.filter(z=>z.alive&&z.nsDoor).length
 NS.alive=reserve+live
 NS.toSpawn=reserve
 if(!NSDOOR.hold){if(NSDOOR.sectors.length&&NSDOOR.sectors.every(nsDoorTaken)){NSDOOR.hold='quiet'
-NSDOOR.quiet=8
+NSDOOR.quiet=4
 NSDOOR.siege=0
 for(const s of NSDOOR.sectors){s.hold='secured';s.overrun=false}
 NS.phase='secured'
