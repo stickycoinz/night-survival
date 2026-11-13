@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ZEmxznL5qVG0igYFIL6jJJkSGC+PAdgszC2OhlPqGMo=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-QpEAbT3O6QxDKtCc2lTtRBLoWhoQAHzlIrot/6QxX80=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="a78ae694d40f">
+<meta name="cod-build" content="86ffeac892b2">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -467,7 +467,132 @@ function fmtNum(n,digits){return Number(n).toLocaleString(LOCALE,digits===undefi
 function fmtDate(d,opts){return d.toLocaleDateString(LOCALE,opts);}
 function i18nDom(root){if(LANG!=='en')return;const tr=(s)=>{const k=s.trim();if(!k||!Object.prototype.hasOwnProperty.call(I18N_EN,k))return s;return s.replace(k,()=>I18N_EN[k]);};const w=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{acceptNode:(n)=>(n.nodeType===1&&(n.tagName==='SCRIPT'||n.tagName==='STYLE')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT)});for(let n=w.currentNode;n;n=w.nextNode()){if(n.nodeType===3){const v=tr(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;continue;}
 if(n.nodeType!==1)continue;for(const a of['aria-label','placeholder','title','alt'])if(n.hasAttribute&&n.hasAttribute(a)){const v=n.getAttribute(a),r=tr(v);if(r!==v)n.setAttribute(a,r);}}}
-document.documentElement.lang=LANG;i18nDom(document.body);if(LANG==='en')document.title=_t(document.title);const PRE={err:[],booted:false,blocked:false};const PAGE_LEAVE={ok:false};addEventListener('error',(e)=>{if(PRE.err.length<3)PRE.err.push(String((e&&e.message)||'error')+(e&&e.filename?' @'+String(e.filename).split('/').pop()+':'+e.lineno:''));});function preLog(m){try{const k='dc_gpu_tl',v=JSON.parse(localStorage.getItem(k)||'[]');v.push([Date.now(),'pre',String(m).slice(0,90)]);localStorage.setItem(k,JSON.stringify(v.slice(-70)));}catch(e){}}
+document.documentElement.lang=LANG;i18nDom(document.body);if(LANG==='en')document.title=_t(document.title);(()=>{'use strict';const listings=[{title:'FREE GUN IF YOU HELP ME MOVE SOMETHING',price:'$75 — ONE TIME',seller:'Federal Property Recovery Office',rating:'2.1/5',details:['Need 4 people to help clear out a property.','Previous crew left their tools behind.','Must be comfortable with stairs and loud noises.','No refunds on ammunition.']},{title:'HAUNTED GOVERNMENT BUILDING — YOU KEEP WHAT YOU FIND',price:'$120 — OBO',seller:'Federal Property Recovery Office',rating:'1.8/5',details:['Basement needs clearing. Minor water damage.','Some previous tenants still on premises.','DO NOT CONTACT ME ASKING WHAT HAPPENED.','Bring your own flashlight.']},{title:'EASY $200 TONIGHT. NO COPS. MUST HAVE PULSE.',price:'$200 — PAYMENT UPON RETURN',seller:'D. Wallace — Government Surplus',rating:'3.0/5',details:['Entry-level federal contracting opportunity.','No experience required. No next of kin preferred.','Must be able to carry 40 lbs and run.','Stop asking about the screaming.']},{title:'4 GUYS NEEDED TO CHECK IF BASEMENT IS STILL ALIVE',price:'$90 — CASH',seller:'Federal Property Recovery Office',rating:'2.1/5',details:['Routine inspection of abandoned facility.','Industrial accident occurred (mostly resolved).','Hazmat experience preferred but not necessary.','Waiver required before location is disclosed.']},{title:'PAID ACTORS WANTED FOR REALISTIC SHOOTING SCENE',price:'$150 — CASH',seller:'D. Wallace — Government Surplus',rating:'3.0/5',details:['Immersive government training exercise.','Authentic tactical equipment provided.','Other participants may not know they are acting.','Production insurance not provided.']},{title:'SECURITY JOB. FREE PLATE CARRIER. POSSIBLE GHOSTS.',price:'$60 — FIRM',seller:'Federal Property Recovery Office',rating:'1.8/5',details:['Need people to secure old office building.','Includes lightly used tactical vest.','Do not wash stains off equipment.','Must agree not to post photos afterward.']}];const onboarding=`FEDERAL PROPERTY RECOVERY OFFICE
+CONTRACTOR ONBOARDING SYSTEM v1.04
+
+> RETRIEVING EMPLOYMENT RECORDS...
+> SOURCE: FACEBOOK MARKETPLACE
+> APPLICATION STATUS: ACCEPTED
+> INTERVIEW STATUS: WAIVED
+
+CONGRATULATIONS.
+
+YOU HAVE BEEN SELECTED FROM A COMPETITIVE
+POOL OF 4 APPLICANTS.
+
+4 APPLICANTS WERE ACCEPTED.
+
+POSITION: SPECIAL OPERATIONS AGENT
+EMPLOYMENT TYPE: INDEPENDENT CONTRACTOR
+SECURITY CLEARANCE: SELF-REPORTED
+MILITARY EXPERIENCE: UNVERIFIED
+DRUG SCREENING: DISCONTINUED
+
+ISSUED EQUIPMENT:
+1x FIREARM (PREVIOUSLY OWNED)
+1x FLASHLIGHT
+1x BODY ARMOR (COSMETIC DAMAGE)
+1x GOVERNMENT-ISSUED BODY BAG
+
+NOTE: BODY BAG IS REUSABLE.
+
+WORKPLACE BENEFITS:
+- FLEXIBLE HOURS
+- FREE PARKING
+- HANDS-ON MEDICAL EXPERIENCE
+- UNLIMITED OVERTIME (UNPAID)
+
+THE DEPARTMENT DOES NOT COVER INJURIES,
+DEATH, DISMEMBERMENT, OR PROPERTY DAMAGE.
+
+> PLEASE REMAIN ALIVE UNTIL CLOCK-IN.`.split('\n');const incident=`FEDERAL PROPERTY RECOVERY OFFICE
+FACILITY INCIDENT REPORT — 1987
+
+> RESTORING ARCHIVED DOCUMENT...
+> DOCUMENT INTEGRITY: 63%
+
+02:14 — SECURITY ALARM ACTIVATED
+02:17 — WEST WING SEALED
+02:19 — EMPLOYEE EVACUATION ORDERED
+02:26 — EVACUATION ORDER CANCELLED
+02:27 — ALL EXITS LOCKED
+02:31 — EMPLOYEE COMPLAINT FILED
+02:32 — EMPLOYEE COMPLAINT DENIED
+02:34 — HUMAN RESOURCES DEPARTMENT LOST
+02:36 — HUMAN RESOURCES DEPARTMENT FOUND
+02:37 — HUMAN RESOURCES DEPARTMENT LOST AGAIN
+
+TOTAL EMPLOYEES: 148
+EMPLOYEES ACCOUNTED FOR: 0
+EMPLOYEES TERMINATED: 148
+TERMINATION REASON: ATTENDANCE
+
+> CASE STATUS: RESOLVED
+> FACILITY STATUS: HABITABLE
+> HABITABILITY INSPECTION: WAIVED`.split('\n');const exitSurvey=`PERSONNEL MANAGEMENT SYSTEM
+AUTOMATED EMPLOYEE EXIT SURVEY
+
+> PREVIOUS CONTRACTOR STATUS: DECEASED
+
+WE ARE SORRY TO SEE YOU GO.
+
+PLEASE RATE YOUR EXPERIENCE:
+[ ] EXCELLENT
+[ ] GOOD
+[ ] SATISFACTORY
+[ ] OTHER
+
+REASON FOR LEAVING:
+[X] PERSONAL REASONS
+
+WOULD YOU RECOMMEND THIS WORKPLACE
+TO A FRIEND?
+
+[ ] YES
+[ ] NO
+
+> NO RESPONSE DETECTED.
+> DEFAULTING TO YES.
+
+YOUR FEEDBACK IS IMPORTANT TO US.
+
+MANAGEMENT WILL CONTACT YOU
+WITHIN 3-5 BUSINESS DAYS.
+
+> RECRUITMENT LISTING REPOSTED.`.split('\n');const messages=['AVERAGE CONTRACTOR LIFE EXPECTANCY: 11 MINUTES. UP 4% FROM LAST QUARTER.','EMPLOYEES MUST PROVIDE THEIR OWN EMERGENCY CONTACT. CONTACTING THEM IS OPTIONAL.','PLEASE DO NOT FEED THE FORMER EMPLOYEES.','THE FACILITY IS NOT HAUNTED. THIS HAS BEEN VERIFIED BY THE FACILITY.','TEAM MORALE IS CURRENTLY 100%. DECEASED EMPLOYEES ARE EXCLUDED FROM SURVEYS.','FOR AMMUNITION REIMBURSEMENT, PLEASE RETAIN ALL SPENT CASINGS.','YOUR BODY ARMOR WAS TESTED ON ITS PREVIOUS OWNER. RESULTS INCONCLUSIVE.','UNAUTHORIZED RESURRECTION WILL BE CONSIDERED TIME THEFT.'];const css=`
+#zmt-overlay{position:fixed;inset:0;z-index:2147483000;background:radial-gradient(ellipse at center,#0b100f 0%,#020403 85%);color:#d1d5cc;font:13px/1.5 "Courier New",monospace;letter-spacing:.25px}
+#zmt-overlay *{box-sizing:border-box}
+#zmt-overlay::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0px,rgba(0,0,0,.28) 2px,transparent 4px)}
+#zmt-overlay::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 110px 35px #000}
+#zmt-content{position:absolute;top:9%;left:12%;width:76%;height:77%;overflow:auto;scrollbar-width:none;text-shadow:0 0 5px #8ca99c66}
+#zmt-content::-webkit-scrollbar{display:none}
+.zmt-line{white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.5em}
+.zmt-cyan{color:#73ceda}.zmt-orange{color:#e9a46f}.zmt-red{color:#ed817b}.zmt-green{color:#9bd0a8}
+.zmt-cursor{display:inline-block;width:8px;height:12px;background:#d3dad3;animation:zmt-blink .8s steps(1) infinite}
+@keyframes zmt-blink{50%{opacity:0}}
+#zmt-bottom{position:absolute;left:12%;right:12%;bottom:5%;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#92a59a;font-size:11px}
+#zmt-skip{background:transparent;color:#b8d9c5;border:1px solid #587062;padding:8px 12px;font:inherit;cursor:pointer}
+#zmt-skip:hover{background:#1b3228}#zmt-skip:disabled{cursor:default;opacity:.6}
+@media(max-width:600px){#zmt-content{left:6%;width:88%;font-size:11px}#zmt-bottom{left:6%;right:6%}}
+`;let overlay,content,status,skipButton;let active=false,skipRequested=false,lastListing=-1,lastMessage=-1,rotation=0;const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));function createUI(){if(!document.getElementById('zmt-style')){const style=document.createElement('style');style.id='zmt-style';style.textContent=css;document.head.append(style);}
+if(overlay)return;overlay=document.createElement('div');overlay.id='zmt-overlay';content=document.createElement('div');content.id='zmt-content';const footer=document.createElement('div');footer.id='zmt-bottom';status=document.createElement('span');status.textContent='FP-74-19-B // RESTRICTED ACCESS';skipButton=document.createElement('button');skipButton.id='zmt-skip';skipButton.type='button';skipButton.textContent='SKIP BRIEFING [SPACE]';skipButton.addEventListener('click',skip);footer.append(status,skipButton);overlay.append(content,footer);}
+function differentIndex(length,previous){if(length<2)return 0;let i;do{i=Math.floor(Math.random()*length);}while(i===previous);return i;}
+function recruitmentLines(){lastListing=differentIndex(listings.length,lastListing);const ad=listings[lastListing];return['FEDERAL PROPERTY RECOVERY OFFICE','MARKETPLACE RECRUITMENT ARCHIVE','','> RETRIEVING DELETED LISTING...','> LISTING RECOVERED.','','TITLE:',ad.title,'','COMPENSATION: '+ad.price,'SELLER: '+ad.seller,'SELLER RATING: '+ad.rating,'','DESCRIPTION:',...ad.details,'','APPLICANT SCREENING: WAIVED','POSITION ACCEPTED AUTOMATICALLY.','','> TRANSFERRING TO CONTRACTOR ONBOARDING...','',...onboarding];}
+function quickMessage(){lastMessage=differentIndex(messages.length,lastMessage);return['FEDERAL PROPERTY RECOVERY OFFICE','AUTOMATED EMPLOYEE NOTICE','','> LOADING OPERATIONAL GUIDANCE...','',messages[lastMessage],'','THIS MESSAGE IS MANDATORY.','ACKNOWLEDGEMENT IS ASSUMED.'];}
+function selectDocument(kind){switch(kind){case'first':case'deployment-first':case'recruitment':return recruitmentLines();case'incident':return incident;case'death':return exitSurvey;case'notice':return quickMessage();case'random':{const sequence=['recruitment','incident','notice','recruitment','notice'];return selectDocument(sequence[rotation++%sequence.length]);}
+default:throw new Error('Unknown terminal document: '+kind);}}
+function colorFor(line){if(/DECEASED|TERMINATED|DISMEMBERMENT|ALL EXITS LOCKED|NO RESPONSE|DID NOT RETURN/.test(line))return'zmt-red';if(/FACEBOOK|PENDING|WAIVED|UNVERIFIED|DISCONTINUED|REDACTED/.test(line))return'zmt-orange';if(/^(FEDERAL|PERSONNEL|MARKETPLACE|OBJECTIVE|RECRUITMENT)/.test(line))return'zmt-cyan';if(/ACCEPTED|CONGRATULATIONS/.test(line))return'zmt-green';return'';}
+function addLine(value=''){const node=document.createElement('div');node.className='zmt-line '+colorFor(value);content.append(node);return node;}
+async function typeDocument(lines,run){for(let row=0;row<lines.length;row++){if(run.cancelled)return;const value=lines[row];const node=addLine(value);if(skipRequested){node.textContent=value;continue;}
+for(let i=0;i<value.length;i++){if(run.cancelled)return;if(skipRequested){node.textContent=value;break;}
+const ch=value[i];if(ch!==' '&&Math.random()<.008){node.textContent+='#';await sleep(35);if(skipRequested){node.textContent=value;break;}
+node.textContent=node.textContent.slice(0,-1)+ch;}else{node.textContent+=ch;}
+await sleep(9);}
+content.scrollTop=content.scrollHeight;if(!skipRequested)await sleep(value?65:160);}}
+function skip(){if(active)skipRequested=true;}
+function onKeyDown(event){if(active)event.stopImmediatePropagation();if(active&&(event.code==='Space'||event.code==='Enter')&&event.target!==skipButton){event.preventDefault();skip();}}
+async function show({kind='random',loadPromise,signal,instantText=false}={}){if(active)throw new Error('ZombaeTerminal is already active');createUI();const lines=selectDocument(kind);active=true;skipRequested=instantText;const run={cancelled:false};const previousFocus=document.activeElement;content.replaceChildren();status.textContent='FP-74-19-B // INITIALIZING';skipButton.textContent='SKIP BRIEFING [SPACE]';skipButton.disabled=false;document.body.append(overlay);document.addEventListener('keydown',onKeyDown,true);skipButton.focus({preventScroll:true});const loading=Promise.resolve(loadPromise);let abort;const cancelled=new Promise((resolve,reject)=>{abort=()=>reject(new DOMException('Deployment cancelled','AbortError'));if(signal){signal.addEventListener('abort',abort,{once:true});if(signal.aborted)abort();}});try{const typing=typeDocument(lines,run).then(()=>{if(run.cancelled)return;const last=addLine('> AWAITING DEPLOYMENT ');const cursor=document.createElement('span');cursor.className='zmt-cursor';last.append(cursor);skipButton.textContent='BRIEFING COMPLETE';skipButton.disabled=true;});await Promise.race([Promise.all([typing,loading]),cancelled]);status.textContent='DEPLOYMENT AUTHORIZED';if(!skipRequested)await sleep(350);window.dispatchEvent(new CustomEvent('zombaeBriefingComplete',{detail:{kind}}));}finally{run.cancelled=true;if(signal)signal.removeEventListener('abort',abort);overlay.remove();document.removeEventListener('keydown',onKeyDown,true);active=false;skipRequested=false;if(previousFocus&&previousFocus.isConnected)previousFocus.focus({preventScroll:true});}}
+window.ZombaeTerminal=Object.freeze({show,skip,setStatus:text=>{if(active)status.textContent=String(text);},first:loadPromise=>show({kind:'first',loadPromise}),deployment:loadPromise=>show({kind:'random',loadPromise}),death:loadPromise=>show({kind:'death',loadPromise}),notice:loadPromise=>show({kind:'notice',loadPromise})});})();const PRE={err:[],booted:false,blocked:false};const PAGE_LEAVE={ok:false};addEventListener('error',(e)=>{if(PRE.err.length<3)PRE.err.push(String((e&&e.message)||'error')+(e&&e.filename?' @'+String(e.filename).split('/').pop()+':'+e.lineno:''));});function preLog(m){try{const k='dc_gpu_tl',v=JSON.parse(localStorage.getItem(k)||'[]');v.push([Date.now(),'pre',String(m).slice(0,90)]);localStorage.setItem(k,JSON.stringify(v.slice(-70)));}catch(e){}}
 function preGlTest(attrs){let ok=false,why='';try{const c=document.createElement('canvas');c.addEventListener('webglcontextcreationerror',(e)=>{why=(e&&e.statusMessage)||'';});const gl=c.getContext('webgl2',attrs);ok=!!gl&&!gl.isContextLost()&&!!gl.getParameter(gl.VERSION);if(!ok&&!why)why=gl?'context lost at creation':'no context';if(gl){const x=gl.getExtension('WEBGL_lose_context');if(x)x.loseContext();}}catch(e){why=String((e&&e.message)||e);}
 return{ok,why};}
 (function preflight(){const msg=document.getElementById('loadMsg');if(!msg)return;const say=(t)=>{msg.textContent=t;};if(typeof THREE==='undefined'){preLog('three.js not loaded');say(_t('three.js n\u0027a pas pu être téléchargé. Vérifiez la connexion. Nouvel essai dans quelques secondes.'));setTimeout(()=>location.reload(),5000);return;}
@@ -9425,7 +9550,10 @@ if(layer)S.hT=-1;nszPose(e,dt);layoutSoldier(S,true);nszDriveBody(S);nszHideProc
 {const base=dropKilledWeapon;dropKilledWeapon=function(v,dir){if(nszIsZ(v)){if(v.model&&v.model.gun)v.model.gun.visible=false;return;}return base(v,dir);};}
 {const base=nsMapPreload;nsMapPreload=async function(){const p=nszLoadBody();await base();await p;};}
 const NS_BREAK=12,NS_PRE=6;Object.assign(NS,{match:false,myDown:false,overAt:0,specT:0,spec:null,pubT:0,prevPhase:''});function nsWaveSize(w,np){return Math.round((6+3*w)*(1+0.5*(Math.max(1,np)-1)));}
-function nsPlayerCount(){let n=1;if(MATCH.online)for(const e of NET.remotes.values())if(!e.remoteBot)n++;return n;}
+function nsPlayerCount(){if(!MATCH.online)return 1;return Math.max(1,Math.min(4,[...NET.players.values()].filter(p=>!p.away).length));}
+function nsCoopScale(){return 1+0.5*(nsPlayerCount()-1);}
+function nsScaledCount(base){return Math.round(base*nsCoopScale());}
+function nsScaledGap(base){return base/nsCoopScale();}
 function nsAuth(){return!MATCH.online||NET.role==='host';}
 function nsLiveZ(){let n=0;for(const b of NSZ.pool)if(b.alive)n++;return n;}
 {const base=startMatch;startMatch=function(opt={}){if(!NS.on)return base(opt);nszPoolEnsure();if(typeof nsBoardReset==='function')nsBoardReset();Object.assign(NS,{match:true,over:false,wave:0,phase:'pre',phaseT:NS_PRE,kills:0,toSpawn:0,spawnT:0,elapsed:0,alive:0,myDown:false,overAt:0,specT:0,spec:null,pubT:0,prevPhase:'pre'});NSL.on=true;base(opt);MATCH.limit=1e9;MATCH.timeLeft=1e6;nsOverHide();nsHudShow(true);nsHudLight();};}
@@ -9475,7 +9603,7 @@ finally{coneDir=saved;}};}
 function nsTick(dt,bg){MATCH.limit=1e9;if(nsAuth())MATCH.timeLeft=1e6;if(MATCH.state!=='playing'&&MATCH.state!=='paused')return;if(nsAuth())nsDirector(dt);if(NS.phase!==NS.prevPhase){nsPhaseNote(NS.prevPhase,NS.phase);NS.prevPhase=NS.phase;}
 if(!PL.ent.alive&&!NS.over)nsSpectate(dt);if(!bg)nsHudTick();}
 function nsDirector(dt){if(NS.over)return;if(playHold())return;NS.elapsed+=dt;const P=nszPlayers();if(!P.length&&NS.elapsed>0.5){nsDefeat();return;}
-if(NS.phase==='pre'||NS.phase==='break'){NS.phaseT-=dt;if(NS.phaseT<=0){NS.wave++;NS.toSpawn=nsWaveSize(NS.wave,nsPlayerCount());NS.phase='wave';NS.spawnT=0.3;}}else if(NS.phase==='wave'){NS.spawnT-=dt;const live=nsLiveZ();if(NS.toSpawn>0&&NS.spawnT<=0&&live<Math.min(NS_CFG.zLive,NSZ.pool.length)){const p=nszSpawnPoint(P);if(p&&nszSpawn(p,NS.wave))NS.toSpawn--;NS.spawnT=p?Math.max(0.35,1.5-0.1*NS.wave):0.5;}
+if(NS.phase==='pre'||NS.phase==='break'){NS.phaseT-=dt;if(NS.phaseT<=0){NS.wave++;NS.toSpawn=nsWaveSize(NS.wave,nsPlayerCount());NS.phase='wave';NS.spawnT=0.3;}}else if(NS.phase==='wave'){NS.spawnT-=dt;const live=nsLiveZ();if(NS.toSpawn>0&&NS.spawnT<=0&&live<Math.min(nsScaledCount(NS_CFG.zLive),NSZ.pool.length)){const p=nszSpawnPoint(P);if(p&&nszSpawn(p,NS.wave))NS.toSpawn--;NS.spawnT=p?nsScaledGap(Math.max(0.35,1.5-0.1*NS.wave)):0.5;}
 let left=0;for(const b of NSZ.pool)if(b.alive)left++;NS.alive=left+NS.toSpawn;if(NS.toSpawn<=0&&left===0){NS.phase='break';NS.phaseT=NS_BREAK;}}
 if(MATCH.online){const now=performance.now();if(now-NS.pubT>250){NS.pubT=now;nsNetPub();}}}
 function nsPhaseNote(from,to){if(to==='wave'){hudMsg(`WAVE ${NS.wave}`,'enemy',3);sfxUi('notify');}
@@ -9614,7 +9742,7 @@ function nsBoardHtml(){const rows=NSU.board;if(!rows||!rows.length)return'<div c
 function nsUiBuild(){if(NSU.built)return;NSU.built=true;const st=document.createElement('style');st.textContent=NS_CSS;document.head.appendChild(st);document.body.classList.add('ns');const m=document.createElement('div');m.id='nsMenu';document.body.appendChild(m);NSU.el=m;m.addEventListener('click',nsMenuClick);m.addEventListener('input',nsMenuInput);m.addEventListener('keydown',(e)=>{if(e.key==='Enter'&&e.target&&e.target.id==='nsCode'){e.preventDefault();nsJoin();}e.stopPropagation();});const h=document.createElement('div');h.id='nsHud';h.innerHTML='<div class="tmp" id="nsTmp">TEMPORARY TEST MAP</div><div class="top"><div class="wave" id="nsWave"></div><div class="info" id="nsInfo"></div></div>'+`<div class="light" id="nsLight"><b>${NSL_KEY_LABEL}</b><span>Flashlight</span></div>`+'<div class="down" id="nsDown"><h2>YOU ARE DOWN</h2><p id="nsDownP"></p></div>'+'<div id="nsMarks"></div>';$('hud').appendChild(h);NSU.hud=h;const o=document.createElement('div');o.id='nsOver';document.body.appendChild(o);NSU.over=o;o.addEventListener('click',nsOverClick);}
 function nsMapLine(){const M=NS.map,have=NS_MAPFILES['night-arena.glb']&&NS_MAPFILES['night-arena.col.json'];if(M.src==='glb')return`<div class="map">Map: <b>Night Arena</b> (night-arena.glb + night-arena.col.json, ${M.boxes} collision boxes, ${M.ramps} stairs)</div>`;if(M.src==='test')return`<div class="map tmp">Map: <b>TEMPORARY TEST MAP</b> (corridor test boxes). The custom map did not load: ${nsEsc(M.why)}</div>`;return have?'<div class="map">Map: <b>Night Arena</b> (night-arena.glb, loaded when the match starts)</div>':'<div class="map tmp">Map: <b>TEMPORARY TEST MAP</b>: assets/maps/night-arena.glb and/or night-arena.col.json were missing at build time.</div>';}
 function nsNick(){const el=$('netName');return(el&&el.value)||NET.nick||'';}
-function nsMenuRender(){if(!NSU.el)return;if(NSU.lo&&NSU.lo.mode!=='solo'&&NET.role==='off')NSU.lo=null;if(NSU.lo){NSU.el.innerHTML=nsLoHtml();return;}
+function nsMenuRender(){if(!NSU.el)return;if(NSU.lo&&['coop','join'].includes(NSU.lo.mode)&&NET.role==='off')NSU.lo=null;if(NSU.lo){NSU.el.innerHTML=nsLoHtml();return;}
 const inLobby=NET.role!=='off';NSU.view=inLobby?'lobby':'main';let h='<div class="nsBox"><h1>NIGHT <b>SURVIVAL</b></h1><p class="sub">Co-op zombie survival \u00b7 1 to 4 players \u00b7 one life</p>'+nsMapLine();if(!inLobby){h+=nsLoSummary()+`<div class="row"><button class="pri" data-a="solo">Play solo</button></div>
       <div class="row"><input type="text" id="nsNick" maxlength="16" placeholder="Your name" value="${nsEsc(nsNick())}" style="text-transform:none;letter-spacing:.02em"></div>
       <div class="row"><button data-a="host">Host co-op</button></div>
@@ -9719,6 +9847,7 @@ function shipApply(){BOCFG.replace(shipRaw(BOCFG.defaults()),false);}
 const _resetAll=BOCFG.resetAll;BOCFG.resetAll=function(){const r=_resetAll.apply(this,arguments);shipApply();return r;};const _resetSec=BOCFG.resetSection;BOCFG.resetSection=function(s){const r=_resetSec.apply(this,arguments);if(s!=='look'&&s!=='light'&&s!=='weapons')return r;const raw=JSON.parse(JSON.stringify(BOCFG.v));if(s==='look'){raw.look=Object.assign({},SHIP.look);raw.look.pal=SHIP.look.pal.slice();}
 if(s==='light')raw.light=Object.assign({},raw.light,SHIP.light);if(s==='weapons')raw.weapons.edits=Object.assign({},raw.weapons.edits,SHIP.guns);raw.lightVer=SHIP.lightVer;BOCFG.replace(raw,false);return r;};try{if(!localStorage.getItem('bo_cfg_v1')){shipApply();localStorage.setItem('ns_bocfg_v1','1');}
 else if(!localStorage.getItem('ns_bocfg_v1')){for(const k in NDEF)BOCFG.v.light[k]=S[k].d;localStorage.setItem('ns_bocfg_v1','1');BOCFG.saveNow();}}catch(e){for(const k in NDEF)BOCFG.v.light[k]=S[k].d;}
+const visualKey='ns_reference_visuals_v1';try{if(!localStorage.getItem(visualKey)){localStorage.setItem(visualKey+'_backup',JSON.stringify({light:BOCFG.v.light,look:BOCFG.v.look,lightVer:BOCFG.v.lightVer}));BOCFG.v.light=Object.assign({},BOCFG.v.light,SHIP.light);BOCFG.v.look=Object.assign({},SHIP.look,{pal:SHIP.look.pal.slice()});BOCFG.v.lightVer=SHIP.lightVer;BOCFG.applySection('light');BOCFG.applySection('look');BOCFG.saveNow();localStorage.setItem(visualKey,'1');}}catch(e){console.warn('Night Survival: reference visuals could not be saved',e);}
 BOCFG.v.light.botFlash=NS_CFG.teamLights;let lastBot=NS_CFG.teamLights;const _c=new THREE.Color();function sync(){const L=BOCFG.v.light;Object.assign(NSL_DEF,{I:L.flashI,range:L.flashRange,angle:L.flashAngle,soft:L.flashSoft,decay:L.flashDecay,spill:L.flashSpill,spillW:L.flashSpillW,temp:L.flashTemp,beam:L.flashBeam});try{_c.set(L.flashColor);NSL.tint.setRGB(_c.r,_c.g,_c.b);}catch(e){NSL.tint.setRGB(1,1,1);}
 try{if(NSL.flash)NSL.flash.shadow.camera.far=NSL_DEF.range;}catch(e){}
 if(L.botFlash!==lastBot){lastBot=L.botFlash;NS_CFG.teamLights=Math.round(L.botFlash);nsCfgSave();}
@@ -9800,7 +9929,7 @@ function nsArmoryPoints(){NSARM.points=[];const room=NSB.data&&NSB.data.layout.r
 const ax=marker?marker.x:(x0+x1)*0.5,az=marker?marker.z:(z0+z1)*0.5;NSARM.points.sort((a,b)=>a.distanceToSquared(new V3(ax,0,az))-b.distanceToSquared(new V3(ax,0,az)));return NSARM.points.length;}
 function nsArmoryPoint(players){const pts=NSARM.points;for(let k=0;k<pts.length;k++){const p=pts[(k+NSARM.spawned*7)%pts.length];if(players.some(e=>e.pos.distanceToSquared(p)<10))continue;if(NSZ.pool.some(z=>z.alive&&z.pos.distanceToSquared(p)<1.21))continue;return p;}
 return null;}
-{const base=startMatch;startMatch=function(opt={}){NSARM.on=NSARM.selected&&!MATCH.online;NSZ.stress=0;NSZ.POOL=NSARM.on?60:20;nsArmoryReset();const r=base(opt);if(NSARM.on){NS.wave=NSARM.wave;NS.phase='pre';NS.phaseT=6;NS.toSpawn=60;NS.alive=60;nsHudTick();}
+{const base=startMatch;startMatch=function(opt={}){NSARM.on=NSARM.selected&&!MATCH.online;NSZ.stress=0;NSZ.POOL=NSARM.on?60:50;nsArmoryReset();const r=base(opt);if(NSARM.on){NS.wave=NSARM.wave;NS.phase='pre';NS.phaseT=6;NS.toSpawn=60;NS.alive=60;nsHudTick();}
 return r;};}
 {const base=chooseSpawn;chooseSpawn=function(e){if(NSARM.on&&e.isPlayer){const room=NSB.data&&NSB.data.layout.rooms.find(r=>r.id==='armory');if(room){const[x0,z0,x1,z1]=room.bounds;const p=nsSnap(x0-2,0,(z0+z1)*0.5,2);if(p)return p;}}
 return base(e);};}
@@ -10118,7 +10247,14 @@ try{s.g.gain.setTargetAtTime(0.0001,t,0.15);s.o.stop(t+0.5);s.lfo.stop(t+0.5)}ca
 NSDOOR.alarm=null
 return
 }
-if(NSDOOR.alarm||typeof AU==='undefined'||!AU.ready||!AU.ctx||typeof auOut!=='function')return
+if(typeof AU==='undefined'||!AU.ready||!AU.ctx||typeof auOut!=='function')return
+if(NSDOOR.alarm){const s=NSDOOR.alarm,t=AU.ctx.currentTime
+const sounding=(t-s.started)%8<0.8
+const gain=sounding?0.045*(Settings.volAlarm==null?1:Settings.volAlarm):0
+if(gain!==s.level){s.g.gain.setTargetAtTime(gain,t,0.12)
+s.level=gain}
+return
+}
 const sec=nsDoorSector(NSDOOR.breachId)
 const c=sec&&sec.room&&sec.room.center
 const pos=c?new V3(c[0],2.4,c[1]):new V3(0,2.4,0)
@@ -10126,20 +10262,21 @@ const dest=auOut(pos,0.4,0.85,0.35,16)
 const ctx=AU.ctx
 const o=ctx.createOscillator(),lfo=ctx.createOscillator()
 const g=ctx.createGain(),lg=ctx.createGain()
-o.type='square'
-o.frequency.value=520
+o.type='sine'
+o.frequency.value=340
 lfo.type='sine'
-lfo.frequency.value=1.7
-lg.gain.value=90
+lfo.frequency.value=1.2
+lg.gain.value=30
 lfo.connect(lg)
 lg.connect(o.frequency)
 g.gain.value=0.0001
-g.gain.setTargetAtTime(0.16*(Settings.volAlarm==null?1:Settings.volAlarm),ctx.currentTime,0.25)
+const level=0.045*(Settings.volAlarm==null?1:Settings.volAlarm)
+g.gain.setTargetAtTime(level,ctx.currentTime,0.12)
 o.connect(g)
 g.connect(dest)
 o.start()
 lfo.start()
-NSDOOR.alarm={o,lfo,g}}
+NSDOOR.alarm={o,lfo,g,started:ctx.currentTime,level}}
 function nsHoldFlood(){const L=(typeof NSL!=='undefined')?NSL.flood:null
 const on=!!(NSDOOR.on&&NSDOOR.hold==='defense'&&NSDOOR.breachId)
 if(!on){if(L)L.intensity=0
@@ -10150,10 +10287,10 @@ return
 const sec=nsDoorSector(NSDOOR.breachId)
 const c=sec&&sec.room&&sec.room.center
 if(L&&c){L.position.set(c[0],2.7,c[1])
-L.distance=22
+L.distance=14
 L.decay=1.1
 L.color.setHex(0xfff6e4)
-L.intensity=95}
+L.intensity=18}
 nsHoldAlarm(true)
 if((typeof nsAuth!=='function'||nsAuth())&&c&&typeof nsHearPing==='function'){const now=(typeof MATCH!=='undefined'&&MATCH.time)||0
 if(now>=(NSDOOR.pingAt||0)){NSDOOR.pingAt=now+1.15
@@ -10291,8 +10428,8 @@ else nsGenQuiet()
 if(was===true||was===false)nsDoorSay(on?'POWER BACK · maintenance is held':'POWER DOWN · maintenance is overrun',on?'xp':'enemy',3)}
 function nsDoorReserve(id){if(id==='control_hub'||id==='arrival')return 0
 if(typeof nsNightClassic==='function'&&nsNightClassic()){if(typeof nsIsTestmap==='function'&&nsIsTestmap())
-return(id==='armory'||id==='security'||id==='maintenance')?60:0
-return 60}
+return(id==='armory'||id==='security'||id==='maintenance')?nsScaledCount(60):0
+return nsScaledCount(60)}
 return 0}
 function nsDoorResetSectors(){for(const s of NSDOOR.sectors){const hub=s.id==='control_hub'
 s.reserve=nsDoorReserve(s.id)
@@ -10313,7 +10450,7 @@ function nsDoorBegin(){if(!nsIsBunker()||!NSB.data){NSDOOR.on=false;return}
 const auth=typeof nsAuth!=='function'||nsAuth()
 if(auth){NSARM.on=false
 NSZ.stress=0
-NSZ.POOL=(typeof nsIsTestmap==='function'&&nsIsTestmap())?40:Math.max(NSZ.POOL||20,40)
+NSZ.POOL=64
 nszPoolEnsure()}
 nsDoorBuild()
 NSDOOR.on=NSDOOR.doors.length>0&&!!(NSDOOR.doors[0].leaves?nsDoorInMap(NSDOOR.doors[0].leaves[0]):nsDoorInMap(NSDOOR.doors[0].hinge))
@@ -10599,8 +10736,8 @@ return inside.length?inside:players}
 function nsDoorPace(z,hot){if(hot||Math.random()<.9){z.zRun=true
 z.zSpeed=rand(hot?4.4:4.1,hot?5.3:4.9)}else{z.zRun=false
 z.zSpeed=rand(3.1,3.8)}}
-function nsDoorGap(){if(!(typeof nsIsTestmap==='function'&&nsIsTestmap()))return.45
-return NSDOOR.hold==='fight'?.42:.72}
+function nsDoorGap(){if(!(typeof nsIsTestmap==='function'&&nsIsTestmap()))return nsScaledGap(.45)
+return nsScaledGap(NSDOOR.hold==='fight'?.42:.72)}
 function nsDoorMarch(players,z){let pick=null,bd=1e9
 for(const pl of players){if(!pl.alive||!pl.pos)continue
 const home=nsDoorInRoom(pl,'arrival')||nsDoorInRoom(pl,'control_hub')
@@ -10809,7 +10946,7 @@ if(NSDOOR.holdT<=0){nsHoldEnd();return}
 NSDOOR.holdSpawnT-=dt
 const dur=NSDOOR.holdDur||90
 const k=clamp(1-NSDOOR.holdT/Math.max(1,dur),0,1)
-const gap=2.2-k*1.5
+const gap=nsScaledGap(2.2-k*1.5)
 if(NSDOOR.holdSpawnT>0)return
 NSDOOR.holdSpawnT=gap
 const cap=nsDoorAliveCap()
@@ -11013,15 +11150,15 @@ s.open=true
 s.timer=1.4
 if(!s.points.length)s.points=nsDoorPoints(s.room)
 if(typeof nsNightClassic==='function'&&nsNightClassic())
-nsDoorSay((s.name||s.id).toUpperCase()+' · 60 INFECTED','enemy',2.5)
+nsDoorSay((s.name||s.id).toUpperCase()+' · '+(s.reserve+s.spawned)+' INFECTED','enemy',2.5)
 else{nsDoorWakeSector(s)
 nsDoorSay((s.name||s.id).toUpperCase()+' · infected waking','enemy',2.5)}}}
 function nsDoorAliveCap(){const pool=(NSZ.pool&&NSZ.pool.length)||NSZ.POOL||20
 if(typeof nsHoldOn==='function'&&nsHoldOn()&&typeof nsNightCfg==='function')
-return Math.min(nsNightCfg().holdCap,pool)
+return Math.min(nsScaledCount(nsNightCfg().holdCap),pool,64)
 if(typeof nsIsTestmap==='function'&&nsIsTestmap())
-return Math.min(NSDOOR.hold==='fight'?8:6,pool)
-return Math.min(40,pool)}
+return Math.min(nsScaledCount(NSDOOR.hold==='fight'?8:6),pool,64)
+return Math.min(nsScaledCount(40),pool,64)}
 function nsDoorSpawn(dt,players){nsDoorWakeRooms()
 const wave=NSDOOR.hold==='fight'?NSDOOR.wave:null
 if(wave&&wave.reserve>0){wave.timer-=dt
@@ -11095,7 +11232,7 @@ function nsDoorAttack(){const test=typeof nsIsTestmap==='function'&&nsIsTestmap(
 const pts=test?nsDoorStartPts():nsDoorArrivalPts()
 if(!pts.length){NSDOOR.hold='quiet';NSDOOR.quiet=4;return}
 const cams=!test&&!!(nsDoorSector('security')&&nsDoorSector('security').hold==='secured')
-const size=test?Math.min(48,30+NSDOOR.siege*8):Math.min(24,12+NSDOOR.siege*3)
+const size=nsScaledCount(test?Math.min(48,30+NSDOOR.siege*8):Math.min(24,12+NSDOOR.siege*3))
 NSDOOR.wave={reserve:size,timer:cams?5:.35,spawned:0}
 NSDOOR.siege++
 NSDOOR.hold='fight'
@@ -11355,6 +11492,11 @@ AU.mixZombie=AU.ctx.createGain();NSA.zOut.connect(AU.mixZombie);AU.mixZombie.con
 if(AU.mixZombie)AU.mixZombie.gain.value=nsMixVol('volZombie');if(typeof NSDOOR!=='undefined'&&NSDOOR.alarm&&NSDOOR.alarm.g)
 NSDOOR.alarm.g.gain.setTargetAtTime(Math.max(0.0001,0.16*nsMixVol('volAlarm')),AU.ctx.currentTime,0.08);}
 {const base=setVolume;setVolume=function(v){base(v);nsMixApply();};}
+const NS_TERMINAL={deployed:false,controller:null,error:null};{const style=document.createElement('style');style.textContent='#loading,#matchload{display:none!important}#nsLoadError{position:fixed;inset:0;z-index:2147483001;background:#020403;color:#d1d5cc;padding:12vh 12vw;font:14px/1.6 monospace}#nsLoadError button{margin:16px 12px 0 0;padding:12px;background:#14241c;color:#bdd8c5;border:1px solid #587062;cursor:pointer}';document.head.appendChild(style);}
+function nsTerminalError(error,bootFailure=false){if(NS_TERMINAL.error)NS_TERMINAL.error.remove();const panel=document.createElement('section');panel.id='nsLoadError';panel.setAttribute('role','alert');const title=document.createElement('h2');title.textContent='FEDERAL PROPERTY RECOVERY OFFICE';const message=document.createElement('p');message.textContent='DEPLOYMENT WITHHELD: '+String(error.message||error);panel.append(title,message);const button=(text,fn)=>{const b=document.createElement('button');b.textContent=text;b.onclick=fn;panel.append(b);return b;};const back=button(bootFailure?'Reload system':'Return to menu',()=>{panel.remove();NS_TERMINAL.error=null;if(bootFailure)location.reload();else menuLoadBack();});button('Graphics report',()=>gpuReport());button('Retry with low graphics',()=>{Settings.gfxSafe=true;Settings.gfxSafeAuto=BUILD;saveSettings();location.reload();});document.body.append(panel);NS_TERMINAL.error=panel;back.focus();}
+{const original=boot;boot=async function(){const load=original();const observer=new MutationObserver(()=>ZombaeTerminal.setStatus($('loadMsg').textContent));observer.observe($('loadMsg'),{childList:true,subtree:true,characterData:true});try{await ZombaeTerminal.show({kind:'notice',instantText:true,loadPromise:load.then(()=>{if(!GPUX.booted)throw new Error($('loadMsg').textContent||'System initialization failed');})});}catch(error){nsTerminalError(error,true);}
+finally{observer.disconnect();}};}
+{const original=menuLoading;menuLoading=async function(F){const controller=new AbortController();NS_TERMINAL.controller=controller;const show=()=>ZombaeTerminal.setStatus(($('mlMsg').textContent||'CONNECTING')+' // '+Math.round(MAPL.p*100)+'%');MAPL.subs.add(show);const observer=new MutationObserver(show);observer.observe($('mlMsg'),{childList:true,subtree:true,characterData:true});const load=original(F).then(ok=>{if(!ok){if(UI.flow!==F)throw new DOMException('Deployment cancelled','AbortError');throw new Error($('mlMsg').textContent||'Facility connection failed');}});const watch=setInterval(()=>{if(UI.flow!==F)controller.abort();else if(F.online&&netGo())ZombaeTerminal.skip();},50);try{await ZombaeTerminal.show({kind:NS_TERMINAL.deployed?'random':'first',loadPromise:load,signal:controller.signal});if(UI.flow!==F)return false;NS_TERMINAL.deployed=true;return true;}catch(error){if(error.name!=='AbortError'&&UI.flow===F)nsTerminalError(error);return false;}finally{clearInterval(watch);observer.disconnect();MAPL.subs.delete(show);if(NS_TERMINAL.controller===controller)NS_TERMINAL.controller=null;}};}
 if(!window.WebGLRenderingContext)$('loadMsg').textContent=_t('WebGL est indisponible sur ce navigateur.');else if(!pwaGate(boot))boot();
 </script>
 <!-- Vercel Web Analytics (sans dépendance : le script est servi par Vercel, il échoue sans bruit hors ligne ou en fichier local) -->
