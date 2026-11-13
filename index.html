@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-QpEAbT3O6QxDKtCc2lTtRBLoWhoQAHzlIrot/6QxX80=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PlBRaOZ4ipsQDKKe0sGQ7N1qSIuyx/KpRdklnmOzVNI=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="86ffeac892b2">
+<meta name="cod-build" content="2cbc0cc76b10">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9360,10 +9360,10 @@ function nsMuzSync(){if(typeof MUZ==='undefined')return;const L=(typeof BOCFG!==
 function nsMuzArm(){if(typeof flashLights==='undefined')return;nsMuzSync();const n=nsMuzSlots();for(let i=0;i<flashLights.length;i++){const L=flashLights[i].light;L.castShadow=false;L.visible=i<n;if(!(flashLights[i].t>0))L.intensity=0;}
 if(typeof FLASH_HOLD!=='undefined')FLASH_HOLD.t=Math.max(FLASH_HOLD.t||0,2);NS_MUZ.armed=true;}
 {const base=flashLight;flashLight=function(pos,intensity,dist,dur,color){if(typeof NS!=='undefined'&&(NS.match||NS_MUZ.armed)&&typeof flashLights!=='undefined'){const n=nsMuzSlots();let best=flashLights[0];for(let i=0;i<n;i++)if(flashLights[i].t<=0){best=flashLights[i];break;}
-best.light.position.copy(pos);best.light.distance=dist;best.light.color.setHex(color||MUZ.col||NS_MUZ.col||0xffb060);best.light.castShadow=false;best.light.visible=true;best.peak=intensity;best.dur=dur;best.t=dur;best.light.intensity=intensity;return;}
+best.light.position.copy(pos);best.light.decay=1;best.light.distance=Math.max(8,dist);best.light.color.setHex(color||MUZ.col||NS_MUZ.col||0xffb060);best.light.castShadow=false;best.light.visible=true;best.peak=intensity;best.dur=dur;best.t=dur;best.light.intensity=intensity;return;}
 return base.apply(this,arguments);};}
 {const base=muzzleLight;muzzleLight=function(pos,silent,I,D,dur,ent){if(typeof NS!=='undefined'&&(NS.match||NS.on)){nsMuzSync();let f=1,sil=!!silent;try{const d=(typeof nszGunDef==='function')?nszGunDef(ent):(ent&&ent.weapon);if(d&&d.feel&&d.feel.flash!=null)f=d.feel.flash;if(!sil)sil=!!(d&&d.silent)||!!(ent&&ent.nsShotSilent);}catch(e){}
-I=(I||3)*f;dur=0.065;const s=sil?MUZ.supp:1;if(!(s>0)||!(MUZ.k>0))return;return flashLight(pos,I*MUZ.k*s,D*MUZ.range*(sil?Math.max(0.5,Math.sqrt(s)):1),dur,MUZ.col);}
+const s=sil?MUZ.supp:1;if(!(s>0)||!(MUZ.k>0))return;const peak=52*Math.max(0.7,f)*MUZ.k*s;const reach=17*MUZ.range*(sil?0.42:1);const p=(pos&&pos.clone)?pos.clone():new THREE.Vector3(pos.x,pos.y,pos.z);if(typeof camera!=='undefined'&&camera.position)p.lerp(camera.position,sil?0.2:0.4);return flashLight(p,peak,reach,sil?0.05:0.11,MUZ.col);}
 return base.apply(this,arguments);};}
 {const base=updateFlashLights;updateFlashLights=function(dt){if(typeof NS!=='undefined'&&NS.on&&NS_MUZ.armed&&typeof flashLights!=='undefined'){let any=false;for(const f of flashLights){if(f.t>0){f.t-=dt;f.light.intensity=Math.max(0,f.t/f.dur)*f.peak;if(f.t>0)any=true;}
 else f.light.intensity=0;f.light.castShadow=false;}
@@ -9829,6 +9829,10 @@ nsMkUpdate();}
 {const base=allyMarksUpdate;allyMarksUpdate=function(){if(NS&&NS.match&&NSU&&NSU.hud&&NSU.hud.style.display!=='none'){if(typeof allyMarksHide==='function')allyMarksHide();nsVisTick();return;}
 nsMkHideAll();nsGlassHide();return base();};}
 {const base=vmEquip;vmEquip=function(def){const r=base(def);NSV.kind='';NSV.primed=false;if(NSV.mesh)nsGlassPose();return r;};}
+function nsXhair(dt){const e=PL.ent;const w=(typeof curW==='function')?curW():null;const d=w&&w.def;const xh=$('xhair');if(!e||!d||!xh||!VIEW)return;const ads=(typeof VM!=='undefined'&&VM.ads)||0;const aim=ads*ads;const spd=hyp(e.vel.x,e.vel.z);let spread=d.spread[0]+(d.spread[1]-d.spread[0])*aim;spread+=(d.moveSpread||0)*clamp(spd/MOVE_SPEED,0,1.5)*(1-aim*0.85);spread+=(PL.bloom||0)*(1-aim*0.7);if(!e.onGround)spread+=0.045*(1-aim*0.6);if(e.crouch)spread*=0.8;const focal=VIEW.h/(2*Math.tan((camera.fov*Math.PI)/360));const rest=5+Math.tan(Math.max(0,spread))*focal;const opening=(HUD.xhairGap||rest)<rest-0.5;HUD.xhairGap=damp(HUD.xhairGap||rest,rest,opening?26:10,dt);HUD.kick=damp(HUD.kick||0,0,8,dt);const scoped=!!(d.scope&&ads>0.9);const hide=!e.alive||scoped||e.sprinting||PL.knifeT>0||PL.knifeOut||(typeof KS!=='undefined'&&KS.mode)||(typeof playHold==='function'&&playHold());hudStyle(xh,'opacity',hide?'0':'0.96');const gap=HUD.xhairGap+(HUD.kick||0)*(1.15-aim*0.72);hudVar(xh,'--gap',(Math.round(gap*2)/2).toFixed(1)+'px');}
+{const base=updateHud;updateHud=function(dt){const r=base(dt);if(typeof NS!=='undefined'&&NS.match)nsXhair(dt);return r;};}
+{const base=playerShotFx;playerShotFx=function(d,ads,f,muzzle,kv,kh,hitAny){const before=HUD.kick||0;const r=base(d,ads,f,muzzle,kv,kh,hitAny);if(!(typeof NS!=='undefined'&&NS.match)||!d)return r;const hip=1-Math.min(1,ads||0);const pop=(18+((d.recoil&&d.recoil.kick)||0.03)*260)*(0.32+hip*0.85);HUD.kick=Math.min(52,before+pop);if(PL.ent&&PL.ent.arms){const add=(d.auto?0.007:0.011)*(0.4+hip*0.7);const cap=d.auto?0.05:0.03;PL.ent.arms.bloom=Math.min(cap,(PL.ent.arms.bloom||0)+add);}
+return r;};}
 function nsOverShow(){nsUiBuild();const host=!MATCH.online||NET.role==='host';NSU.over.innerHTML=`<div class="box"><h2>OVERRUN</h2><div class="st"><div><b>${NS.wave}</b>wave</div><div><b>${fmtTime(NS.elapsed)}</b>survived</div><div><b>${NS.kills}</b>kills${MATCH.online?` (you ${PL.ent.kills|0})`:''}</div></div>
     ${nsBoardHtml()}
     <div class="row">${host?'<button class="pri" data-a="restart">Restart</button>':''}<button data-a="menu">${MATCH.online&&!host?'Leave':'Main menu'}</button></div>
