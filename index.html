@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-9ebl3xtJBRLx0O+6Sfa1ed39V11EdfEbzMsKfQP5CtA=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VfOBaH9o/YwANqmF8mFVBKocM2HGf66a8bfKTG//NRk=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="ba99e427b1a1">
+<meta name="cod-build" content="c285ab728fd8">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9148,11 +9148,11 @@ if(!root)build();root.classList.add('open');render();live();try{if(document.poin
 for(const k in KEYS)KEYS[k]=false;}
 function close(){if(!root)return;root.classList.remove('open');try{if(MATCH.state==='playing'&&!pointerActive())requestLock(true);}catch(e){}}
 const isOpen=()=>!!(root&&root.classList.contains('open'));function live(){const d=root&&root.querySelector('#boEdLive');if(!d)return;const t=window.BOADMIN&&BOADMIN.liveText?BOADMIN.liveText():'';d.textContent=t;d.style.display=t?'':'none';}
-setInterval(()=>{if(isOpen()){live();if(!can())close();}},1000);window.BOEDITOR={open,close,toggle:()=>(isOpen()?close():open()),isOpen,setTab:(t)=>{tab=t;if(isOpen())render();},render};addEventListener('keydown',(e)=>{if(e.code==='F10'&&!(e.ctrlKey&&e.shiftKey)){e.preventDefault();if(!can())return;e.stopPropagation();if(!e.repeat)BOEDITOR.toggle();}else if(e.code==='Escape'&&isOpen()){e.stopPropagation();close();}},true);const addBtn=()=>{if(document.getElementById('boEdBtn'))return true;const host=document.getElementById('boRole');if(!host)return false;css();const b=el('button',{id:'boEdBtn',type:'button',title:'BLACKOUT editor (F10)'},'EDITOR (F10)');b.onclick=(e)=>{e.stopPropagation();if(can())BOEDITOR.toggle();};host.append(b);return true;};const iv=setInterval(()=>{if(addBtn())clearInterval(iv);},500);})();const NS_MAPFILES={"night-arena.glb":"751d3648","night-arena.col.json":"3cbc7cb8","night-arena.wide.glb":"b510f264","night-arena.wide.col.json":"92252a93","night-arena.mag.glb":"fd6ac0c2","night-arena.mag.col.json":"2aef32d1","bunker-props.glb":"751d3648","bunker-layout.json":"2d2594f8","bunker-props.json":"1d380e68"};const NS={on:true,map:{src:'none',why:'',glb:null,col:null,tris:0,boxes:0,ramps:0,rooms:[],spawnA:null,spawnB:null,pspawns:[],zspawns:[]},wave:0,phase:'idle',phaseT:0,kills:0,toSpawn:0,alive:0,over:false,startT:0,elapsed:0,};const NS_CFG_DEF={zLive:16,aiHz:15,shadows:1,teamLights:2,beams:1};const NS_CFG=(()=>{let s={};try{s=JSON.parse(localStorage.getItem('ns_cfg')||'{}')||{};}catch(e){s={};}
+setInterval(()=>{if(isOpen()){live();if(!can())close();}},1000);window.BOEDITOR={open,close,toggle:()=>(isOpen()?close():open()),isOpen,setTab:(t)=>{tab=t;if(isOpen())render();},render};addEventListener('keydown',(e)=>{if(e.code==='F10'&&!(e.ctrlKey&&e.shiftKey)){e.preventDefault();if(!can())return;e.stopPropagation();if(!e.repeat)BOEDITOR.toggle();}else if(e.code==='Escape'&&isOpen()){e.stopPropagation();close();}},true);const addBtn=()=>{if(document.getElementById('boEdBtn'))return true;const host=document.getElementById('boRole');if(!host)return false;css();const b=el('button',{id:'boEdBtn',type:'button',title:'BLACKOUT editor (F10)'},'EDITOR (F10)');b.onclick=(e)=>{e.stopPropagation();if(can())BOEDITOR.toggle();};host.append(b);return true;};const iv=setInterval(()=>{if(addBtn())clearInterval(iv);},500);})();const NS_MAPFILES={"night-arena.glb":"751d3648","night-arena.col.json":"3cbc7cb8","night-arena.wide.glb":"b510f264","night-arena.wide.col.json":"92252a93","night-arena.mag.glb":"fd6ac0c2","night-arena.mag.col.json":"2aef32d1","bunker-props.glb":"751d3648","bunker-layout.json":"2d2594f8","bunker-props.json":"1d380e68","tm1.glb":"01d9cb91","tm1.col.json":"efac342d"};const NS={on:true,map:{src:'none',why:'',glb:null,col:null,tris:0,boxes:0,ramps:0,rooms:[],spawnA:null,spawnB:null,pspawns:[],zspawns:[]},wave:0,phase:'idle',phaseT:0,kills:0,toSpawn:0,alive:0,over:false,startT:0,elapsed:0,};const NS_CFG_DEF={zLive:16,aiHz:15,shadows:1,teamLights:2,beams:1};const NS_CFG=(()=>{let s={};try{s=JSON.parse(localStorage.getItem('ns_cfg')||'{}')||{};}catch(e){s={};}
 const o=Object.assign({},NS_CFG_DEF);for(const k in o)if(typeof s[k]==='number'&&isFinite(s[k]))o[k]=s[k];o.zLive=clamp(Math.round(o.zLive),12,20);o.aiHz=clamp(Math.round(o.aiHz),5,30);o.shadows=o.shadows?1:0;o.teamLights=clamp(Math.round(o.teamLights),0,3);o.beams=o.beams?1:0;return o;})();function nsCfgSave(){try{localStorage.setItem('ns_cfg',JSON.stringify(NS_CFG));}catch(e){}}
 const ATMO_NIGHT=Object.assign({},ATMO_DEFAULT,{sun:[0.15,1.0,0.1],sunColor:0x1a2232,sunI:0.05,vmSun:0x3a4658,fog:[0.012,0.014,0.02],fogD:0.03,hemi:[0x22303f,0x0b0d10,0.11],vmHemi:[0x2d3a4c,0x0c0e14],sky:Object.assign({},ATMO_DEFAULT.sky,{zen:[0.004,0.005,0.01],mid:[0.008,0.01,0.016],hor:[0.014,0.016,0.022],gnd:[0.006,0.007,0.009],glow:[0.02,0.022,0.03],halo:[0.03,0.035,0.045],disk:[0.6,0.6,0.7],cloudLo:[0.012,0.014,0.018],cloudHi:[0.02,0.022,0.026],cloud:[0.1,0.15,0.1],}),envGround:0x07080b,hdri:null,bounce:[0.05,0.06,0.08],dust:[0.08,0.085,0.09],motes:[0.12,0.12,0.13],grade:{lo:[0.85,0.92,1.06],hi:[1.0,0.98,0.94],exp:0.95,vig:0.5,lift:0.025},rays:[0.1,0.12,0.15],fogSun:0.0,fogH:[0,0],interior:[1,0.35,0.4],winLit:0,bloom:[0.3,0.5,0.9],aoFloor:0.6,raysThr:1.5,raysCap:400,});function nsIsBunker(){const M=NS.map;return M.src==='glb'&&!!M.col&&/bunker/i.test(String(M.col.source||''));}
 function nsMapVariant(){return'v1';}
-function nsArenaFiles(){return['night-arena.glb','night-arena.col.json'];}
+function nsArenaFiles(){return['tm1.glb','tm1.col.json'];}
 MAPS.length=0;MAPS.push({id:'night',name:'Night Arena',tag:'Night Survival',ok:true,desc:'Abandoned two-floor block. Lights are out. Hold out as long as you can.'});Settings.map='night';function nsBoxGeo(list){const P=[],N=[],I=[];const face=(o,u,v,n)=>{const b=P.length/3;for(const[a,c]of[[0,0],[1,0],[1,1],[0,1]]){P.push(o[0]+u[0]*a+v[0]*c,o[1]+u[1]*a+v[1]*c,o[2]+u[2]*a+v[2]*c);N.push(...n);}I.push(b,b+1,b+2,b,b+2,b+3);};for(const[x0,x1,y0,y1,z0,z1]of list){const dx=x1-x0,dy=y1-y0,dz=z1-z0;face([x0,y1,z1],[dx,0,0],[0,0,-dz],[0,1,0]);face([x0,y0,z0],[dx,0,0],[0,0,dz],[0,-1,0]);face([x0,y0,z1],[dx,0,0],[0,dy,0],[0,0,1]);face([x1,y0,z0],[-dx,0,0],[0,dy,0],[0,0,-1]);face([x1,y0,z1],[0,0,-dz],[0,dy,0],[1,0,0]);face([x0,y0,z0],[0,0,dz],[0,dy,0],[-1,0,0]);}
 const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(P,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(N,3));g.setIndex(I);nsWorldUV(g);return g;}
 function nsWorldUV(g){const p=g.attributes.position,n=g.attributes.normal,uv=new Float32Array(p.count*2);for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),ax=Math.abs(n.getX(i)),ay=Math.abs(n.getY(i)),az=Math.abs(n.getZ(i));let u,v;if(ay>=ax&&ay>=az){u=x;v=z;}else if(ax>=az){u=z;v=y;}else{u=x;v=y;}
@@ -9180,10 +9180,10 @@ let r=0;for(const p of col.ramps||[]){if(!p||(p.axis!=='x'&&p.axis!=='z'))contin
 return[n,r];}
 function nsGlbMat(src,kind){const m=new THREE.MeshStandardMaterial({color:src&&src.color?src.color.clone():0x808080,roughness:src&&src.roughness!=null?src.roughness:0.9,metalness:src&&src.metalness!=null?src.metalness:0.1,envMapIntensity:0.2,map:kind==='lamp'?null:nsTex('plain'),side:(kind==='wall'||kind==='trim'||kind==='ceil')?THREE.DoubleSide:THREE.FrontSide,});if(src&&src.emissive&&src.emissive.getHex()){m.emissive.copy(src.emissive);m.emissiveIntensity=src.emissiveIntensity||1;}
 m.name='ns:glb:'+kind;return m;}
-function nsBuildGlb(){const M=NS.map,root=M.glb,bunker=nsIsBunker();const keepMat=bunker||/mainmap/i.test(String((M.col&&M.col.source)||''));let tris=0;root.updateMatrixWorld(true);const meshes=[];root.traverse((o)=>{if(o.isMesh)meshes.push(o);});const revised=meshes.some((o)=>/^REVISED_/i.test(o.name));const kept=new Map();for(const o of meshes){const meshName=o.name||'';if(revised&&!/^REVISED_/i.test(meshName))continue;if(/^CP_/i.test(meshName)||meshName.indexOf('__UCX_')>=0)continue;let k=o,name=o.name;while(k&&!/^MA_/.test(name||'')){k=k.parent;name=k&&k.name;}
+function nsBuildGlb(){const M=NS.map,root=M.glb,bunker=nsIsBunker();const grey=/tm1/i.test(String((M.col&&M.col.source)||''));const keepMat=bunker||grey||/mainmap/i.test(String((M.col&&M.col.source)||''));let tris=0;root.updateMatrixWorld(true);const meshes=[];root.traverse((o)=>{if(o.isMesh)meshes.push(o);});const revised=!grey&&meshes.some((o)=>/^REVISED_/i.test(o.name));const kept=new Map();for(const o of meshes){const meshName=o.name||'';if(grey&&(meshName.indexOf('_col')>=0||meshName.indexOf('CP reuse')===0||/^Player start/i.test(meshName)||/^Label •/.test(meshName)||/NT_BlastDoor_s42_(?:col|Leaf)/.test(meshName)))continue;if(revised&&!/^REVISED_/i.test(meshName))continue;if(/^CP_/i.test(meshName)||meshName.indexOf('__UCX_')>=0)continue;let k=o,name=o.name;while(k&&!/^MA_/.test(name||'')){k=k.parent;name=k&&k.name;}
 const kind=nsKindOf(name||o.name);const g=o.geometry.clone();g.applyMatrix4(o.matrixWorld);if(!keepMat){for(const a of Object.keys(g.attributes))if(a!=='position'&&a!=='normal')g.deleteAttribute(a);}
 if(!g.attributes.normal)g.computeVertexNormals();else g.normalizeNormals();nsWorldUV(g);g.computeBoundingSphere();g.computeBoundingBox();let mat=nsMat(kind);if(keepMat&&o.material){const src=Array.isArray(o.material)?o.material[0]:o.material;const id=src.uuid||kind;if(!kept.has(id))kept.set(id,nsGlbMat(src,kind));mat=kept.get(id);}
-const m=new THREE.Mesh(g,mat);m.name='night:'+(name||kind);m.castShadow=true;m.receiveShadow=true;m.matrixAutoUpdate=false;m.updateMatrix();MAPL.root.add(m);tris+=(g.index?g.index.count:g.attributes.position.count)/3;}
+const m=new THREE.Mesh(g,mat);m.name='night:'+(name||kind);m.castShadow=!grey;m.receiveShadow=!grey;m.matrixAutoUpdate=false;m.updateMatrix();MAPL.root.add(m);tris+=(g.index?g.index.count:g.attributes.position.count)/3;}
 MAPL.root.updateMatrixWorld(true);const[nb,nr]=nsEmitCol(M.col);M.tris=Math.round(tris);M.boxes=nb;M.ramps=nr;}
 function nsBuildTest(){const H=3.4,T=0.4,B=[],C=[];const wall=(x0,x1,z0,z1,h=H)=>{B.push([x0,x1,0,h,z0,z1]);C.push([x0,x1,0,h,z0,z1]);};wall(-24,24,-24,-24+T);wall(-24,24,24-T,24);wall(-24,-24+T,-24,24);wall(24-T,24,-24,24);for(const sx of[-1,1])for(const sz of[-1,1]){const a=sx<0?-15:2,b=sx<0?-2:15,c=sz<0?-15:2,d=sz<0?-2:15;wall(a,b,c,c+T);wall(a,b,d-T,d);wall(a,a+T,c,d);wall(b-T,b,c,d);}
 const crates=[[-1,1,0,1.1,8,9.2],[-21,-19.6,0,1.0,-6,-4.6],[19.4,21,0,1.2,5,6.2],[-8,-6.6,0,1.0,19,20.4]];for(const c of crates){B.push(c);C.push(c);}
@@ -9557,14 +9557,16 @@ nsMapPreload=async function(){await base();if(!nsIsBunker())return;if(NSB.data){
 if(NSB.error)return;try{const get=async(name,binary)=>{if(!NS_MAPFILES[name])throw new Error('Missing bunker asset: '+name);const r=await fetch('maps/'+name+'?v='+NS_MAPFILES[name]);if(!r.ok)throw new Error(name+': HTTP '+r.status);return binary?r.arrayBuffer():r.json();};const pack={layout:'bunker-layout.json',meta:'bunker-props.json',glb:'bunker-props.glb'};const[layout,meta,buf]=await Promise.all([get(pack.layout),get(pack.meta),get(pack.glb,true)]);if(!layout.rooms||layout.rooms.length!==8)throw new Error('Unexpected bunker manifest');if(meta.instances.length<29)throw new Error('Unexpected bunker manifest');const gltf=await nsGltfParse(buf);for(const p of meta.instances)if(!gltf.scene.getObjectByName(p.exportNode))throw new Error('Missing prop: '+p.id);NSB.props=gltf.scene;NSB.data={layout,meta};applyLayout();}catch(e){NSB.error=e.message||String(e);console.error('[Night Survival] bunker dressing unavailable: '+NSB.error);}};}
 function nsBunkerCollider(bounds,id){const a=bounds.min,b=bounds.max;if(![a.x,a.y,a.z,b.x,b.y,b.z].every(Number.isFinite)||b.x-a.x<.005||b.z-a.z<.005||b.y-a.y<.005)return;const c={x0:a.x,x1:b.x,y0:a.y,y1:b.y,z0:a.z,z1:b.z,m:'metal',ray:false,bunkerProp:id};COL.push(c);NSB.colliders++;if(b.y-a.y>1.2)OCC.push({...c,k:1});}
 function nsBunkerMarker(id,type,x,z,room){const o=new THREE.Object3D();o.name='bunker-marker:'+id;o.position.set(x,0,z);o.userData={id,type,room,active:false};NSB.root.add(o);NSB.markers.push({id,type,room,x,y:0,z,active:false});}
-function nsBuildBunkerDressing(){if(!nsIsBunker()||!NSB.data)return;NSB.colliders=0;NSB.markers=[];NSB.doors=[];const root=NSB.props.clone(true);NSB.root=root;root.name='bunker-dressing';const materials=new Map();const cloneMat=m=>{if(!materials.has(m.uuid))materials.set(m.uuid,m.clone());return materials.get(m.uuid);};const drop=[];root.traverse(o=>{if(/^REVISED_/i.test(o.name||'')||(o.name||'').indexOf('__UCX_')>=0){drop.push(o);return;}
+function nsGreyMarkers(root){const L=NSB.data.layout;L.players.forEach((p,i)=>nsBunkerMarker('player-'+i,'player',p[0],p[1],'arrival'));L.enemySpawns.forEach((s,i)=>nsBunkerMarker('sector-'+i,'zombie',s.point[0],s.point[1],s.type));L.doors.forEach((d,i)=>{NSB.doors.push({id:'door-'+i,name:d.name,x:d.center[0],z:d.center[1],open:true,dynamic:false});nsBunkerMarker('door-'+i,'door',d.center[0],d.center[1],d.category);});}
+function nsBuildBunkerDressing(){if(!nsIsBunker()||!NSB.data)return;NSB.colliders=0;NSB.markers=[];NSB.doors=[];const grey=/tm1/i.test(String((NS.map.col&&NS.map.col.source)||''));NSB.grey=grey;if(grey){const root=new THREE.Group();NSB.root=root;root.name='bunker-dressing';MAPL.root.add(root);nsGreyMarkers(root);console.info('[Night Survival] greybox tm1: same rooms and door rules, '+NS.map.boxes+' collision boxes');return;}
+const root=NSB.props.clone(true);NSB.root=root;root.name='bunker-dressing';const materials=new Map();const cloneMat=m=>{if(!materials.has(m.uuid))materials.set(m.uuid,m.clone());return materials.get(m.uuid);};const drop=[];root.traverse(o=>{if(/^REVISED_/i.test(o.name||'')||(o.name||'').indexOf('__UCX_')>=0){drop.push(o);return;}
 if(!o.isMesh)return;o.geometry=o.geometry.clone();o.material=Array.isArray(o.material)?o.material.map(cloneMat):cloneMat(o.material);o.castShadow=o.receiveShadow=true;});for(const o of drop)if(o.parent)o.parent.remove(o);MAPL.root.add(root);root.updateMatrixWorld(true);for(const p of NSB.data.meta.instances){const o=root.getObjectByName(p.exportNode);if(p.collisionMode==='static'&&!(NSB.data.layout&&NSB.data.layout.version===2))nsBunkerCollider(new THREE.Box3().setFromObject(o),p.id);else if(p.collisionMode==='dynamic_door'){}}
 const L=NSB.data.layout;L.players.forEach((p,i)=>nsBunkerMarker('player-'+i,'player',p[0],p[1],'arrival'));L.enemySpawns.forEach((s,i)=>nsBunkerMarker('sector-'+i,'zombie',s.point[0],s.point[1],s.type));L.doors.forEach((d,i)=>{NSB.doors.push({id:'door-'+i,name:d.name,x:d.center[0],z:d.center[1],open:true,dynamic:false});nsBunkerMarker('door-'+i,'door',d.center[0],d.center[1],d.category);const hasDoor=NSB.data.meta.instances.some(p=>p.asset==='BlastDoor'&&hyp((p.game&&p.game.x)-d.center[0],(p.game&&p.game.z)-d.center[1])<2.5);if(hasDoor)return;const g=new THREE.BoxGeometry(d.clearWidth,.6,.18);const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x59646a,metalness:.65,roughness:.6}));m.name='bunker-open-shutter-'+i;m.position.set(d.center[0],2.45,d.center[1]);m.castShadow=m.receiveShadow=true;root.add(m);m.updateMatrixWorld(true);nsBunkerCollider(new THREE.Box3().setFromObject(m),'door-'+i);});NS.map.boxes+=NSB.colliders;console.info('[Night Survival] bunker '+((NSB.data.layout&&NSB.data.layout.version)||1)+': 8 rooms, '+NSB.data.meta.instances.length+' props, '+NSB.colliders+' added colliders, '+((NSB.data.layout.doors&&NSB.data.layout.doors.length)||0)+' doors, 4 player / '+(NSB.data.layout.enemySpawns||[]).length+' sector markers');}
 {const base=nsBuildGlb;nsBuildGlb=function(){base();nsBuildBunkerDressing();};}
 {const base=nsSpawnPoints;nsSpawnPoints=function(){base();if(!nsIsBunker()||!NSB.data||!NSB.root)return;for(const m of NSB.markers.filter(m=>m.type==='zombie')){let best=-1,distance=3;for(let i=0;i<NAV.count;i++){if(Math.abs(NAV.ny[i])>.4)continue;const d=hyp(NAV.nx[i]-m.x,NAV.nz[i]-m.z);if(d<distance){distance=d;best=i;}}
 if(best>=0){m.source=[m.x,m.y,m.z];m.x=NAV.nx[best];m.y=NAV.ny[best];m.z=NAV.nz[best];NSB.root.getObjectByName('bunker-marker:'+m.id).position.set(m.x,m.y,m.z);}}
 const players=NSB.markers.filter(m=>m.type==='player').map(m=>nsSnap(m.x,m.y,m.z,1.5));if(players.every(Boolean))NS.map.pspawns=players;const checks=NSB.data.layout.rooms.map(r=>({id:r.id,type:'room',x:r.center[0],y:0,z:r.center[1]})).concat(NSB.markers);NSB.audit=checks.map(m=>{const n=navNode(m.x,m.y,m.z);const onFloor=n>=0&&Math.abs(NAV.ny[n]-m.y)<.4&&hyp(NAV.nx[n]-m.x,NAV.nz[n]-m.z)<1.5;const valid=m.type==='player'?(onFloor&&NAV.comp[n]===NAV.mainComp):onFloor;return{id:m.id,type:m.type,reachable:valid,node:n};});const failed=NSB.audit.filter(a=>!a.reachable);if(failed.length)console.warn('[Night Survival] bunker marker validation failed: '+failed.map(a=>a.id).join(', '));};}
-{const base=nsMapLine;nsMapLine=function(){if(NSB.error)return base()+'<div class="map tmp">Bunker props did not load: '+nsEsc(NSB.error)+'</div>';if(NS_MAPFILES['bunker-props.glb'])return'<div class="map">Map: <b>Compact Bunker</b> · sector doors start closed · start the generator, then a door button</div>';return base();};}
+{const base=nsMapLine;nsMapLine=function(){if(NSB.error)return base()+'<div class="map tmp">Bunker props did not load: '+nsEsc(NSB.error)+'</div>';if(NS_MAPFILES['tm1.glb'])return'<div class="map">Map: <b>Greybox</b> · same bunker rules · sector doors start closed</div>';if(NS_MAPFILES['bunker-props.glb'])return'<div class="map">Map: <b>Compact Bunker</b> · sector doors start closed · start the generator, then a door button</div>';return base();};}
 const NSARM={selected:false,on:false,reserve:60,spawned:0,live:0,cleared:false,delay:6,timer:0,points:[],blocked:false,error:'',wave:5,cap:40};function nsArmoryReset(){Object.assign(NSARM,{reserve:60,spawned:0,live:0,cleared:false,delay:6,timer:0,points:[],blocked:false,error:''});for(const z of NSZ.pool)z.nsArmory=false;for(const m of NSB.markers.filter(m=>m.type==='zombie')){m.active=NSARM.on&&m.room==='armory_rear_hatch';const o=NSB.root&&NSB.root.getObjectByName('bunker-marker:'+m.id);if(o)o.userData.active=m.active;}
 if(!NSARM.on)return;if(!nsArmoryPoints())NSARM.error='No safe Armory spawn positions. Return to the menu.';}
 function nsArmoryPoints(){NSARM.points=[];const room=NSB.data&&NSB.data.layout.rooms.find(r=>r.id==='armory');if(!room||typeof NAV==='undefined'||!NAV.count)return 0;const marker=NSB.markers.find(m=>m.type==='zombie'&&m.room==='armory_rear_hatch');const[x0,z0,x1,z1]=room.bounds;for(let i=0;i<NAV.count;i++){const x=NAV.nx[i],y=NAV.ny[i],z=NAV.nz[i];if(Math.abs(y)>.4||x<x0+.45||x>x1-.45||z<z0+.45||z>z1-.45)continue;if(!navClear(x,z,y))continue;NSARM.points.push(new V3(x,y,z));}
@@ -9626,6 +9628,26 @@ let a=HASH.get(k)
 if(!a)HASH.set(k,a=[])
 a.push(i)}}
 function nsDoorNode(name){return NSB.root&&NSB.root.getObjectByName(name)}
+function nsDoorAnchor(name,x,z){const found=nsDoorNode(name)
+if(found||!NSB.root)return found
+const o=new THREE.Object3D()
+o.name=name
+o.position.set(x,1.1,z)
+NSB.root.add(o)
+return o}
+function nsGreyHinge(R){const half=(R.clearWidth||2.6)*0.5
+const g=new THREE.Group()
+g.name=R.node+'__PIVOT_BlastDoor_Hinge'
+const alongX=R.facing==='x'
+if(alongX)g.position.set(R.x,0,R.z-half)
+else g.position.set(R.x-half,0,R.z)
+const leaf=new THREE.Mesh(new THREE.BoxGeometry(alongX?0.12:R.clearWidth,2.7,alongX?R.clearWidth:0.12),new THREE.MeshStandardMaterial({color:0x8d9692,metalness:0.35,roughness:0.55}))
+leaf.position.set(alongX?0:half,1.35,alongX?half:0)
+leaf.castShadow=false
+g.add(leaf)
+g.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI/2)
+NSB.root.add(g)
+return g}
 const NSDOOR_TEX={}
 function nsDoorTex(label,hex){if(NSDOOR_TEX[label])return NSDOOR_TEX[label]
 const c=document.createElement('canvas')
@@ -9697,7 +9719,9 @@ const old=[]
 NSB.root.traverse(o=>{if(o.name&&(o.name.indexOf('nsdoor-crate-')===0||o.name.indexOf('nsdoor-mark-')===0))old.push(o)})
 for(const o of old)if(o.parent)o.parent.remove(o)
 for(const R of nsDoorSpecList()){const room=nsDoorRoom(R.roomId||R.id)
-const hinge=nsDoorNode(R.node+'__PIVOT_BlastDoor_Hinge')
+let hinge=nsDoorNode(R.node+'__PIVOT_BlastDoor_Hinge')
+if(!hinge&&NSB.root){R.clearWidth=Math.max(R.clearWidth||0,2.6)
+hinge=nsGreyHinge(R)}
 const access=nsDoorNode(R.node+'__INTERACT_BlastDoor_Access')
 if(!hinge)continue
 if(R.role==='sector'&&!room)continue
@@ -9719,7 +9743,8 @@ nsDoorMark(access||hinge,R.role==='breach'?0xff8a3c:0x3ec2ff,R.role==='breach'?'
 nsDoorShut(door)}
 const hub=nsDoorRoom('control_hub')
 if(hub)NSDOOR.sectors.push({id:'control_hub',name:'Control Hub',room:hub,reserve:0,spawned:0,open:true,points:[],timer:0,hold:'',overrun:false,warn:0})
-for(const S of NSDOOR_STATIONS){const n=nsDoorNode(S.node)
+for(const S of NSDOOR_STATIONS){const room=nsDoorRoom(S.id)
+const n=nsDoorNode(S.node)||nsDoorAnchor(S.node,room?room.center[0]:0,room?room.center[1]:0)
 if(!n)continue
 n.getWorldPosition(wp)
 if(S.color){n.traverse(o=>{if(!o.isMesh||!o.material||!o.material.emissive)return
@@ -9728,7 +9753,7 @@ o.material.emissive.setHex(S.color)
 o.material.emissiveIntensity=1.6})
 nsDoorMark(n,S.color,S.id==='armory'?'AMMO':'MED','crate',S.id)}
 NSDOOR.stations.push({id:S.id,name:S.name,x:wp.x,z:wp.z,color:S.color})}
-for(const p of NSDOOR_POWER){const n=nsDoorNode(p.node)
+for(const p of NSDOOR_POWER){const n=nsDoorNode(p.node)||nsDoorAnchor(p.node,p.x,p.z)
 if(!n)continue
 n.getWorldPosition(wp)
 p.x=wp.x
