@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VfOBaH9o/YwANqmF8mFVBKocM2HGf66a8bfKTG//NRk=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ZARNdpFeMEn+xLIOl7kaa1zv4HytpaJTslQDgNDmluA=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="c285ab728fd8">
+<meta name="cod-build" content="cd0f78de726a">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9148,11 +9148,12 @@ if(!root)build();root.classList.add('open');render();live();try{if(document.poin
 for(const k in KEYS)KEYS[k]=false;}
 function close(){if(!root)return;root.classList.remove('open');try{if(MATCH.state==='playing'&&!pointerActive())requestLock(true);}catch(e){}}
 const isOpen=()=>!!(root&&root.classList.contains('open'));function live(){const d=root&&root.querySelector('#boEdLive');if(!d)return;const t=window.BOADMIN&&BOADMIN.liveText?BOADMIN.liveText():'';d.textContent=t;d.style.display=t?'':'none';}
-setInterval(()=>{if(isOpen()){live();if(!can())close();}},1000);window.BOEDITOR={open,close,toggle:()=>(isOpen()?close():open()),isOpen,setTab:(t)=>{tab=t;if(isOpen())render();},render};addEventListener('keydown',(e)=>{if(e.code==='F10'&&!(e.ctrlKey&&e.shiftKey)){e.preventDefault();if(!can())return;e.stopPropagation();if(!e.repeat)BOEDITOR.toggle();}else if(e.code==='Escape'&&isOpen()){e.stopPropagation();close();}},true);const addBtn=()=>{if(document.getElementById('boEdBtn'))return true;const host=document.getElementById('boRole');if(!host)return false;css();const b=el('button',{id:'boEdBtn',type:'button',title:'BLACKOUT editor (F10)'},'EDITOR (F10)');b.onclick=(e)=>{e.stopPropagation();if(can())BOEDITOR.toggle();};host.append(b);return true;};const iv=setInterval(()=>{if(addBtn())clearInterval(iv);},500);})();const NS_MAPFILES={"night-arena.glb":"751d3648","night-arena.col.json":"3cbc7cb8","night-arena.wide.glb":"b510f264","night-arena.wide.col.json":"92252a93","night-arena.mag.glb":"fd6ac0c2","night-arena.mag.col.json":"2aef32d1","bunker-props.glb":"751d3648","bunker-layout.json":"2d2594f8","bunker-props.json":"1d380e68","tm1.glb":"01d9cb91","tm1.col.json":"efac342d"};const NS={on:true,map:{src:'none',why:'',glb:null,col:null,tris:0,boxes:0,ramps:0,rooms:[],spawnA:null,spawnB:null,pspawns:[],zspawns:[]},wave:0,phase:'idle',phaseT:0,kills:0,toSpawn:0,alive:0,over:false,startT:0,elapsed:0,};const NS_CFG_DEF={zLive:16,aiHz:15,shadows:1,teamLights:2,beams:1};const NS_CFG=(()=>{let s={};try{s=JSON.parse(localStorage.getItem('ns_cfg')||'{}')||{};}catch(e){s={};}
+setInterval(()=>{if(isOpen()){live();if(!can())close();}},1000);window.BOEDITOR={open,close,toggle:()=>(isOpen()?close():open()),isOpen,setTab:(t)=>{tab=t;if(isOpen())render();},render};addEventListener('keydown',(e)=>{if(e.code==='F10'&&!(e.ctrlKey&&e.shiftKey)){e.preventDefault();if(!can())return;e.stopPropagation();if(!e.repeat)BOEDITOR.toggle();}else if(e.code==='Escape'&&isOpen()){e.stopPropagation();close();}},true);const addBtn=()=>{if(document.getElementById('boEdBtn'))return true;const host=document.getElementById('boRole');if(!host)return false;css();const b=el('button',{id:'boEdBtn',type:'button',title:'BLACKOUT editor (F10)'},'EDITOR (F10)');b.onclick=(e)=>{e.stopPropagation();if(can())BOEDITOR.toggle();};host.append(b);return true;};const iv=setInterval(()=>{if(addBtn())clearInterval(iv);},500);})();const NS_MAPFILES={"night-arena.glb":"751d3648","night-arena.col.json":"3cbc7cb8","night-arena.wide.glb":"b510f264","night-arena.wide.col.json":"92252a93","night-arena.mag.glb":"fd6ac0c2","night-arena.mag.col.json":"2aef32d1","bunker-props.glb":"751d3648","bunker-layout.json":"2d2594f8","bunker-props.json":"1d380e68","tm1.glb":"01d9cb91","tm1.col.json":"efac342d","testmap1.glb":"ec13c85e","testmap1.col.json":"523a1321"};const NS={on:true,map:{src:'none',why:'',glb:null,col:null,tris:0,boxes:0,ramps:0,rooms:[],spawnA:null,spawnB:null,pspawns:[],zspawns:[]},wave:0,phase:'idle',phaseT:0,kills:0,toSpawn:0,alive:0,over:false,startT:0,elapsed:0,};const NS_CFG_DEF={zLive:16,aiHz:15,shadows:1,teamLights:2,beams:1};const NS_CFG=(()=>{let s={};try{s=JSON.parse(localStorage.getItem('ns_cfg')||'{}')||{};}catch(e){s={};}
 const o=Object.assign({},NS_CFG_DEF);for(const k in o)if(typeof s[k]==='number'&&isFinite(s[k]))o[k]=s[k];o.zLive=clamp(Math.round(o.zLive),12,20);o.aiHz=clamp(Math.round(o.aiHz),5,30);o.shadows=o.shadows?1:0;o.teamLights=clamp(Math.round(o.teamLights),0,3);o.beams=o.beams?1:0;return o;})();function nsCfgSave(){try{localStorage.setItem('ns_cfg',JSON.stringify(NS_CFG));}catch(e){}}
 const ATMO_NIGHT=Object.assign({},ATMO_DEFAULT,{sun:[0.15,1.0,0.1],sunColor:0x1a2232,sunI:0.05,vmSun:0x3a4658,fog:[0.012,0.014,0.02],fogD:0.03,hemi:[0x22303f,0x0b0d10,0.11],vmHemi:[0x2d3a4c,0x0c0e14],sky:Object.assign({},ATMO_DEFAULT.sky,{zen:[0.004,0.005,0.01],mid:[0.008,0.01,0.016],hor:[0.014,0.016,0.022],gnd:[0.006,0.007,0.009],glow:[0.02,0.022,0.03],halo:[0.03,0.035,0.045],disk:[0.6,0.6,0.7],cloudLo:[0.012,0.014,0.018],cloudHi:[0.02,0.022,0.026],cloud:[0.1,0.15,0.1],}),envGround:0x07080b,hdri:null,bounce:[0.05,0.06,0.08],dust:[0.08,0.085,0.09],motes:[0.12,0.12,0.13],grade:{lo:[0.85,0.92,1.06],hi:[1.0,0.98,0.94],exp:0.95,vig:0.5,lift:0.025},rays:[0.1,0.12,0.15],fogSun:0.0,fogH:[0,0],interior:[1,0.35,0.4],winLit:0,bloom:[0.3,0.5,0.9],aoFloor:0.6,raysThr:1.5,raysCap:400,});function nsIsBunker(){const M=NS.map;return M.src==='glb'&&!!M.col&&/bunker/i.test(String(M.col.source||''));}
 function nsMapVariant(){return'v1';}
-function nsArenaFiles(){return['tm1.glb','tm1.col.json'];}
+function nsIsTestmap(){return!!(NS.map&&NS.map.col&&/testmap1/i.test(String(NS.map.col.source||'')));}
+function nsArenaFiles(){return['testmap1.glb','testmap1.col.json'];}
 MAPS.length=0;MAPS.push({id:'night',name:'Night Arena',tag:'Night Survival',ok:true,desc:'Abandoned two-floor block. Lights are out. Hold out as long as you can.'});Settings.map='night';function nsBoxGeo(list){const P=[],N=[],I=[];const face=(o,u,v,n)=>{const b=P.length/3;for(const[a,c]of[[0,0],[1,0],[1,1],[0,1]]){P.push(o[0]+u[0]*a+v[0]*c,o[1]+u[1]*a+v[1]*c,o[2]+u[2]*a+v[2]*c);N.push(...n);}I.push(b,b+1,b+2,b,b+2,b+3);};for(const[x0,x1,y0,y1,z0,z1]of list){const dx=x1-x0,dy=y1-y0,dz=z1-z0;face([x0,y1,z1],[dx,0,0],[0,0,-dz],[0,1,0]);face([x0,y0,z0],[dx,0,0],[0,0,dz],[0,-1,0]);face([x0,y0,z1],[dx,0,0],[0,dy,0],[0,0,1]);face([x1,y0,z0],[-dx,0,0],[0,dy,0],[0,0,-1]);face([x1,y0,z1],[0,0,-dz],[0,dy,0],[1,0,0]);face([x0,y0,z0],[0,0,dz],[0,dy,0],[-1,0,0]);}
 const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(P,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(N,3));g.setIndex(I);nsWorldUV(g);return g;}
 function nsWorldUV(g){const p=g.attributes.position,n=g.attributes.normal,uv=new Float32Array(p.count*2);for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),ax=Math.abs(n.getX(i)),ay=Math.abs(n.getY(i)),az=Math.abs(n.getZ(i));let u,v;if(ay>=ax&&ay>=az){u=x;v=z;}else if(ax>=az){u=z;v=y;}else{u=x;v=y;}
@@ -9166,11 +9167,11 @@ speck(1200,0.15,3);}else{speck(4000,0.16,3);for(let i=0;i<18;i++){const g=Math.f
 const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return(NS_TEX[kind]=t);}
 const NS_MAT={};function nsMat(kind){if(NS_MAT[kind])return NS_MAT[kind];const K={wall:['brick',0xb4ada2],trim:['brick',0x9d968a],floor:['cobble',0x8c857a],ceil:['plain',0x5e5a54],cover:['wood',0x8a6a48],rubble:['plain',0x6e6961],stair:['plain',0x8a8378],lamp:['plain',0xc8d4d4],test:['plain',0x8a8a86]}[kind]||['plain',0x808080];const m=new THREE.MeshStandardMaterial({color:K[1],map:nsTex(K[0]),roughness:0.93,metalness:0,envMapIntensity:0.2});m.name='ns:'+kind;return(NS_MAT[kind]=m);}
 function nsKindOf(name){const n=String(name||'');if(/LAMP/i.test(n))return'lamp';if(/CEILING|CEIL/i.test(n))return'ceil';if(/FLOOR/i.test(n))return'floor';if(/WALL/i.test(n))return'wall';if(/TRIM|RIB|CORNER|DOORWAY|PILLAR/i.test(n))return'trim';if(/COVER|CRATE|PROP|MED|POWER/i.test(n))return'cover';if(/RUBBLE/i.test(n))return'rubble';if(/STAIR/i.test(n))return'stair';if(/_Wall_/.test(n))return'wall';if(/_(Corner|Doorway|Pillar)_/.test(n))return'trim';if(/_Floor_/.test(n))return'floor';if(/_Ceiling_/.test(n))return'ceil';if(/_Cover_/.test(n))return'cover';if(/_Rubble_/.test(n))return'rubble';if(/_Stair_/.test(n))return'stair';return'wall';}
-function nsGltfParse(buf){return new Promise((res,rej)=>{if(!THREE.GLTFLoader){rej(new Error('GLTFLoader missing'));return;}
-const L=new THREE.GLTFLoader();L.register(()=>({name:'ns_no_textures',loadTexture:()=>Promise.resolve(new THREE.Texture())}));L.parse(buf,'',(g)=>res(g),(e)=>rej(e instanceof Error?e:new Error(String((e&&e.message)||e))));});}
+function nsGltfParse(buf,preserveMaterials=false){return new Promise((res,rej)=>{if(!THREE.GLTFLoader){rej(new Error('GLTFLoader missing'));return;}
+const L=new THREE.GLTFLoader();if(!preserveMaterials)L.register(()=>({name:'ns_no_textures',loadTexture:()=>Promise.resolve(new THREE.Texture())}));L.parse(buf,'',(g)=>res(g),(e)=>rej(e instanceof Error?e:new Error(String((e&&e.message)||e))));});}
 function nsColOk(c){return c&&Array.isArray(c.col)&&c.col.length>0&&c.bounds&&['x0','x1','z0','z1'].every((k)=>typeof c.bounds[k]==='number')&&c.col.every((b)=>b&&['x0','x1','y0','y1','z0','z1'].every((k)=>typeof b[k]==='number'&&isFinite(b[k])));}
 const NS_MAPCACHE={};function nsMapWant(){return(typeof NSARM!=='undefined'&&NSARM.selected)?'bunker':'arena';}
-async function nsMapPreload(){const M=NS.map;const want=nsMapWant();const variant=nsMapVariant();const cacheKey=want+':'+variant;if((M.src==='glb'||M.src==='test')&&M.which===want&&M.variant===variant)return;const files=nsArenaFiles();const q=(f)=>'maps/'+f+(NS_MAPFILES[f]?'?v='+NS_MAPFILES[f]:'');try{if(!NS_MAPFILES[files[0]]||!NS_MAPFILES[files[1]])throw new Error('map files not in this build ('+files[0]+' and '+files[1]+')');let pack=NS_MAPCACHE[cacheKey];if(!pack){const[cr,gr]=await Promise.all([fetch(q(files[1])),fetch(q(files[0]))]);if(!cr.ok)throw new Error(files[1]+': HTTP '+cr.status);if(!gr.ok)throw new Error(files[0]+': HTTP '+gr.status);const col=await cr.json();if(!nsColOk(col))throw new Error(files[1]+': unexpected format');const gl=await nsGltfParse(await gr.arrayBuffer());pack={col,glb:gl.scene};NS_MAPCACHE[cacheKey]=pack;}
+async function nsMapPreload(){const M=NS.map;const want=nsMapWant();const variant=nsMapVariant();const cacheKey=want+':'+variant;if((M.src==='glb'||M.src==='test')&&M.which===want&&M.variant===variant)return;const files=nsArenaFiles();const q=(f)=>'maps/'+f+(NS_MAPFILES[f]?'?v='+NS_MAPFILES[f]:'');try{if(!NS_MAPFILES[files[0]]||!NS_MAPFILES[files[1]])throw new Error('map files not in this build ('+files[0]+' and '+files[1]+')');let pack=NS_MAPCACHE[cacheKey];if(!pack){const[cr,gr]=await Promise.all([fetch(q(files[1])),fetch(q(files[0]))]);if(!cr.ok)throw new Error(files[1]+': HTTP '+cr.status);if(!gr.ok)throw new Error(files[0]+': HTTP '+gr.status);const col=await cr.json();if(!nsColOk(col))throw new Error(files[1]+': unexpected format');const gl=await nsGltfParse(await gr.arrayBuffer(),col.materialPolicy==='authored');pack={col,glb:gl.scene};NS_MAPCACHE[cacheKey]=pack;}
 M.col=pack.col;M.glb=pack.glb;M.src='glb';M.which=want;M.variant=variant;M.why='';console.info('[Night Survival] map: '+want+' '+variant+' ('+files[0]+', '+pack.col.col.length+' boxes, '+(pack.col.ramps||[]).length+' ramps)');}catch(e){M.src='test';M.which=want;M.why=(e&&e.message)||String(e);M.glb=null;M.col=null;console.warn('[Night Survival] custom map NOT loaded ('+M.why+'): using the TEMPORARY corridor test map');}
 nsMapInfo();}
 function nsMapInfo(){const D=MAP_DEFS.night,M=NS.map;if(M.src==='glb'){const b=M.col.bounds;D.bounds={x0:Math.floor(b.x0)-1,x1:Math.ceil(b.x1)+1,z0:Math.floor(b.z0)-1,z1:Math.ceil(b.z1)+1};const sp=(id)=>(M.col.spawns||[]).find((s)=>s.id===id);const A=sp('MA_SPAWN_A_00')||(M.col.spawns||[])[0]||{x:(b.x0+b.x1)/2,z:(b.z0+b.z1)/2},B=sp('MA_SPAWN_B_02')||(M.col.spawns||[])[1]||A;M.spawnA=[A.x,A.y||0,A.z];M.spawnB=[B.x,B.y||0,B.z];M.rooms=(M.col.rooms||[]).filter((r)=>typeof r.x==='number').map((r)=>[r.x,r.y||0,r.z,r.id]);}else{D.bounds={x0:-24,x1:24,z0:-24,z1:24};M.spawnA=[0,0,18];M.spawnB=[0,0,-18];M.rooms=[[-18,0,-18,'NW'],[18,0,-18,'NE'],[-18,0,18,'SW'],[18,0,18,'SE'],[0,0,-18,'N'],[-18,0,0,'W'],[18,0,0,'E']];}
@@ -9180,17 +9181,20 @@ let r=0;for(const p of col.ramps||[]){if(!p||(p.axis!=='x'&&p.axis!=='z'))contin
 return[n,r];}
 function nsGlbMat(src,kind){const m=new THREE.MeshStandardMaterial({color:src&&src.color?src.color.clone():0x808080,roughness:src&&src.roughness!=null?src.roughness:0.9,metalness:src&&src.metalness!=null?src.metalness:0.1,envMapIntensity:0.2,map:kind==='lamp'?null:nsTex('plain'),side:(kind==='wall'||kind==='trim'||kind==='ceil')?THREE.DoubleSide:THREE.FrontSide,});if(src&&src.emissive&&src.emissive.getHex()){m.emissive.copy(src.emissive);m.emissiveIntensity=src.emissiveIntensity||1;}
 m.name='ns:glb:'+kind;return m;}
-function nsBuildGlb(){const M=NS.map,root=M.glb,bunker=nsIsBunker();const grey=/tm1/i.test(String((M.col&&M.col.source)||''));const keepMat=bunker||grey||/mainmap/i.test(String((M.col&&M.col.source)||''));let tris=0;root.updateMatrixWorld(true);const meshes=[];root.traverse((o)=>{if(o.isMesh)meshes.push(o);});const revised=!grey&&meshes.some((o)=>/^REVISED_/i.test(o.name));const kept=new Map();for(const o of meshes){const meshName=o.name||'';if(grey&&(meshName.indexOf('_col')>=0||meshName.indexOf('CP reuse')===0||/^Player start/i.test(meshName)||/^Label •/.test(meshName)||/NT_BlastDoor_s42_(?:col|Leaf)/.test(meshName)))continue;if(revised&&!/^REVISED_/i.test(meshName))continue;if(/^CP_/i.test(meshName)||meshName.indexOf('__UCX_')>=0)continue;let k=o,name=o.name;while(k&&!/^MA_/.test(name||'')){k=k.parent;name=k&&k.name;}
+function nsBuildGlb(){const M=NS.map,root=M.glb,bunker=nsIsBunker();const srcName=String((M.col&&M.col.source)||'');const grey=/tm1-bunker/i.test(srcName);const testmap=/testmap1/i.test(srcName);const authored=M.col&&M.col.materialPolicy==='authored';const keepMat=authored||bunker||grey||/mainmap/i.test(String((M.col&&M.col.source)||''));let tris=0;root.updateMatrixWorld(true);const meshes=[];root.traverse((o)=>{if(o.isMesh)meshes.push(o);});const revised=!grey&&meshes.some((o)=>/^REVISED_/i.test(o.name));const kept=new Map();for(const o of meshes){const meshName=o.name||'';if(meshName.indexOf('_col')>=0||meshName.indexOf('CP reuse')===0)continue;if(testmap&&(meshName==='CP • Full ceiling'||meshName.indexOf('NT_BlastDoor')===0))continue;if(!authored&&grey&&(/^Player start/i.test(meshName)||/^Label •/.test(meshName)||/NT_BlastDoor_s42_(?:col|Leaf)/.test(meshName)))continue;if(revised&&!/^REVISED_/i.test(meshName))continue;if((!authored&&/^CP_/i.test(meshName))||meshName.indexOf('__UCX_')>=0)continue;let k=o,name=o.name;while(k&&!/^MA_/.test(name||'')){k=k.parent;name=k&&k.name;}
 const kind=nsKindOf(name||o.name);const g=o.geometry.clone();g.applyMatrix4(o.matrixWorld);if(!keepMat){for(const a of Object.keys(g.attributes))if(a!=='position'&&a!=='normal')g.deleteAttribute(a);}
-if(!g.attributes.normal)g.computeVertexNormals();else g.normalizeNormals();nsWorldUV(g);g.computeBoundingSphere();g.computeBoundingBox();let mat=nsMat(kind);if(keepMat&&o.material){const src=Array.isArray(o.material)?o.material[0]:o.material;const id=src.uuid||kind;if(!kept.has(id))kept.set(id,nsGlbMat(src,kind));mat=kept.get(id);}
-const m=new THREE.Mesh(g,mat);m.name='night:'+(name||kind);m.castShadow=!grey;m.receiveShadow=!grey;m.matrixAutoUpdate=false;m.updateMatrix();MAPL.root.add(m);tris+=(g.index?g.index.count:g.attributes.position.count)/3;}
+if(!g.attributes.normal)g.computeVertexNormals();else g.normalizeNormals();if(!authored&&!testmap)nsWorldUV(g);g.computeBoundingSphere();g.computeBoundingBox();let mat=nsMat(kind);if(testmap&&o.material){const take=src=>{let copy=kept.get(src.uuid);if(copy)return copy;copy=src.clone();copy.name=src.name||meshName;if(copy.color)copy.color.multiplyScalar(0.46);if(copy.emissive)copy.emissive.multiplyScalar(0.35);copy.emissiveIntensity=Math.min(copy.emissiveIntensity||0,0.35);copy.metalness=Math.min(copy.metalness==null?0:copy.metalness,0.2);copy.roughness=Math.max(copy.roughness==null?1:copy.roughness,0.74);copy.envMapIntensity=0.06;if(copy.normalScale){copy.normalScale.x=Math.abs(copy.normalScale.x||1)*0.7;copy.normalScale.y=-Math.abs(copy.normalScale.y||1)*0.7;}
+kept.set(src.uuid,copy);return copy;};mat=Array.isArray(o.material)?o.material.map(take):take(o.material);}else if(authored&&o.material){const take=src=>{const copy=src.clone();copy.name=src.name||meshName;return copy;};mat=Array.isArray(o.material)?o.material.map(take):take(o.material);}else if(keepMat&&o.material){const src=Array.isArray(o.material)?o.material[0]:o.material;const id=src.uuid||kind;if(!kept.has(id))kept.set(id,nsGlbMat(src,kind));mat=kept.get(id);}
+const m=new THREE.Mesh(g,mat);m.name='night:'+(testmap?(meshName||kind):(name||kind));m.castShadow=!(grey||testmap);m.receiveShadow=!(grey||testmap);m.matrixAutoUpdate=false;m.updateMatrix();MAPL.root.add(m);tris+=(g.index?g.index.count:g.attributes.position.count)/3;}
 MAPL.root.updateMatrixWorld(true);const[nb,nr]=nsEmitCol(M.col);M.tris=Math.round(tris);M.boxes=nb;M.ramps=nr;}
 function nsBuildTest(){const H=3.4,T=0.4,B=[],C=[];const wall=(x0,x1,z0,z1,h=H)=>{B.push([x0,x1,0,h,z0,z1]);C.push([x0,x1,0,h,z0,z1]);};wall(-24,24,-24,-24+T);wall(-24,24,24-T,24);wall(-24,-24+T,-24,24);wall(24-T,24,-24,24);for(const sx of[-1,1])for(const sz of[-1,1]){const a=sx<0?-15:2,b=sx<0?-2:15,c=sz<0?-15:2,d=sz<0?-2:15;wall(a,b,c,c+T);wall(a,b,d-T,d);wall(a,a+T,c,d);wall(b-T,b,c,d);}
 const crates=[[-1,1,0,1.1,8,9.2],[-21,-19.6,0,1.0,-6,-4.6],[19.4,21,0,1.2,5,6.2],[-8,-6.6,0,1.0,19,20.4]];for(const c of crates){B.push(c);C.push(c);}
 const floor=[[-24,24,-0.2,0,-24,24]],ceil=[[-24,24,H,H+0.2,-24,24]];MAPL.root.add(new THREE.Mesh(nsBoxGeo(B),nsMat('test')),new THREE.Mesh(nsBoxGeo(floor),nsMat('floor')),new THREE.Mesh(nsBoxGeo(ceil),nsMat('ceil')));for(const o of MAPL.root.children){o.castShadow=o.receiveShadow=true;}
 for(const[x0,x1,y0,y1,z0,z1]of C){COL.push({x0,x1,y0,y1,z0,z1,m:'concrete',ray:false});if(y1-y0>1.2)OCC.push({x0,x1,y0,y1,z0,z1,k:1});}
 COL.push({x0:-24,x1:24,y0:H,y1:H+0.2,z0:-24,z1:24,m:'concrete',ray:false});NS.map.boxes=C.length+1;NS.map.ramps=0;}
-MAP_DEFS.night={type:'close',surface:()=>'concrete',bounds:{x0:-24,x1:24,z0:-24,z1:24},textures:[],splat:{x0:-24,z0:-24,w:48,d:48,ppm:1},far:140,void:{kill:-12},art:{cam:[0,40,0.1],look:[0,0,0],fov:50},spawns:[[0,18]],poi:[],zones:[],cam:30,atmo:ATMO_NIGHT,build(){if(NS.map.src==='glb')nsBuildGlb();else nsBuildTest();},after(){},};nsMapInfo();{const base=mapBuild;mapBuild=async function(id){if(id==='night'){mapProg('Loading the scaled bunker',0.01);await nsMapPreload();}
+MAP_DEFS.night={type:'close',surface:()=>'concrete',bounds:{x0:-24,x1:24,z0:-24,z1:24},textures:[],splat:{x0:-24,z0:-24,w:48,d:48,ppm:1},far:140,void:{kill:-12},art:{cam:[0,40,0.1],look:[0,0,0],fov:50},spawns:[[0,18]],poi:[],zones:[],cam:30,atmo:ATMO_NIGHT,build(){if(NS.map.src==='glb')nsBuildGlb();else nsBuildTest();},after(){},};nsMapInfo();{const base=mapCompile;mapCompile=async function(prog){const back=[];if(MAPL.root&&nsIsTestmap())MAPL.root.traverse((o)=>{if(!o.isMesh||!o.frustumCulled)return;back.push(o);o.frustumCulled=false;});try{return await base(prog);}
+finally{for(const o of back)o.frustumCulled=true;}};}
+{const base=mapBuild;mapBuild=async function(id){if(id==='night'){mapProg('Loading the scaled bunker',0.01);await nsMapPreload();}
 await base(id);if(id==='night'){nsFixNav();nsSpawnPoints();}};}
 {const base=mapEnsure;mapEnsure=function(id){const mid=mapById(id).id;const want=nsMapWant();if(mid==='night'&&NS.map.which&&NS.map.which!==want){if(MAPL.id)mapUnload();MAPL.job=null;MAPL.jobId=null;}
 return base(id);};}
@@ -9270,7 +9274,7 @@ if(!aware&&best.sprinting&&d<10&&Math.abs(dy)<2)aware=true;if(!aware)for(let i=s
 if(aware){b.zState='chase';b.repathT=b.nsDoor?rand(0.05,0.4):0;b.path=null;}}}
 const _nszPd=[0,0];function nszUpdate(b,dt,now){if(!b.alive){if(b.respawnT===Infinity){b.model.root.visible=false;return;}
 animSoldier(b,dt);b.respawnT-=dt;if(b.respawnT<=0)nszRelease(b);return;}
-const I=b.input;if(playHold()){I.mx=0;I.mz=0;I.sprint=false;I.jump=false;I.fire=false;I.firePressed=false;I.ads=false;ctlMove(b,dt);animSoldier(b,dt);return;}
+const I=b.input;if(playHold()||(typeof NSDOOR!=='undefined'&&NSDOOR.bench)){I.mx=0;I.mz=0;I.sprint=false;I.jump=false;I.fire=false;I.firePressed=false;I.ads=false;ctlMove(b,dt);animSoldier(b,dt);return;}
 b.zThinkT-=dt;if(b.zThinkT<=0){b.zThinkT+=1/NS_CFG.aiHz;nszThink(b);}
 b.repathT-=dt;b.zCd-=dt;let wishX=0,wishZ=0,speed=0,face=b.yaw;const T=b.zTgt&&b.zTgt.alive?b.zTgt:null;if(b.zStag>0)b.zStag-=dt;if(b.zState==='attack'){b.zAtkT+=dt;if(T){const dx=T.pos.x-b.pos.x,dz=T.pos.z-b.pos.z,d=hyp(dx,dz);face=Math.atan2(-dx,-dz);if(d>0.7){wishX=dx/d;wishZ=dz/d;speed=b.zAtkT<0.42?Math.max(b.zSpeed,6.4):1.15;}
 if(!b.zAtkHit&&b.zAtkT>=0.42){b.zAtkHit=true;if(d<NSZ_HIT&&Math.abs(T.pos.y-b.pos.y)<1.3&&b.zStag<=0&&lineClear(_nszE.set(b.pos.x,b.pos.y+1.3,b.pos.z),_nszT.set(T.pos.x,T.pos.y+1.2,T.pos.z)))
@@ -9543,22 +9547,29 @@ function nsLoGunCol(which,L){const sec=which==='s',id=sec?L.s:L.p,att=sec?L.sa:L
 let h=`<div class="loCol"><h3>${sec?'Secondary':'Primary'}</h3><div class="row"><label>Gun</label><select data-lo="${which}"${dis}>${opts}</select></div>`;if(b){const d=nsGunDef(id,att)||b;h+=`<div class="loStat">${Math.round(d.dmg[0])} damage \u00b7 ${Math.round(d.rpm)} rpm \u00b7 ${d.mag} rounds \u00b7 range ${Math.round(d.range[1])} m</div>`;for(const g of attGroupsOf(b)){const list=Object.keys(ATT).filter((a)=>attGroup(a)===g&&attFits(b,a));if(!list.length)continue;const cur=att.find((a)=>attGroup(a)===g)||'';let o=`<option value=""${cur?'':' selected'}>None</option>`;for(const a of list){const fx=attEffects(a,b).map((f)=>f.t).join(', ');o+=`<option value="${a}"${a===cur?' selected':''} title="${nsEsc(fx)}">${nsEsc(attName(a,b))}${fx?' \u00b7 '+nsEsc(fx):''}</option>`;}
 h+=`<div class="row"><label>${NS_LO_GROUP[g]||g}</label><select data-lo="att" data-w="${which}" data-g="${g}"${dis}>${o}</select></div>`;}}
 return h+'</div>';}
-function nsLoHtml(){const lo=NSU.lo,L=nsLoGet(),coop=lo.mode==='coop',host=NET.role==='host',lock=nsLoLocked();const p=nsGunBase(L.p),s=L.s!=='none'?nsGunBase(L.s):null;let h=`<div class="nsBox lo"><h1>NIGHT <b>SURVIVAL</b></h1><p class="sub">Loadout \u00b7 the match has not started: nothing is running, take your time</p>`;h+=`<div class="row loPre">${NS_LO_PRESETS.map(([n,i])=>`<button data-a="lo-pre" data-i="${i}"${lock?' disabled':''}>${n}</button>`).join('')}</div>`;h+=`<p class="hint" style="margin:0 0 8px">Start from a class, or pick any gun and fit it. Every gun and attachment is available.</p>`;h+=`<div class="loCols">${nsLoGunCol('p',L)}${nsLoGunCol('s',L)}</div>`;h+=`<div class="loSum"><b>${nsEsc(p?p.name:L.p)}</b>: ${nsEsc(nsLoAttTxt(L.pa,p))}<br>${s?`<b>${nsEsc(s.name)}</b>: ${nsEsc(nsLoAttTxt(L.sa,s))}`:'No secondary'}<br><span style="color:#7f8a95">Extra reserve ammo. No grenades, no killstreaks.</span></div>`;if(coop){const pl=[...NET.players.values()].filter((x)=>!x.away).map((x)=>{const r=NSRU.ready.has(x.id);return`<div class="pl${r?' rdy':''}"><span>${nsEsc(x.n)}${x.id===NET.me?' (you)':''}</span><span>${r?'ready':'building\u2026'}</span></div>`;}).join('');const wait=[...NET.players.values()].filter((x)=>!x.away&&!NSRU.ready.has(x.id)).map((x)=>x.n);h+=`<div style="margin-top:10px">${pl}</div><div class="status">${lock?(wait.length?'Waiting for '+nsEsc(wait.join(', '))+'. The match starts when everyone is ready.':'Everyone is ready. Starting\u2026'):'The match starts when every player is ready.'}</div>`;h+=`<div class="row">${lock?'<button data-a="lo-change">Change loadout</button>':'<button class="pri" data-a="lo-ready">Ready</button>'}${host?'<button data-a="lo-cancel">Cancel start</button>':'<button data-a="lo-leave">Leave room</button>'}</div>`;}else{h+=`<div class="status">${nsEsc(lo.msg||'')}</div><div class="row"><button class="pri" data-a="lo-go">${lo.mode==='join'?'Ready \u00b7 join the match':'Ready \u00b7 start'}</button><button data-a="lo-back">Back</button></div>`;}
+function nsLoHtml(){const lo=NSU.lo,L=nsLoGet(),coop=lo.mode==='coop',host=NET.role==='host',lock=nsLoLocked();const p=nsGunBase(L.p),s=L.s!=='none'?nsGunBase(L.s):null;const armory=lo.mode==='armory';let h=`<div class="nsBox lo"><h1>NIGHT <b>SURVIVAL</b></h1><p class="sub">${armory?'Armory bench \u00b7 pick a gun and its attachments':'Loadout \u00b7 the match has not started: nothing is running, take your time'}</p>`;h+=`<div class="row loPre">${NS_LO_PRESETS.map(([n,i])=>`<button data-a="lo-pre" data-i="${i}"${lock?' disabled':''}>${n}</button>`).join('')}</div>`;h+=`<p class="hint" style="margin:0 0 8px">Start from a class, or pick any gun and fit it. Every gun and attachment is available.</p>`;h+=`<div class="loCols">${nsLoGunCol('p',L)}${nsLoGunCol('s',L)}</div>`;h+=`<div class="loSum"><b>${nsEsc(p?p.name:L.p)}</b>: ${nsEsc(nsLoAttTxt(L.pa,p))}<br>${s?`<b>${nsEsc(s.name)}</b>: ${nsEsc(nsLoAttTxt(L.sa,s))}`:'No secondary'}<br><span style="color:#7f8a95">Extra reserve ammo. No grenades, no killstreaks.</span></div>`;if(armory){h+=`<div class="status">${nsEsc(lo.msg||'Equip keeps this gun. Close leaves what you are holding.')}</div><div class="row"><button class="pri" data-a="lo-equip">Equip</button><button data-a="lo-bench-close">Close</button></div>`;}else if(coop){const pl=[...NET.players.values()].filter((x)=>!x.away).map((x)=>{const r=NSRU.ready.has(x.id);return`<div class="pl${r?' rdy':''}"><span>${nsEsc(x.n)}${x.id===NET.me?' (you)':''}</span><span>${r?'ready':'building\u2026'}</span></div>`;}).join('');const wait=[...NET.players.values()].filter((x)=>!x.away&&!NSRU.ready.has(x.id)).map((x)=>x.n);h+=`<div style="margin-top:10px">${pl}</div><div class="status">${lock?(wait.length?'Waiting for '+nsEsc(wait.join(', '))+'. The match starts when everyone is ready.':'Everyone is ready. Starting\u2026'):'The match starts when every player is ready.'}</div>`;h+=`<div class="row">${lock?'<button data-a="lo-change">Change loadout</button>':'<button class="pri" data-a="lo-ready">Ready</button>'}${host?'<button data-a="lo-cancel">Cancel start</button>':'<button data-a="lo-leave">Leave room</button>'}</div>`;}else{h+=`<div class="status">${nsEsc(lo.msg||'')}</div><div class="row"><button class="pri" data-a="lo-go">${lo.mode==='join'?'Ready \u00b7 join the match':'Ready \u00b7 start'}</button><button data-a="lo-back">Back</button></div>`;}
 return h+'</div>';}
 function nsLoInput(t){if(!NSU.lo||nsLoLocked())return;const L=nsLoGet(),k=t.dataset.lo,v=t.value;if(k==='p'||k==='s'){if(k==='p'){L.p=v;const b=nsGunBase(v);L.pa=b?attNormalize(b,L.pa):[];}
 else{L.s=v;const b=v==='none'?null:nsGunBase(v);L.sa=b?attNormalize(b,L.sa):[];}}else if(k==='att'){const w=t.dataset.w,g=t.dataset.g,id=w==='s'?L.s:L.p,b=nsGunBase(id);if(!b)return;const arr=(w==='s'?L.sa:L.pa).filter((a)=>hasKey(ATT,a)&&attGroup(a)!==g);if(v&&hasKey(ATT,v))arr.push(v);if(w==='s')L.sa=attNormalize(b,arr);else L.pa=attNormalize(b,arr);}else return;nsLoSave(L);nsMenuRender();}
-function nsLoClick(a,b){const lo=NSU.lo;if(!lo)return;if(a==='lo-pre'){const c=CLASSES[+b.dataset.i];if(!c||nsLoLocked())return;nsLoSave({p:c.primary,pa:[],s:c.secondary||'m9',sa:[]});nsMenuRender();}else if(a==='lo-go')nsLoGo();else if(a==='lo-back')nsLoClose();else if(a==='lo-ready')nsRuMine(true);else if(a==='lo-change')nsRuMine(false);else if(a==='lo-cancel'){nsRuCancel();nsLoClose();}
+function nsLoClick(a,b){const lo=NSU.lo;if(!lo)return;if(a==='lo-equip'){nsArmoryBenchClose(true);return;}
+if(a==='lo-bench-close'){nsArmoryBenchClose(false);return;}
+if(a==='lo-pre'){const c=CLASSES[+b.dataset.i];if(!c||nsLoLocked())return;nsLoSave({p:c.primary,pa:[],s:c.secondary||'m9',sa:[]});nsMenuRender();}else if(a==='lo-go')nsLoGo();else if(a==='lo-back')nsLoClose();else if(a==='lo-ready')nsRuMine(true);else if(a==='lo-change')nsRuMine(false);else if(a==='lo-cancel'){nsRuCancel();nsLoClose();}
 else if(a==='lo-leave'){NSU.lo=null;netQuit();nsMenuRender();}}
+function nsArmoryBench(){if(NSU.lo&&NSU.lo.mode==='armory')return;NSDOOR.bench=true;if(MATCH.state==='playing')pauseGame();const pause=$('pause');if(pause)pause.classList.remove('show');try{if(document.pointerLockElement){LOCK.resumeT=performance.now();LOCK.scriptExit=true;document.exitPointerLock();}}catch(e){}
+NSU.lo={mode:'armory',msg:''};nsMenuShow(true);}
+function nsArmoryBenchClose(equip){NSDOOR.bench=false;NSU.lo=null;document.body.classList.remove('ns-menu');if(equip&&PL.ent&&PL.ent.alive){giveLoadout();if(typeof nsRefillAmmo==='function')nsRefillAmmo();hudMsg('GUN BENCH · loadout equipped','xp',2);}
+if(MATCH.state==='paused')resumeGame();}
 function nsLoGo(){const lo=NSU.lo;if(!lo)return;if(lo.mode==='join'){if(NET.role!=='client'||NET.phase==='lobby'){NSU.lo=null;nsMenuRender();return;}
 NSU.lo=null;nsMenuRender();netJoinRunning();return;}
 NSU.lo=null;menuLaunch({online:false,map:'night',deploy:()=>startMatch()});}
-const NSB={data:null,props:null,root:null,error:'',colliders:0,markers:[],doors:[],audit:null};{const base=nsMapPreload;function applyLayout(){const layout=NSB.data.layout;NS.map.rooms=layout.rooms.map(r=>[r.center[0],0,r.center[1],r.id]);NS.map.spawnA=[layout.players[0][0],0,layout.players[0][1]];MAP_DEFS.night.spawns=layout.players;MAP_DEFS.night.poi=NS.map.rooms.map(r=>[r[0],r[1],r[2],'M']);MAP_DEFS.night.zones=layout.rooms.map(r=>[r.name,...r.bounds]);MAPS[0].name='Compact Bunker';MAPS[0].desc='Eight rooms, placed props. Sector doors start closed. Start the generator, then a door button.';}
+const NSB={data:null,props:null,root:null,error:'',colliders:0,markers:[],doors:[],audit:null};{const base=nsMapPreload;function applyLayout(){const layout=NSB.data.layout;if(nsIsTestmap()){layout.players=[[-2.46,18.06],[-1.73,19.15],[-1.01,18.06],[-0.28,19.15]];layout.enemySpawns=[];layout.doors=[];layout.rooms=[{id:'arrival',name:'DECON',bounds:[-4.94,15.9,0.4,21.22],center:[-2.27,18.56]},{id:'control_hub',name:'DECON',bounds:[-4.94,15.9,0.4,21.22],center:[-2.27,18.56]},{id:'medbay',name:'MED BAY',bounds:[-8.3,3.59,8.06,15.95],center:[-0.12,9.77]},{id:'lower',name:'LOWER DECON',bounds:[-3.87,-4.35,4.78,3.59],center:[0.46,-0.38]},{id:'medical',name:'MED BAY',bounds:[-8.3,3.59,8.06,15.95],center:[-0.12,9.77]},{id:'armory',name:'WORKSHOP',bounds:[15.04,-23.92,24.66,-14.82],center:[19.85,-19.37]},{id:'security',name:'COMMS',bounds:[-4.49,-24.01,3.69,-15.24],center:[-0.4,-19.62]},{id:'maintenance',name:'GENERATOR',bounds:[35.47,-42.78,44.73,-34.04],center:[40.1,-38.41]},];}
+NS.map.rooms=layout.rooms.map(r=>[r.center[0],0,r.center[1],r.id]);NS.map.spawnA=[layout.players[0][0],0,layout.players[0][1]];MAP_DEFS.night.spawns=layout.players;MAP_DEFS.night.poi=NS.map.rooms.map(r=>[r[0],r[1],r[2],'M']);MAP_DEFS.night.zones=layout.rooms.map(r=>[r.name,...r.bounds]);MAPS[0].name=nsIsTestmap()?'Facility':'Compact Bunker';MAPS[0].desc=nsIsTestmap()?'Start the generator in the spawn room. The blast doors slide shut until you open them.':'Eight rooms, placed props. Sector doors start closed. Start the generator, then a door button.';}
 nsMapPreload=async function(){await base();if(!nsIsBunker())return;if(NSB.data){applyLayout();return;}
 if(NSB.error)return;try{const get=async(name,binary)=>{if(!NS_MAPFILES[name])throw new Error('Missing bunker asset: '+name);const r=await fetch('maps/'+name+'?v='+NS_MAPFILES[name]);if(!r.ok)throw new Error(name+': HTTP '+r.status);return binary?r.arrayBuffer():r.json();};const pack={layout:'bunker-layout.json',meta:'bunker-props.json',glb:'bunker-props.glb'};const[layout,meta,buf]=await Promise.all([get(pack.layout),get(pack.meta),get(pack.glb,true)]);if(!layout.rooms||layout.rooms.length!==8)throw new Error('Unexpected bunker manifest');if(meta.instances.length<29)throw new Error('Unexpected bunker manifest');const gltf=await nsGltfParse(buf);for(const p of meta.instances)if(!gltf.scene.getObjectByName(p.exportNode))throw new Error('Missing prop: '+p.id);NSB.props=gltf.scene;NSB.data={layout,meta};applyLayout();}catch(e){NSB.error=e.message||String(e);console.error('[Night Survival] bunker dressing unavailable: '+NSB.error);}};}
 function nsBunkerCollider(bounds,id){const a=bounds.min,b=bounds.max;if(![a.x,a.y,a.z,b.x,b.y,b.z].every(Number.isFinite)||b.x-a.x<.005||b.z-a.z<.005||b.y-a.y<.005)return;const c={x0:a.x,x1:b.x,y0:a.y,y1:b.y,z0:a.z,z1:b.z,m:'metal',ray:false,bunkerProp:id};COL.push(c);NSB.colliders++;if(b.y-a.y>1.2)OCC.push({...c,k:1});}
 function nsBunkerMarker(id,type,x,z,room){const o=new THREE.Object3D();o.name='bunker-marker:'+id;o.position.set(x,0,z);o.userData={id,type,room,active:false};NSB.root.add(o);NSB.markers.push({id,type,room,x,y:0,z,active:false});}
 function nsGreyMarkers(root){const L=NSB.data.layout;L.players.forEach((p,i)=>nsBunkerMarker('player-'+i,'player',p[0],p[1],'arrival'));L.enemySpawns.forEach((s,i)=>nsBunkerMarker('sector-'+i,'zombie',s.point[0],s.point[1],s.type));L.doors.forEach((d,i)=>{NSB.doors.push({id:'door-'+i,name:d.name,x:d.center[0],z:d.center[1],open:true,dynamic:false});nsBunkerMarker('door-'+i,'door',d.center[0],d.center[1],d.category);});}
-function nsBuildBunkerDressing(){if(!nsIsBunker()||!NSB.data)return;NSB.colliders=0;NSB.markers=[];NSB.doors=[];const grey=/tm1/i.test(String((NS.map.col&&NS.map.col.source)||''));NSB.grey=grey;if(grey){const root=new THREE.Group();NSB.root=root;root.name='bunker-dressing';MAPL.root.add(root);nsGreyMarkers(root);console.info('[Night Survival] greybox tm1: same rooms and door rules, '+NS.map.boxes+' collision boxes');return;}
+function nsBuildBunkerDressing(){if(!nsIsBunker()||!NSB.data)return;NSB.colliders=0;NSB.markers=[];NSB.doors=[];const src=String((NS.map.col&&NS.map.col.source)||'');const grey=/tm1-bunker/i.test(src);const testmap=/testmap1/i.test(src);NSB.grey=grey||testmap;if(grey||testmap){const root=new THREE.Group();NSB.root=root;root.name='bunker-dressing';MAPL.root.add(root);nsGreyMarkers(root);console.info('[Night Survival] '+(testmap?'testmap1':'greybox tm1')+': '+NS.map.boxes+' collision boxes');return;}
 const root=NSB.props.clone(true);NSB.root=root;root.name='bunker-dressing';const materials=new Map();const cloneMat=m=>{if(!materials.has(m.uuid))materials.set(m.uuid,m.clone());return materials.get(m.uuid);};const drop=[];root.traverse(o=>{if(/^REVISED_/i.test(o.name||'')||(o.name||'').indexOf('__UCX_')>=0){drop.push(o);return;}
 if(!o.isMesh)return;o.geometry=o.geometry.clone();o.material=Array.isArray(o.material)?o.material.map(cloneMat):cloneMat(o.material);o.castShadow=o.receiveShadow=true;});for(const o of drop)if(o.parent)o.parent.remove(o);MAPL.root.add(root);root.updateMatrixWorld(true);for(const p of NSB.data.meta.instances){const o=root.getObjectByName(p.exportNode);if(p.collisionMode==='static'&&!(NSB.data.layout&&NSB.data.layout.version===2))nsBunkerCollider(new THREE.Box3().setFromObject(o),p.id);else if(p.collisionMode==='dynamic_door'){}}
 const L=NSB.data.layout;L.players.forEach((p,i)=>nsBunkerMarker('player-'+i,'player',p[0],p[1],'arrival'));L.enemySpawns.forEach((s,i)=>nsBunkerMarker('sector-'+i,'zombie',s.point[0],s.point[1],s.type));L.doors.forEach((d,i)=>{NSB.doors.push({id:'door-'+i,name:d.name,x:d.center[0],z:d.center[1],open:true,dynamic:false});nsBunkerMarker('door-'+i,'door',d.center[0],d.center[1],d.category);const hasDoor=NSB.data.meta.instances.some(p=>p.asset==='BlastDoor'&&hyp((p.game&&p.game.x)-d.center[0],(p.game&&p.game.z)-d.center[1])<2.5);if(hasDoor)return;const g=new THREE.BoxGeometry(d.clearWidth,.6,.18);const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x59646a,metalness:.65,roughness:.6}));m.name='bunker-open-shutter-'+i;m.position.set(d.center[0],2.45,d.center[1]);m.castShadow=m.receiveShadow=true;root.add(m);m.updateMatrixWorld(true);nsBunkerCollider(new THREE.Box3().setFromObject(m),'door-'+i);});NS.map.boxes+=NSB.colliders;console.info('[Night Survival] bunker '+((NSB.data.layout&&NSB.data.layout.version)||1)+': 8 rooms, '+NSB.data.meta.instances.length+' props, '+NSB.colliders+' added colliders, '+((NSB.data.layout.doors&&NSB.data.layout.doors.length)||0)+' doors, 4 player / '+(NSB.data.layout.enemySpawns||[]).length+' sector markers');}
@@ -9566,7 +9577,7 @@ const L=NSB.data.layout;L.players.forEach((p,i)=>nsBunkerMarker('player-'+i,'pla
 {const base=nsSpawnPoints;nsSpawnPoints=function(){base();if(!nsIsBunker()||!NSB.data||!NSB.root)return;for(const m of NSB.markers.filter(m=>m.type==='zombie')){let best=-1,distance=3;for(let i=0;i<NAV.count;i++){if(Math.abs(NAV.ny[i])>.4)continue;const d=hyp(NAV.nx[i]-m.x,NAV.nz[i]-m.z);if(d<distance){distance=d;best=i;}}
 if(best>=0){m.source=[m.x,m.y,m.z];m.x=NAV.nx[best];m.y=NAV.ny[best];m.z=NAV.nz[best];NSB.root.getObjectByName('bunker-marker:'+m.id).position.set(m.x,m.y,m.z);}}
 const players=NSB.markers.filter(m=>m.type==='player').map(m=>nsSnap(m.x,m.y,m.z,1.5));if(players.every(Boolean))NS.map.pspawns=players;const checks=NSB.data.layout.rooms.map(r=>({id:r.id,type:'room',x:r.center[0],y:0,z:r.center[1]})).concat(NSB.markers);NSB.audit=checks.map(m=>{const n=navNode(m.x,m.y,m.z);const onFloor=n>=0&&Math.abs(NAV.ny[n]-m.y)<.4&&hyp(NAV.nx[n]-m.x,NAV.nz[n]-m.z)<1.5;const valid=m.type==='player'?(onFloor&&NAV.comp[n]===NAV.mainComp):onFloor;return{id:m.id,type:m.type,reachable:valid,node:n};});const failed=NSB.audit.filter(a=>!a.reachable);if(failed.length)console.warn('[Night Survival] bunker marker validation failed: '+failed.map(a=>a.id).join(', '));};}
-{const base=nsMapLine;nsMapLine=function(){if(NSB.error)return base()+'<div class="map tmp">Bunker props did not load: '+nsEsc(NSB.error)+'</div>';if(NS_MAPFILES['tm1.glb'])return'<div class="map">Map: <b>Greybox</b> · same bunker rules · sector doors start closed</div>';if(NS_MAPFILES['bunker-props.glb'])return'<div class="map">Map: <b>Compact Bunker</b> · sector doors start closed · start the generator, then a door button</div>';return base();};}
+{const base=nsMapLine;nsMapLine=function(){if(NSB.error)return base()+'<div class="map tmp">Bunker props did not load: '+nsEsc(NSB.error)+'</div>';if(NS_MAPFILES['testmap1.glb'])return'<div class="map">Map: <b>Facility</b> · blast doors slide shut · start the generator in the spawn room</div>';if(NS_MAPFILES['tm1.glb'])return'<div class="map">Map: <b>Greybox</b> · same bunker rules · sector doors start closed</div>';if(NS_MAPFILES['bunker-props.glb'])return'<div class="map">Map: <b>Compact Bunker</b> · sector doors start closed · start the generator, then a door button</div>';return base();};}
 const NSARM={selected:false,on:false,reserve:60,spawned:0,live:0,cleared:false,delay:6,timer:0,points:[],blocked:false,error:'',wave:5,cap:40};function nsArmoryReset(){Object.assign(NSARM,{reserve:60,spawned:0,live:0,cleared:false,delay:6,timer:0,points:[],blocked:false,error:''});for(const z of NSZ.pool)z.nsArmory=false;for(const m of NSB.markers.filter(m=>m.type==='zombie')){m.active=NSARM.on&&m.room==='armory_rear_hatch';const o=NSB.root&&NSB.root.getObjectByName('bunker-marker:'+m.id);if(o)o.userData.active=m.active;}
 if(!NSARM.on)return;if(!nsArmoryPoints())NSARM.error='No safe Armory spawn positions. Return to the menu.';}
 function nsArmoryPoints(){NSARM.points=[];const room=NSB.data&&NSB.data.layout.rooms.find(r=>r.id==='armory');if(!room||typeof NAV==='undefined'||!NAV.count)return 0;const marker=NSB.markers.find(m=>m.type==='zombie'&&m.room==='armory_rear_hatch');const[x0,z0,x1,z1]=room.bounds;for(let i=0;i<NAV.count;i++){const x=NAV.nx[i],y=NAV.ny[i],z=NAV.nz[i];if(Math.abs(y)>.4||x<x0+.45||x>x1-.45||z<z0+.45||z>z1-.45)continue;if(!navClear(x,z,y))continue;NSARM.points.push(new V3(x,y,z));}
@@ -9601,7 +9612,8 @@ const NSDOOR_POWER=[{id:'hub',name:'hub panel',node:'CP_control_hub_electricalpa
 const NSDOOR_STATIONS=[{id:'armory',name:'ammo crate',node:'CP_armory_supplycrate_01',color:0xd7a441},{id:'medical',name:'med crate',node:'CP_medical_medicalcart_01',color:0xd24a4a},{id:'security',name:'cameras',node:'CP_security_securitydesk_01__INTERACT_DeskRadio',color:0},{id:'control_hub',name:'hub console',node:'CP_control_hub_operatorconsole_01__INTERACT_OperatorTerminal',color:0},]
 function nsDoorRoom(id){return NSB.data&&NSB.data.layout.rooms.find(r=>r.id===id)}
 function nsDoorSector(id){return NSDOOR.sectors.find(s=>s.id===id)}
-function nsDoorSpecList(){const L=NSB.data&&NSB.data.layout
+function nsDoorSpecList(){if(typeof nsIsTestmap==='function'&&nsIsTestmap())return[{id:'medbay',name:'Med Bay',node:'NT_BlastDoor_s42',x:-2.28,z:15.93,facing:'z',clearWidth:2.4,role:'sector',roomId:'medbay'},{id:'lower',name:'Lower Decon',node:'NT_BlastDoor_s42.001',x:0.57,z:3.71,facing:'z',clearWidth:2.4,role:'sector',roomId:'lower'},]
+const L=NSB.data&&NSB.data.layout
 if(L&&Array.isArray(L.doors)&&L.doors.some(d=>d.role)){return L.doors.filter(d=>d.role==='sector'||d.role==='breach').map(d=>({id:d.role==='sector'?d.room:d.id,name:d.name,node:d.exportNode,x:d.center[0],z:d.center[1],facing:d.facing||'z',clearWidth:d.clearWidth||2.8,forceOpenOnSiege:!!d.forceOpenOnSiege,role:d.role,roomId:d.room,}))}
 return NSDOOR_ROOMS.map(r=>Object.assign({},r,{role:'sector',roomId:r.id,facing:'z',clearWidth:1.1,forceOpenOnSiege:false}))}
 function nsDoorColBox(R){const half=(R.clearWidth||1.1)*0.5,t=0.18
@@ -9706,8 +9718,50 @@ d.pound=0
 d.lockAt=0
 d.col.y0=0
 d.col.y1=2.55
-if(d.hinge&&d.closedQ)d.hinge.quaternion.copy(d.closedQ)}
-function nsDoorPose(d,k){if(d.hinge&&d.closedQ&&d.openQ)d.hinge.quaternion.copy(d.closedQ).slerp(d.openQ,k)}
+if(d.leaves)nsDoorPose(d,0)
+else if(d.hinge&&d.closedQ)d.hinge.quaternion.copy(d.closedQ)}
+function nsDoorPose(d,k){if(d.leaves){for(const leaf of d.leaves){const a=leaf.userData.openP,b=leaf.userData.shutP
+if(!a||!b)continue
+leaf.position.lerpVectors(b,a,k)}
+return
+}
+if(d.hinge&&d.closedQ&&d.openQ)d.hinge.quaternion.copy(d.closedQ).slerp(d.openQ,k)}
+function nsDoorPrimitive(R){if(!MAPL.root)return[]
+const w=R.clearWidth||2.4
+const mesh=new THREE.Mesh(new THREE.BoxGeometry(R.facing==='x'?0.16:w,2.5,R.facing==='x'?w:0.16),new THREE.MeshStandardMaterial({color:0x5c6560,roughness:0.78,metalness:0.12}))
+mesh.name='night:door-primitive-'+R.id
+mesh.castShadow=false
+mesh.receiveShadow=false
+mesh.matrixAutoUpdate=true
+const shutP=new THREE.Vector3(R.x,1.25,R.z)
+const openP=shutP.clone()
+if(R.facing==='x')openP.z+=w
+else openP.x+=w
+mesh.position.copy(shutP)
+mesh.userData.shutP=shutP
+mesh.userData.openP=openP
+MAPL.root.add(mesh)
+return[mesh]}
+function nsSlideBind(R){if(!MAPL.root)return[]
+const suffix=/\.001$/.test(R.node)?'.001':''
+const shift=new THREE.Vector3(-1.837,0,-22.628)
+const travel=1.162
+const leaves=[]
+MAPL.root.traverse(o=>{if(!o.isMesh)return
+const n=o.name.indexOf('night:')===0?o.name.slice(6):o.name
+let dir=0
+if(n==='NT_BlastDoor_s42_LeafL'+suffix||n==='NT_BlastDoor_s42_Rod_0'+suffix)dir=1
+else if(n==='NT_BlastDoor_s42_LeafR'+suffix||n==='NT_BlastDoor_s42_Rod_1'+suffix)dir=-1
+if(!dir)return
+const openP=shift.clone()
+const shutP=shift.clone()
+shutP.x+=dir*travel
+o.userData.openP=openP
+o.userData.shutP=shutP
+o.matrixAutoUpdate=true
+o.position.copy(shutP)
+leaves.push(o)})
+return leaves}
 function nsDoorBuild(){NSDOOR.doors=[]
 NSDOOR.sectors=[]
 NSDOOR.stations=[]
@@ -9718,9 +9772,21 @@ NSB.root.updateMatrixWorld(true)
 const old=[]
 NSB.root.traverse(o=>{if(o.name&&(o.name.indexOf('nsdoor-crate-')===0||o.name.indexOf('nsdoor-mark-')===0))old.push(o)})
 for(const o of old)if(o.parent)o.parent.remove(o)
+if(typeof nsIsTestmap==='function'&&nsIsTestmap()){NSDOOR_POWER[0].x=-3.6
+NSDOOR_POWER[0].z=18.4
+NSDOOR_POWER[1].x=40.1
+NSDOOR_POWER[1].z=-41.98
+NSDOOR.genAt=new V3(40.1,1.1,-41.98)
+const drop=[]
+if(MAPL.root)MAPL.root.traverse(o=>{if(o.name&&o.name.indexOf('door-primitive-')>=0)drop.push(o)})
+for(const o of drop)if(o.parent)o.parent.remove(o)}
 for(const R of nsDoorSpecList()){const room=nsDoorRoom(R.roomId||R.id)
+let leaves=nsIsTestmap()?nsDoorPrimitive(R):[]
 let hinge=nsDoorNode(R.node+'__PIVOT_BlastDoor_Hinge')
-if(!hinge&&NSB.root){R.clearWidth=Math.max(R.clearWidth||0,2.6)
+if(leaves.length){hinge=new THREE.Group()
+hinge.name=R.node+'__SLIDE'
+hinge.position.set(R.x,0,R.z)
+MAPL.root.add(hinge)}else if(!hinge&&NSB.root){R.clearWidth=Math.max(R.clearWidth||0,2.6)
 hinge=nsGreyHinge(R)}
 const access=nsDoorNode(R.node+'__INTERACT_BlastDoor_Access')
 if(!hinge)continue
@@ -9735,15 +9801,27 @@ const col=nsDoorColBox(R)
 COL.push(col)
 nsDoorHash(col)
 hinge.traverse(o=>{if(o.isMesh)o.castShadow=false})
-const door={id:R.id,name:R.name,x:R.x,z:R.z,bx:wp.x,bz:wp.z,open:false,swinging:false,swing:0,goal:0,col,hinge,wheel:nsDoorNode(R.node+'__PIVOT_BlastDoor_Wheel'),openQ,closedQ,role:R.role||'sector',roomId:R.roomId||R.id,forceOpenOnSiege:!!R.forceOpenOnSiege,facing:R.facing,clearWidth:R.clearWidth}
+const door={id:R.id,name:R.name,x:R.x,z:R.z,bx:wp.x,bz:wp.z,open:false,swinging:false,swing:0,goal:0,col,hinge,leaves:leaves.length?leaves:null,wheel:nsDoorNode(R.node+'__PIVOT_BlastDoor_Wheel'),openQ,closedQ,role:R.role||'sector',roomId:R.roomId||R.id,forceOpenOnSiege:!!R.forceOpenOnSiege,facing:R.facing,clearWidth:R.clearWidth}
 NSDOOR.doors.push(door)
 if(R.role!=='breach')
-NSDOOR.sectors.push({id:R.id,name:R.name,room,reserve:60,spawned:0,open:false,points:[],timer:0,hold:'',overrun:false,warn:0})
+NSDOOR.sectors.push({id:R.id,name:R.name,room,reserve:nsDoorReserve(R.id),spawned:0,open:false,points:[],timer:0,hold:'',overrun:false,warn:0})
 nsDoorMark(access||hinge,R.role==='breach'?0xff8a3c:0x3ec2ff,R.role==='breach'?'SIDE':'DOOR','door',R.id)
 nsDoorShut(door)}
 const hub=nsDoorRoom('control_hub')
 if(hub)NSDOOR.sectors.push({id:'control_hub',name:'Control Hub',room:hub,reserve:0,spawned:0,open:true,points:[],timer:0,hold:'',overrun:false,warn:0})
-for(const S of NSDOOR_STATIONS){const room=nsDoorRoom(S.id)
+if(typeof nsIsTestmap==='function'&&nsIsTestmap()){for(const id of['armory','security','maintenance']){if(NSDOOR.sectors.some(s=>s.id===id))continue
+const room=nsDoorRoom(id)
+if(!room)continue
+NSDOOR.sectors.push({id,name:room.name,room,reserve:60,spawned:0,open:false,points:[],timer:1.2,hold:'',overrun:false,warn:0})}
+const arm=nsDoorRoom('armory')
+if(arm){const gx=arm.center[0]+1.6,gz=arm.center[1]
+const n=nsDoorAnchor('CP_armory_gunbench',gx,gz)
+if(n){const bp=new THREE.Vector3()
+n.getWorldPosition(bp)
+NSDOOR.stations.push({id:'bench',name:'gun bench',x:bp.x,z:bp.z,color:0x8eb4ff})
+nsDoorMark(n,0x8eb4ff,'GUNS','crate','bench')}}}
+for(const S of NSDOOR_STATIONS){if(typeof nsIsTestmap==='function'&&nsIsTestmap()&&S.id==='control_hub')continue
+const room=nsDoorRoom(S.id)
 const n=nsDoorNode(S.node)||nsDoorAnchor(S.node,room?room.center[0]:0,room?room.center[1]:0)
 if(!n)continue
 n.getWorldPosition(wp)
@@ -9768,7 +9846,7 @@ try{s.g.gain.setTargetAtTime(0.0001,t,0.15);s.o1.stop(t+1);s.o2.stop(t+1);s.lfo.
 NSDOOR.genSnd=null}
 function nsGenHum(){if(!NSDOOR.lit||NSDOOR.genSnd||typeof AU==='undefined'||!AU.ready||!AU.ctx)return
 const ctx=AU.ctx
-const pos=new V3(-20.06,1.1,37.39)
+const pos=NSDOOR.genAt||new V3(-20.06,1.1,37.39)
 const dest=auOut(pos,0.22,0.5,0.5,14)
 const o1=ctx.createOscillator(),o2=ctx.createOscillator(),lfo=ctx.createOscillator()
 const lp=ctx.createBiquadFilter(),g=ctx.createGain(),lg=ctx.createGain()
@@ -9805,8 +9883,12 @@ nsDoorLeds(on)
 if(on)nsGenHum()
 else nsGenQuiet()
 if(was===true||was===false)nsDoorSay(on?'POWER BACK · maintenance is held':'POWER DOWN · maintenance is overrun',on?'xp':'enemy',3)}
+function nsDoorReserve(id){if(id==='control_hub'||id==='arrival')return 0
+if(typeof nsIsTestmap==='function'&&nsIsTestmap())
+return(id==='armory'||id==='security'||id==='maintenance')?60:0
+return 60}
 function nsDoorResetSectors(){for(const s of NSDOOR.sectors){const hub=s.id==='control_hub'
-s.reserve=hub?0:60
+s.reserve=nsDoorReserve(s.id)
 s.spawned=0
 s.open=!!hub
 s.timer=.4
@@ -9821,7 +9903,7 @@ function nsDoorBegin(){if(!nsIsBunker()||!NSB.data){NSDOOR.on=false;return}
 const auth=typeof nsAuth!=='function'||nsAuth()
 if(auth){NSARM.on=false
 NSZ.stress=0
-NSZ.POOL=Math.max(NSZ.POOL||20,40)
+NSZ.POOL=(typeof nsIsTestmap==='function'&&nsIsTestmap())?16:Math.max(NSZ.POOL||20,40)
 nszPoolEnsure()}
 if(!NSDOOR.built||!NSDOOR.doors.length||!NSDOOR.doors[0].hinge||!NSDOOR.doors[0].hinge.parent)nsDoorBuild()
 NSDOOR.on=NSDOOR.doors.length>0
@@ -9885,7 +9967,9 @@ nsDoorSnd(d,1)
 if(d.broke){d.broke=false;continue}
 if(d.role==='breach')nsDoorSay((d.name||'SIDE ACCESS').toUpperCase()+' BREACHED','enemy',3)
 else nsDoorSay(d.name.toUpperCase()+' OPEN · infected behind the door','enemy',3)}}
-function nsDoorUsable(id){const s=nsDoorSector(id)
+function nsDoorUsable(id){if(typeof nsIsTestmap==='function'&&nsIsTestmap()){if(id==='bench'||id==='armory'||id==='security')return!!NSDOOR.power
+if(id==='medical')return nsDoorUsable('medbay')}
+const s=nsDoorSector(id)
 if(!s)return false
 if(s.hold==='overrun'||s.hold==='contested'||s.hold==='warned')return false
 if(s.hold==='secured')return true
@@ -9942,26 +10026,41 @@ const next=NSDOOR.sectors.filter(s=>s.hold==='warned'||s.hold==='contested'||s.h
 nsDoorSay(next.length?'CAMERAS · '+next.map(s=>s.name+(s.hold==='overrun'?' overrun':' under attack')).join(', '):'CAMERAS · halls are quiet','info',2.5)
 return
 }
+if(st.id==='bench'){if(local&&NSDOOR.power&&typeof nsArmoryBench==='function')nsArmoryBench()
+else if(local)NSDOOR.prompt='Gun bench · generator is off'
+return
+}
 if(local)NSDOOR.prompt=ok?'E  Sector board':'Control lost'
 if(!ok){nsDoorSay('Control lost · the board is dark','enemy',1.5);return}
 if(!nsDoorReady('control_hub',2))return
 nsDoorSay(NSDOOR.sectors.map(s=>s.name+' '+(s.hold||(s.open?'open':'shut'))).join(' · '),'info',3.5)}
-function nsDoorPromptAt(x,z){if(!NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,NSDOOR_REACH.use)
-if(p)return'E  Start generator'}
-const st=nsDoorNear(x,z,NSDOOR.stations,NSDOOR_REACH.use)
-if(st){const crate=nsDoorCrateLine(st)
+function nsDoorFocus(x,z){const st=nsDoorNear(x,z,NSDOOR.stations,NSDOOR_REACH.use)
+const doors=[]
+for(const d of NSDOOR.doors){const line=nsDoorPromptDoor(d)
+if(!line)continue
+doors.push({x:d.bx,z:d.bz,door:d,line})}
+const door=nsDoorNear(x,z,doors,NSDOOR_REACH.use)
+if(st&&door){const ds=(st.x-x)*(st.x-x)+(st.z-z)*(st.z-z)
+const dd=(door.x-x)*(door.x-x)+(door.z-z)*(door.z-z)
+if(dd<=ds)return{kind:'door',door:door.door,line:door.line}
+return{kind:'station',st}}
+if(door)return{kind:'door',door:door.door,line:door.line}
+if(st)return{kind:'station',st}
+return null}
+function nsDoorStationLine(st){if(st.id==='bench')return NSDOOR.power?'E  Choose guns':'Gun bench · generator is off'
+const crate=nsDoorCrateLine(st)
 if(crate)return crate
 const ok=nsDoorUsable(st.id)
 if(st.id==='security')return ok?'E  Check cameras':'Cameras down'
 return ok?'E  Sector board':'Control lost'}
-const powers=NSDOOR_POWER.map(p=>({x:p.x,z:p.z,kind:'power'}))
-const doors=[]
-for(const d of NSDOOR.doors){const line=nsDoorPromptDoor(d)
-if(line)doors.push({x:d.bx,z:d.bz,kind:'door',door:d,line})}
-const hit=nsDoorNear(x,z,powers.concat(doors),NSDOOR_REACH.use)
-if(!hit)return''
-if(hit.kind==='power')return'Generator running'
-return hit.line}
+function nsDoorPromptAt(x,z){if(!NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,NSDOOR_REACH.use)
+if(p)return'E  Start generator'}
+const hit=nsDoorFocus(x,z)
+if(hit&&hit.kind==='door')return hit.line
+if(hit&&hit.kind==='station')return nsDoorStationLine(hit.st)
+if(NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,NSDOOR_REACH.use)
+if(p)return'Generator running'}
+return''}
 function nsDoorPromptDoor(d){if(!d||d.swinging)return''
 if(!d.open&&d.swing<.5)return NSDOOR.power?'E  Open '+d.name:'E  Door button · generator is off'
 if(d.swing<.9)return''
@@ -10031,26 +10130,22 @@ nsDoorPower()
 nsDoorSay('GENERATOR ON · door buttons are live','xp',3)
 return
 }}
-const st=nsDoorNear(x,z,NSDOOR.stations,NSDOOR_REACH.use)
-if(st){nsDoorStation(st,who||PL.ent);return}
-const doors=NSDOOR.doors.map(d=>({x:d.bx,z:d.bz,kind:'door',door:d,name:d.name}))
-const hit=nsDoorNear(x,z,doors,NSDOOR_REACH.use)
-if(!hit){NSDOOR.prompt='';return}
-if(nsDoorCanLock(hit.door)){NSDOOR.prompt='';nsDoorLock(hit.door);return}
-if(hit.door.open||hit.door.swing>.5){NSDOOR.prompt=nsDoorPromptDoor(hit.door);return}
+const hit=nsDoorFocus(x,z)
+if(hit&&hit.kind==='station'){nsDoorStation(hit.st,who||PL.ent);return}
+if(!hit||hit.kind!=='door'){NSDOOR.prompt='';return}
+const door=hit.door
+if(nsDoorCanLock(door)){NSDOOR.prompt='';nsDoorLock(door);return}
+if(door.open||door.swing>.5){NSDOOR.prompt=nsDoorPromptDoor(door);return}
 if(!NSDOOR.power){NSDOOR.prompt='E  Door button · generator is off';nsDoorSay('Start the generator first','info',1.5);return}
 NSDOOR.prompt=''
-nsDoorOpen(hit.door)}
+nsDoorOpen(door)}
 function nsDoorPick(x,z){if(!NSDOOR.power){const p=nsDoorNear(x,z,NSDOOR_POWER,NSDOOR_REACH.use)
 if(p)return{k:'power',id:p.id}}
-const st=nsDoorNear(x,z,NSDOOR.stations,NSDOOR_REACH.use)
-if(st)return{k:'station',id:st.id}
-const choices=[]
-for(const d of NSDOOR.doors){if(d.swinging)continue
-if(!d.open&&d.swing<.5)choices.push({id:d.id,x:d.bx,z:d.bz,k:'door'})
-else if(nsDoorCanLock(d))choices.push({id:d.id,x:d.bx,z:d.bz,k:'lock'})}
-const d=nsDoorNear(x,z,choices,NSDOOR_REACH.use)
-if(d)return{k:d.k,id:d.id}
+const hit=nsDoorFocus(x,z)
+if(hit&&hit.kind==='station')return{k:'station',id:hit.st.id}
+if(hit&&hit.kind==='door'){const d=hit.door
+if(!d.open&&d.swing<.5)return{k:'door',id:d.id}
+if(nsDoorCanLock(d))return{k:'lock',id:d.id}}
 return null}
 function nsDoorGuestOk(e,m,tx,tz){const spots=[]
 if(typeof m.x==='number'&&typeof m.z==='number'&&isFinite(m.x)&&isFinite(m.z))spots.push([m.x,m.z])
@@ -10083,10 +10178,22 @@ nsDoorOpen(d)
 return
 }
 if(typeof m.x==='number'&&typeof m.z==='number')nsDoorUse(m.x,m.z,e||PL.ent)}
-function nsDoorSpawn(dt,players){const wave=NSDOOR.hold==='fight'?NSDOOR.wave:null
+function nsDoorWakeRooms(){if(typeof nsIsTestmap!=='function'||!nsIsTestmap())return
+const who=nszPlayers()
+for(const s of NSDOOR.sectors){if(s.open||s.reserve<=0||!s.room||!s.room.bounds)continue
+if(s.id==='medbay'||s.id==='lower'||s.id==='control_hub')continue
+const[x0,z0,x1,z1]=s.room.bounds
+if(!who.some(e=>e.alive&&e.pos.x>=x0&&e.pos.x<=x1&&e.pos.z>=z0&&e.pos.z<=z1))continue
+s.open=true
+s.timer=1.4
+if(!s.points.length)s.points=nsDoorPoints(s.room)
+nsDoorSay((s.name||s.id).toUpperCase()+' · 60 INFECTED','enemy',2.5)}}
+function nsDoorAliveCap(){return(typeof nsIsTestmap==='function'&&nsIsTestmap())?Math.min(8,NSZ.pool.length):Math.min(40,NSZ.pool.length)}
+function nsDoorSpawn(dt,players){nsDoorWakeRooms()
+const wave=NSDOOR.hold==='fight'?NSDOOR.wave:null
 if(wave&&wave.reserve>0){wave.timer-=dt
 if(wave.timer>0)return
-const cap=Math.min(40,NSZ.pool.length)
+const cap=nsDoorAliveCap()
 if(NSZ.pool.filter(z=>z.alive).length>=cap)return
 const pts=nsDoorArrivalPts()
 let spot=null
@@ -10112,7 +10219,7 @@ if(NSDOOR.hold)return s.hold==='contested'||s.hold==='overrun'
 return s.open&&s.id!=='control_hub'})
 if(!open.length)return
 for(const s of open)s.timer-=dt
-const cap=Math.min(40,NSZ.pool.length)
+const cap=nsDoorAliveCap()
 const live=NSZ.pool.filter(z=>z.alive).length
 if(live>=cap)return
 const ready=open.filter(s=>s.timer<=0)
@@ -10222,7 +10329,8 @@ nsDoorCrateGlow()
 if(!(PL.ent&&PL.ent.pos))return
 const down=!!(KEYS&&KEYS.KeyE)
 const pick=PL.ent&&PL.ent.pos?nsDoorPick(PL.ent.pos.x,PL.ent.pos.z):null
-if(down&&!NSDOOR.eWas&&pick)netSend({t:'nsuse',x:PL.ent.pos.x,z:PL.ent.pos.z,k:pick.k,id:pick.id})
+if(down&&!NSDOOR.eWas&&pick){if(pick.k==='station'&&pick.id==='bench'&&typeof nsArmoryBench==='function')nsArmoryBench()
+else netSend({t:'nsuse',x:PL.ent.pos.x,z:PL.ent.pos.z,k:pick.k,id:pick.id})}
 else if(!down&&NSDOOR.on)NSDOOR.prompt=nsDoorPromptAt(PL.ent.pos.x,PL.ent.pos.z)
 NSDOOR.eWas=down}
 function nsDoorTick(dt){if(!nsAuth()||NS.over||playHold()||MATCH.state!=='playing'||!(dt>0))return
