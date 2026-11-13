@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bmzsoiRva64Wv1W9TqCQsqq1qKD/0N01CoQFAXAwPOI=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Z6BKs0FXksrblqFJYTGgEELK2OlKhGsJXoXfl9Ss7/Q=' 'sha256-rbTaSdDD+Sd+K8IZ66VS79bdI78bN8AwXXyN0/lD5fY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' data: blob: https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Survival">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="9ad4c56edd84">
+<meta name="cod-build" content="c21459d7b23f">
 <meta name="menu-music" content="">
 <title>Night Survival</title>
 <!-- Aperçu d'un lien partagé (Discord, WhatsApp, réseaux) et adresse de référence : adresse et image posées par build.py (SITE, assets/apercu.jpg).
@@ -9418,7 +9418,7 @@ return p&&p.weapon?p.weapon:null;}
 function nszGunSilent(p){if(p&&p.nsShotSilent)return true;const d=nszGunDef(p);return!!(d&&d.silent);}
 function nszHearDefault(w){if(w&&(w.cat==='shotgun'||w.fam==='shotgun'||(w.pellets||0)>1))return 44;if(w&&(w.cat==='sniper'||w.fam==='sniper'))return 38;if(w&&(w.cat==='smg'||w.fam==='smg'))return 28;if(w&&(w.cat==='pistol'||w.fam==='pistol'))return 24;return 32;}
 function nszHearBase(p){const d=nszGunDef(p);const r=d&&+d.hearRange;return(r>0)?r:nszHearDefault(d);}
-const NSZ_HEAR_MAP=1e6;function nszHearRange(p){if(!nszGunSilent(p)){if(typeof nsHoldOn==='function'&&nsHoldOn())return 26;return NSZ_HEAR_MAP;}
+const NSZ_HEAR_MAP=1e6;function nszHearRange(p){if(!nszGunSilent(p)){if(typeof nsHoldOn==='function'&&nsHoldOn())return 48;return NSZ_HEAR_MAP;}
 const base=nszHearBase(p);return clamp(base*(NSZ_SMART.hearingQuiet/NSZ_SMART.hearing),5,16);}
 function nszHearMapWide(range){return!!(range&&range>=10000);}
 function nszAlertRun(b){if(!b)return;if(b.zInjury==='crawl'||b.zInjury==='limp')return;b.zRun=true;if(b.zLeaper)return;if(b.zWalkSpeed==null&&b.zSpeed<3.6)b.zWalkSpeed=b.zSpeed;if(b.zSpeed<3.6)b.zSpeed=rand(3.9,4.6);}
@@ -9427,7 +9427,7 @@ function nszDecisionHz(b){const P=nszPlayers();let nearest=999;for(const p of P)
 const NS_SHOTS=[];let NS_SHOT_SEQ=0;function nsShotNote(ent,now){if(!ent||!ent.pos)return null;const t=(now!=null&&Number.isFinite(+now))?+now:(typeof MATCH!=='undefined'?MATCH.time:0);ent._nsShotNoteT=t;const ev={id:++NS_SHOT_SEQ,t,x:ent.pos.x,y:ent.pos.y,z:ent.pos.z,silent:nszGunSilent(ent),range:nszHearRange(ent),who:ent};NS_SHOTS.push(ev);if(NS_SHOTS.length>48)NS_SHOTS.shift();try{if(typeof nsHearVizOn==='function'&&nsHearVizOn())nsHearVizOnShot(ev);}catch(e){}
 return ev;}
 function nsHearCanInvestigate(b){if(!b||!b.alive||b.zState==='dead')return false;if(b.zState==='chase'||b.zState==='attack')return false;if(b.zLeap==='tele'||b.zLeap==='air')return false;return true;}
-function nsHearApplyEvent(b,ev){if(!b||!b.alive||!ev)return false;if((b.zHeardId||0)>=ev.id)return false;const dist=hyp(ev.x-b.pos.x,ev.z-b.pos.z)+Math.abs((ev.y||0)-(b.pos.y||0))*4;if(dist>ev.range)return false;b.zHeardId=ev.id;b.zHeardT=ev.t;b.zSearchX=ev.x;b.zSearchZ=ev.z;b.zSearchUntil=MATCH.time+NSZ_SMART.searchSeconds+(b.zPersonality||0)*4;if(nsHearCanInvestigate(b)){b.zState='investigate';b.zSearchStage=0;b.path=null;b.repathT=0;b.zDormant=false;b.zAwake=true;b.zJoinHold=false;b.zWander=null;nszAlertRun(b);}
+function nsHearApplyEvent(b,ev){if(!b||!b.alive||!ev)return false;if((b.zHeardId||0)>=ev.id)return false;const dist=hyp(ev.x-b.pos.x,ev.z-b.pos.z)+Math.abs((ev.y||0)-(b.pos.y||0))*4;if(dist>ev.range)return false;b.zHeardId=ev.id;b.zHeardT=ev.t;b.zSearchX=ev.x;b.zSearchZ=ev.z;b.zSearchUntil=MATCH.time+NSZ_SMART.searchSeconds+(b.zPersonality||0)*4;if(nsHearCanInvestigate(b)){b.zState='investigate';b.zSearchStage=0;b.path=null;b.repathT=0;b.zDormant=false;b.zAwake=true;b.zJoinHold=false;b.zWander=null;const far=typeof nsHoldFar==='function'&&nsHoldFar(b);const packed=far&&typeof nsHoldCrowd==='function'&&typeof nsDoorAliveCap==='function'&&nsHoldCrowd()>=nsDoorAliveCap();if(packed)nszCalmWalk(b);else nszAlertRun(b);}
 return true;}
 function nsHearPing(x,y,z,range){const t=(typeof MATCH!=='undefined'&&MATCH.time)||0;const r=(range>0)?range:NSZ_HEAR_MAP;NS_SHOTS.push({id:++NS_SHOT_SEQ,t,x,y:y||1.2,z,silent:false,range:r,who:null});if(NS_SHOTS.length>48)NS_SHOTS.shift();}
 function nsHearApplyAll(){if(!NS_SHOTS.length)return;const tnow=(typeof MATCH!=='undefined'&&MATCH.time)||0;while(NS_SHOTS.length&&Number.isFinite(NS_SHOTS[0].t)&&NS_SHOTS[0].t<=tnow&&(tnow-NS_SHOTS[0].t)>1.6)
@@ -9857,12 +9857,12 @@ BOCFG.v.light.botFlash=NS_CFG.teamLights;let lastBot=NS_CFG.teamLights;const _c=
 try{if(NSL.flash)NSL.flash.shadow.camera.far=NSL_DEF.range;}catch(e){}
 if(L.botFlash!==lastBot){lastBot=L.botFlash;NS_CFG.teamLights=Math.round(L.botFlash);nsCfgSave();}
 if(typeof nsMuzSync==='function')nsMuzSync();}
-const _sec=BOCFG.applySection;BOCFG.applySection=function(s){const r=_sec.apply(this,arguments);if(s==='light')sync();return r;};const _all=BOCFG.applyAll;BOCFG.applyAll=function(){const r=_all.apply(this,arguments);sync();return r;};BOCFG.syncNight=sync;BOCFG.tick=function(){};BOCFG.download=function(){const blob=new Blob([this.exportJson()],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='night-survival-config.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);};const _sm=startMatch;startMatch=function(){const r=_sm.apply(this,arguments);try{sync();}catch(e){}return r;};const _save=nsCfgSave;nsCfgSave=function(){_save();if(BOCFG.v.light.botFlash!==NS_CFG.teamLights){BOCFG.v.light.botFlash=lastBot=NS_CFG.teamLights;BOCFG.save();}};sync();try{BOCFG.applyLight();}catch(e){}})();function nsNightCfg(){const v=(typeof BOCFG!=='undefined'&&BOCFG.v&&BOCFG.v.night)||{};const num=(k,d,min,max)=>{const x=+v[k];return Number.isFinite(x)?clamp(x,min,max):d;};return{regenDelay:num('regenDelay',6,1,20),regenRate:num('regenRate',4,0,45),holdDur:num('holdDur',90,15,300),holdCap:Math.round(num('holdCap',8,6,14)),breachBreak:Math.round(num('breachBreak',38,15,90)),dormant:Math.round(num('dormant',2,1,4)),leapChance:Math.round(num('leapChance',15,0,50)),classic:!!v.classic,showHearing:!!v.showHearing,};}
+const _sec=BOCFG.applySection;BOCFG.applySection=function(s){const r=_sec.apply(this,arguments);if(s==='light')sync();return r;};const _all=BOCFG.applyAll;BOCFG.applyAll=function(){const r=_all.apply(this,arguments);sync();return r;};BOCFG.syncNight=sync;BOCFG.tick=function(){};BOCFG.download=function(){const blob=new Blob([this.exportJson()],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='night-survival-config.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);};const _sm=startMatch;startMatch=function(){const r=_sm.apply(this,arguments);try{sync();}catch(e){}return r;};const _save=nsCfgSave;nsCfgSave=function(){_save();if(BOCFG.v.light.botFlash!==NS_CFG.teamLights){BOCFG.v.light.botFlash=lastBot=NS_CFG.teamLights;BOCFG.save();}};sync();try{BOCFG.applyLight();}catch(e){}})();function nsNightCfg(){const v=(typeof BOCFG!=='undefined'&&BOCFG.v&&BOCFG.v.night)||{};const num=(k,d,min,max)=>{const x=+v[k];return Number.isFinite(x)?clamp(x,min,max):d;};return{regenDelay:num('regenDelay',6,1,20),regenRate:num('regenRate',4,0,45),holdDur:num('holdDur',90,15,300),holdCap:Math.round(num('holdCap',14,8,20)),breachBreak:Math.round(num('breachBreak',38,15,90)),dormant:Math.round(num('dormant',4,2,6)),leapChance:Math.round(num('leapChance',15,0,50)),classic:!!v.classic,showHearing:!!v.showHearing,};}
 function nsRegenDelay(){return(typeof NS!=='undefined'&&NS.match)?nsNightCfg().regenDelay:4.5;}
 function nsRegenRate(){return(typeof NS!=='undefined'&&NS.match)?nsNightCfg().regenRate:45;}
 function nsNightClassic(){return!!(typeof NS!=='undefined'&&NS.match&&nsNightCfg().classic);}
-function nsNightEditorFields(ui){const sec=ui.sec,note=ui.note,btn=ui.btn,sectionFields=ui.sectionFields,render=ui.render,toast=ui.toast,el=ui.el;return[sec('Survival'),...sectionFields('night',['regenDelay','regenRate']),note('Health regeneration in a Night Survival match only. Default: 6 s delay, 4 HP/s (other modes stay 4.5 s / 45 HP/s).'),sec('Hold the room'),...sectionFields('night',['holdDur','holdCap','breachBreak']),note('One room at a time is breached. The hold (RETAKE) starts only when a player enters that room. Reinforcements come from the halls around that room, a few seconds apart, under the alive cap. A second player adds a couple of infected, not another wave. After the room is secured, the next breach waits for the break duration. The generator only powers doors.'),sec('Infected'),...sectionFields('night',['dormant','leapChance','classic']),note('At match start, dormant groups idle behind locked doors and in outer areas (not the old 60-zombie dump). Opening a door wakes them. They chase only on line of sight (12-15 m) or when hit. A leaper (default 15%) sprints much faster and may leaping-tackle from 4-7 m. Classic waves restores the old door reserves and the end-of-bunker siege.'),sec('Debug'),...sectionFields('night',['showHearing']),note('When on, each shot draws the hearing radius on the floor (cyan if suppressed; unsuppressed is map-wide and shows MAP-WIDE) and marks zombies that heard it with HEARD. An unsuppressed shot is heard by every living zombie; the Weapons hearing slider only applies with a suppressor. Off by default.'),el('div',{class:'btns'},btn('Reset Night gameplay',()=>{BOCFG.resetSection('night');render();toast('Night gameplay reset');},'dng')),];}
-(function nsNightCfgWire(){if(typeof BOCFG==='undefined'||!BOCFG.SCHEMA)return;const num=(d,min,max,step,label)=>({t:'n',d,min,max,step,label});const bool=(d,label)=>({t:'b',d,label});const NIGHT_SCHEMA={regenDelay:num(6,1,20,0.5,'Regen delay (s)'),regenRate:num(4,0,45,0.5,'Regen rate (HP/s)'),holdDur:num(90,15,300,5,'Hold duration (s)'),holdCap:num(8,6,14,1,'Max alive during hold'),breachBreak:num(38,15,90,1,'Break between breaches (s)'),dormant:num(2,1,4,1,'Dormant group size'),leapChance:num(15,0,50,1,'Leaper chance (%)'),classic:bool(false,'Classic waves'),showHearing:bool(false,'Show zombie hearing'),};BOCFG.SCHEMA.night=NIGHT_SCHEMA;function fill(raw){const o={};for(const k in NIGHT_SCHEMA)o[k]=(raw&&k in raw)?BOCFG.vField(NIGHT_SCHEMA[k],raw[k]):NIGHT_SCHEMA[k].d;if(raw&&Number(raw.holdCap)===25)o.holdCap=NIGHT_SCHEMA.holdCap.d;if(raw&&Number(raw.dormant)===4)o.dormant=NIGHT_SCHEMA.dormant.d;return o;}
+function nsNightEditorFields(ui){const sec=ui.sec,note=ui.note,btn=ui.btn,sectionFields=ui.sectionFields,render=ui.render,toast=ui.toast,el=ui.el;return[sec('Survival'),...sectionFields('night',['regenDelay','regenRate']),note('Health regeneration in a Night Survival match only. Default: 6 s delay, 4 HP/s (other modes stay 4.5 s / 45 HP/s).'),sec('Hold the room'),...sectionFields('night',['holdDur','holdCap','breachBreak']),note('One room at a time is breached. The hold starts when a player enters. The wing outside rushes the door. Once the room is full, farther infected walk in instead of arriving as one pile. A second player adds a few, not another full wave. After the room is secured, the next breach waits for the break duration. The generator only powers doors.'),sec('Infected'),...sectionFields('night',['dormant','leapChance','classic']),note('At match start, dormant groups idle behind locked doors and in outer areas (not the old 60-zombie dump). Opening a door wakes them. They chase only on line of sight (12-15 m) or when hit. A leaper (default 15%) sprints much faster and may leaping-tackle from 4-7 m. Classic waves restores the old door reserves and the end-of-bunker siege.'),sec('Debug'),...sectionFields('night',['showHearing']),note('When on, each shot draws the hearing radius on the floor (cyan if suppressed; unsuppressed is map-wide and shows MAP-WIDE) and marks zombies that heard it with HEARD. An unsuppressed shot is heard by every living zombie; the Weapons hearing slider only applies with a suppressor. Off by default.'),el('div',{class:'btns'},btn('Reset Night gameplay',()=>{BOCFG.resetSection('night');render();toast('Night gameplay reset');},'dng')),];}
+(function nsNightCfgWire(){if(typeof BOCFG==='undefined'||!BOCFG.SCHEMA)return;const num=(d,min,max,step,label)=>({t:'n',d,min,max,step,label});const bool=(d,label)=>({t:'b',d,label});const NIGHT_SCHEMA={regenDelay:num(6,1,20,0.5,'Regen delay (s)'),regenRate:num(4,0,45,0.5,'Regen rate (HP/s)'),holdDur:num(90,15,300,5,'Hold duration (s)'),holdCap:num(14,8,20,1,'Max alive during hold'),breachBreak:num(38,15,90,1,'Break between breaches (s)'),dormant:num(4,2,6,1,'Dormant group size'),leapChance:num(15,0,50,1,'Leaper chance (%)'),classic:bool(false,'Classic waves'),showHearing:bool(false,'Show zombie hearing'),};BOCFG.SCHEMA.night=NIGHT_SCHEMA;function fill(raw){const o={};for(const k in NIGHT_SCHEMA)o[k]=(raw&&k in raw)?BOCFG.vField(NIGHT_SCHEMA[k],raw[k]):NIGHT_SCHEMA[k].d;if(raw&&(Number(raw.holdCap)===25||Number(raw.holdCap)===8))o.holdCap=NIGHT_SCHEMA.holdCap.d;if(raw&&Number(raw.dormant)===2)o.dormant=NIGHT_SCHEMA.dormant.d;return o;}
 const _defaults=BOCFG.defaults;BOCFG.defaults=function(){const v=_defaults.apply(this,arguments);v.night=fill({});return v;};const _sanitize=BOCFG.sanitize;BOCFG.sanitize=function(raw){const v=_sanitize.apply(this,arguments);v.night=fill(raw&&raw.night);return v;};const _resetSec=BOCFG.resetSection;BOCFG.resetSection=function(s){if(s==='night'){this.v.night=fill({});this.save();return;}
 return _resetSec.apply(this,arguments);};try{let rawN=null;const s=localStorage.getItem('bo_cfg_v1');if(s){const raw=JSON.parse(s);rawN=raw&&raw.night;}
 BOCFG.v.night=fill(rawN);}catch(e){BOCFG.v.night=fill({});}})();(function nsHearRangeWire(){if(typeof BOCFG==='undefined'||!BOCFG.WF)return;const hear={t:'n',d:32,min:8,max:80,step:1,label:'Hearing range (m, suppressed)'};const next={};for(const k in BOCFG.WF){next[k]=BOCFG.WF[k];if(k==='flash')next.hearRange=hear;}
@@ -10298,8 +10298,8 @@ L.color.setHex(0xfff6e4)
 L.intensity=18}
 nsHoldAlarm(true)
 if((typeof nsAuth!=='function'||nsAuth())&&c&&typeof nsHearPing==='function'){const now=(typeof MATCH!=='undefined'&&MATCH.time)||0
-if(now>=(NSDOOR.pingAt||0)){NSDOOR.pingAt=now+2.8
-nsHearPing(c[0],1.5,c[1],22)}}}
+if(now>=(NSDOOR.pingAt||0)){NSDOOR.pingAt=now+1.5
+nsHearPing(c[0],1.5,c[1],48)}}}
 function nsDoorLeapHit(b){if(!b||!NSDOOR.on||!NSDOOR.doors||b.zDoorHit)return false
 const x0=b.zLeapSX!=null?b.zLeapSX:b.pos.x
 const z0=b.zLeapSZ!=null?b.zLeapSZ:b.pos.z
@@ -10315,7 +10315,7 @@ b.zDoorHit=true
 b.zLeap='stumble'
 b.zLeapT=0
 b.zStag=Math.max(b.zStag||0,0.7)
-d.pound=Math.min(1,(d.pound||0)+0.14)
+d.pound=Math.min(1,(d.pound||0)+0.3)
 NSDOOR.pubT=0
 nsDoorSnd(d,1.15)
 if(d.pound>=1)nsDoorBreak(d)
@@ -10677,7 +10677,7 @@ const dx=z.pos.x-d.x,dz=z.pos.z-d.z
 if(dx*dx+dz*dz<5.76)n++
 }
 if(!n){d.pound=Math.max(0,(d.pound||0)-dt*.08);continue}
-d.pound=(d.pound||0)+dt*Math.min(n,3)*.006
+d.pound=(d.pound||0)+dt*Math.min(n,4)*.0095
 if(d.wheel)d.wheel.rotateZ(dt*4)
 d.poundSnd=(d.poundSnd||0)-dt
 if(d.poundSnd<=0){nsDoorSnd(d,.4);d.poundSnd=.85}
@@ -10764,6 +10764,13 @@ for(const z of NSZ.pool){if(!z.alive||!z.pos)continue
 if(Math.hypot(z.pos.x-g.x,z.pos.z-g.z)<=18)n++
 }
 return n}
+function nsHoldFar(b){const g=NSDOOR.holdGoal
+if(!nsHoldOn()||!g||!b||!b.pos)return false
+return Math.hypot(b.pos.x-g.x,b.pos.z-g.z)>24}
+function nsHoldLeash(){if(!nsHoldOn()||!NSZ.pool||nsHoldCrowd()<nsDoorAliveCap())return
+for(const z of NSZ.pool){if(!z.alive||!nsHoldFar(z))continue
+if(z.zState==='chase'||z.zState==='attack')continue
+if(typeof nszCalmWalk==='function')nszCalmWalk(z)}}
 function nsHoldGoal(){return(NSDOOR.holdGoal&&(NSDOOR.hold==='defense'||NSDOOR.hold==='breach'||NSDOOR.hold==='break'))?NSDOOR.holdGoal:null}
 function nsHoldClock(t){t=Math.max(0,Math.ceil(t||0))
 return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
@@ -10910,7 +10917,7 @@ NSDOOR.hold='defense'
 NSDOOR.holdT=cfg.holdDur
 NSDOOR.holdDur=cfg.holdDur
 NSDOOR.holdPause=false
-NSDOOR.holdSpawnT=4.2
+NSDOOR.holdSpawnT=1.8
 if(s&&s.room&&s.room.center)NSDOOR.holdGoal=new V3(s.room.center[0],0,s.room.center[1])
 NSDOOR.holdN=0
 nsHoldBuildSides(NSDOOR.breachId)
@@ -10955,13 +10962,14 @@ NSDOOR.pubT=0
 nsDoorSay('HOLD RESUMED · stay in the room','xp',2)}
 NSDOOR.holdT-=dt
 if(NSDOOR.holdT<=0){nsHoldEnd();return}
+nsHoldLeash()
 NSDOOR.holdSpawnT-=dt
 const dur=NSDOOR.holdDur||90
 const k=clamp(1-NSDOOR.holdT/Math.max(1,dur),0,1)
 const nPlay=(typeof nsPlayerCount==='function')?nsPlayerCount():1
-const gap=(5.2-k*2.2)/(1+0.18*Math.max(0,nPlay-1))
+const gap=(2.8-k*1.0)/(1+0.12*Math.max(0,nPlay-1))
 if(NSDOOR.holdSpawnT>0)return
-NSDOOR.holdSpawnT=Math.max(2.6,gap)
+NSDOOR.holdSpawnT=Math.max(1.7,gap)
 const cap=nsDoorAliveCap()
 if(nsHoldCrowd()>=cap)return
 if(!NSDOOR.holdSides||!NSDOOR.holdSides.length)nsHoldBuildSides(NSDOOR.breachId)
@@ -11027,7 +11035,7 @@ const p=new V3(NAV.nx[i],y,NAV.nz[i])
 if(nsDoorInAnyRoom(p.x,p.z)||nsNearPlayerStart(p,20))continue
 if(out.some(q=>q.distanceToSquared(p)<6.25))continue
 out.push(p)
-if(out.length>=10)break
+if(out.length>=16)break
 }
 if(out.length)NSDOOR.hallPts=out
 return out}
@@ -11048,12 +11056,12 @@ for(const s of starts){if(s&&Math.hypot(p.x-s.x,p.z-s.z)<=r)return true}
 return false}
 function nsDoorPopulate(){if(typeof nsNightClassic==='function'&&nsNightClassic()){NSDOOR.needPop=false;return 0}
 if(!NSZ.pool||!NSZ.pool.length)return 0
-const g=(typeof nsNightCfg==='function')?nsNightCfg().dormant:2
-const cap=14
+const g=(typeof nsNightCfg==='function')?nsNightCfg().dormant:4
+const cap=32
 const startSkip={arrival:1,control_hub:1}
 const areas=[]
 const halls=nsHallPoints()
-if(halls.length)areas.push({id:'hall',points:halls,n:6})
+if(halls.length)areas.push({id:'hall',points:halls,n:14})
 for(const s of NSDOOR.sectors){if(!s.room||startSkip[s.id])continue
 if(!s.points.length)s.points=nsDoorPoints(s.room)
 const pts=s.points.filter(p=>!nsNearPlayerStart(p,20))
@@ -11167,7 +11175,7 @@ else{nsDoorWakeSector(s)
 nsDoorSay((s.name||s.id).toUpperCase()+' · infected waking','enemy',2.5)}}}
 function nsDoorAliveCap(){const pool=(NSZ.pool&&NSZ.pool.length)||NSZ.POOL||20
 if(typeof nsHoldOn==='function'&&nsHoldOn()&&typeof nsNightCfg==='function'){const nPlay=(typeof nsPlayerCount==='function')?nsPlayerCount():1
-return Math.min(pool,14,nsNightCfg().holdCap+Math.max(0,nPlay-1)*2)}
+return Math.min(pool,18,nsNightCfg().holdCap+Math.max(0,nPlay-1)*3)}
 if(typeof nsIsTestmap==='function'&&nsIsTestmap())
 return Math.min(nsScaledCount(NSDOOR.hold==='fight'?8:6),pool,64)
 return Math.min(nsScaledCount(40),pool,64)}
